@@ -217,6 +217,56 @@ recycling.** The serial console doesn't unblock flashing on a walled
 puck, but it DOES let you definitively confirm which side of the wall
 each puck is on without trial-and-error LED-watching.
 
+### Confirming "walled" empirically — the SSH race that never wins
+
+After SW7-dancing a suspect-walled puck, the LED actually does the
+"rapid blue → steady blue → purple loop" thing, and `ping 192.168.1.1`
+shows a fascinating pattern: complete silence, then ~7 seconds of
+successful replies (with the classic backlog-flush latency drop), then
+back to silence. Repeat every ~3 minutes.
+
+The kernel IS booting. LAN comes up. Networking works for ~7 seconds.
+Then the firmware kills it.
+
+To prove SSH never gets a chance, I race-looped `ssh root@192.168.1.1`
+for 5 minutes, gated by a 200 ms ping check so we only attempt during
+live windows:
+
+```
+race start: Tue May 26 19:52:59 EDT 2026
+[8 ping-OK windows across 5 minutes]
+ssh: connect to host 192.168.1.1 port 22: Connection refused
+ssh: connect to host 192.168.1.1 port 22: Connection refused
+...
+race end: Tue May 26 19:58:00 EDT 2026, 135 attempts, 0 SSH successes
+```
+
+`Connection refused` (not timeout) — the puck is responding on layer 3
+but dropbear has not yet bound port 22. Per `procd`'s default startup
+order in OpenWrt 25.12.4, dropbear comes up after networking, and
+*after* the ~7 second window the firmware's signature watchdog kills
+the kernel. So:
+
+- ping works → kernel runs, ethernet driver up, IP assigned
+- TCP SYN to :22 → RST → dropbear never listened
+- 7s later → puck reboots → cycle repeats
+
+This rules out any "race the dropbear and ssh in and run cgpt to mark
+the kernel successful" approach — at least at default OpenWrt boot
+priority. A custom OpenWrt build that brought dropbear (or some other
+sshd) up in initramfs at preinit time *might* win the race, but I
+haven't built it. Even then, marking the kernel "successful" likely
+won't help because earlier sessions also tried initramfs-only boot
+(no rootfs dependency) and the wall reverts that too. The wall is at
+the firmware's signed-kernel enforcement layer, not at boot-success
+GPT flags.
+
+So if you have the time and patience to attempt a flash on a suspected
+walled puck *with* the SuzyQ also attached for diagnosis: you'll get
+the same conclusion in about 5 minutes of race-looping ping+ssh,
+without ever opening the case for SW7. Even without serial, the ping
+pattern alone is diagnostic.
+
 Sources I checked:
 - [OpenWrt forum: Google WiFi flash firmware failure thread](https://forum.openwrt.org/t/google-wifi-flash-firmware-failure/184617)
 - [OpenWrt forum: how can to stock firmware in google wifi (ac 1304)](https://forum.openwrt.org/t/how-can-to-stock-firmware-in-google-wifi-ac-1304/235366)

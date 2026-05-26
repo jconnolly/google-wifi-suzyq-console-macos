@@ -1,0 +1,52 @@
+=== race start ===
+Tue May 26 19:49:55 EDT 2026
+=== race end at Tue May 26 19:51:26 EDT 2026 ===
+=== ping right now ===
+Request timeout for icmp_seq 1
+ping: sendto: Host is down
+Request timeout for icmp_seq 2
+ping: sendto: Host is down
+Request timeout for icmp_seq 3
+
+--- 192.168.1.1 ping statistics ---
+5 packets transmitted, 0 packets received, 100.0% packet loss
+
+=== ssh attempt right now ===
+ssh: connect to host 192.168.1.1 port 22: Host is down
+race start: Tue May 26 19:52:59 EDT 2026
+--- ping ok at 19:54:17 (attempt 36) ---
+ssh: connect to host 192.168.1.1 port 22: Connection refused
+--- ping ok at 19:54:19 (attempt 37) ---
+ssh: connect to host 192.168.1.1 port 22: Connection refused
+--- ping ok at 19:54:21 (attempt 38) ---
+ssh: connect to host 192.168.1.1 port 22: Connection refused
+--- ping ok at 19:54:23 (attempt 39) ---
+ssh: connect to host 192.168.1.1 port 22: Operation timed out
+--- ping ok at 19:57:01 (attempt 110) ---
+ssh: connect to host 192.168.1.1 port 22: Connection refused
+--- ping ok at 19:57:03 (attempt 111) ---
+ssh: connect to host 192.168.1.1 port 22: Connection refused
+--- ping ok at 19:57:06 (attempt 112) ---
+ssh: connect to host 192.168.1.1 port 22: Connection refused
+--- ping ok at 19:57:08 (attempt 113) ---
+ssh: connect to host 192.168.1.1 port 22: Operation timed out
+race end: Tue May 26 19:58:00 EDT 2026, 135 attempts
+=== 300s SSH race, 1s interval ===
+race start: Tue May 26 19:52:59 EDT 2026
+--- ping ok at 19:54:17 (attempt 36) ---
+ssh: connect to host 192.168.1.1 port 22: Connection refused
+--- ping ok at 19:54:19 (attempt 37) ---
+ssh: connect to host 192.168.1.1 port 22: Connection refused
+--- ping ok at 19:54:21 (attempt 38) ---
+ssh: connect to host 192.168.1.1 port 22: Connection refused
+--- ping ok at 19:54:23 (attempt 39) ---
+ssh: connect to host 192.168.1.1 port 22: Operation timed out
+--- ping ok at 19:57:01 (attempt 110) ---
+ssh: connect to host 192.168.1.1 port 22: Connection refused
+--- ping ok at 19:57:03 (attempt 111) ---
+ssh: connect to host 192.168.1.1 port 22: Connection refused
+--- ping ok at 19:57:06 (attempt 112) ---
+ssh: connect to host 192.168.1.1 port 22: Connection refused
+--- ping ok at 19:57:08 (attempt 113) ---
+ssh: connect to host 192.168.1.1 port 22: Operation timed out
+race end: Tue May 26 19:58:00 EDT 2026, 135 attempts

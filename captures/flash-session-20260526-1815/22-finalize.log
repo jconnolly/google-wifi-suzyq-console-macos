@@ -1,0 +1,8 @@
+=== finalize mesh1 ===
+=== set root password ===
+Changing password for root
+New password: 
+Retype password: 
+passwd: password for root changed by root
+
+=== switch LAN to DHCP (auto-join when mesh links) ===
