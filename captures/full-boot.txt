@@ -1,0 +1,104 @@
+[gale-sniff-all] running. duration=120.0s. Ctrl-C to stop.
+18:05:26 [EC_PD] RST EP0 3220
+18:05:26 [AP] 
+18:05:26 [AP] 
+18:05:26 [AP] coreboot-60d1b1c Mon Jan  9 00:04:49 UTC 2017 bootblock startVbBootDeveloper() - trying fixed disk
+18:05:26 [AP] sound_stop: No sound ops set.
+18:05:26 [AP] VbTryLoadKernel() start, get_info_flags=0x2
+18:05:26 [AP] MMC version  = 10000042
+18:05:26 [AP] clock_config_mmc : 1
+18:05:26 [AP] clock_config_mmc : 2
+18:05:26 [AP] Man 000015 Snr 2789407485 Product 4FTE4R Revision 0.1
+18:05:26 [AP] VbTryLoadKernel() found 1 disks
+18:05:26 [AP] VbTryLoadKernel() trying disk 0
+18:05:26 [AP] GptNextKernelEntry looking at new prio partition 2
+18:05:26 [AP] GptNextKernelEntry s1 t0 p1
+18:05:26 [AP] GptNextKernelEntry looking at new prio partition 4
+18:05:26 [AP] GptNextKernelEntry s0 t15 p0
+18:05:26 [AP] GptNextKernelEntry looking at new prio partition 6
+18:05:26 [AP] GptNextKernelEntry s0 t15 p0
+18:05:26 [AP] GptNextKernelEntry likes partition 2
+18:05:26 [AP] Found kernel entry at 20480 size 32768
+18:05:26 [AP] Checking key block signature...
+18:05:26 [AP]    - sig_size=512, expecting 512 for algorithm 8
+18:05:26 [AP] In RSAVerify(): Padding check failed!
+18:05:26 [AP] In RSAVerify(): Hash check failed!
+18:05:26 [AP] Invalid key block signature.
+18:05:26 [AP] Verifying key block signature failed.
+18:05:26 [AP] Checking key block hash only...
+18:05:26 [AP]    - sig_size=256, expecting 256 for algorithm 4
+18:05:26 [AP] Kernel preamble is good.
+18:05:26 [AP] Key block valid: 0
+18:05:26 [AP] Combined version: 65537
+18:05:27 [AP]    - sig_size=256, expecting 256 for algorithm 4
+18:05:28 [AP] Partition is good.
+18:05:28 [AP] In recovery mode or dev-signed kernel
+18:05:28 [AP] Good_partition >= 0
+18:05:28 [AP] VbTryLoadKernel() LoadKernel() = 0
+18:05:28 [AP] TPM: Lock physical presence
+18:05:28 [AP] TPM: command 0x4000000a returned 0x0
+18:05:28 [AP] VbSelectAndLoadKernel() returning 0
+18:05:28 [AP] Boot policy: Match for type 0 with cmdline 1
+18:05:28 [AP] Modified kernel command line: cros_secure console= loglevel=7 init=/sbin/init cros_secure oops=panic panic=-1 root=PARTUUID=cc24514c-062f-2e48-b5f6-05f5233499a4/PARTNROFF=1 rootwait rw dm_verity.error_behavior=3 dm_verity.max_bios=-1 dm_verity.dev_wait=0 dm="1 vroot none ro 1,0 1536000 verity payload=ROOT_DEV hashtree=HASH_DEV hashstart=1536000 alg=sha1 root_hexdigest=25009619ed1c7b8e4eae62d0d4cc7f794507d4d6 salt=8da0ac678592acf6395953f6dca6310b5682844dc5ae70c2e96c88474c273afa" noinitrd vt.global_cursor_default=0 kern_guid=cc24514c-062f-2e48-b5f6-05f5233499a4 coherent_pool=2M 
+18:05:28 [AP] Loading FIT.
+18:05:28 [AP] Image fdt@12 has 4873 bytes.
+18:05:28 [AP] Image fdt@11 has 4975 bytes.
+18:05:28 [AP] Image fdt@10 has 4166 bytes.
+18:05:28 [AP] Image fdt@9 has 6023 bytes.
+18:05:28 [AP] Image fdt@8 has 20301 bytes.
+18:05:28 [AP] Image fdt@7 has 18611 bytes.
+18:05:28 [AP] Image fdt@6 has 14306 bytes.
+18:05:28 [AP] Image fdt@5 has 4369 bytes.
+18:05:28 [AP] Image fdt@4 has 4506 bytes.
+18:05:28 [AP] Image fdt@3 has 5523 bytes.
+18:05:28 [AP] Image fdt@2 has 7318 bytes.
+18:05:28 [AP] Image fdt@1 has 7302 bytes.
+18:05:28 [AP] Image kernel@1 has 4574040 bytes.
+18:05:28 [AP] Compat preference: google,gale-v2
+18:05:28 [AP] Config conf@12, kernel kernel@1, fdt fdt@12, compat sony,xperia-honami qcom,msm8974
+18:05:28 [AP] Config conf@11, kernel kernel@1, fdt fdt@11, compat qcom,msm8960-cdp qcom,msm8960
+18:05:28 [AP] Config conf@10, kernel kernel@1, fdt fdt@10, compat qcom,msm8660-surf qcom,msm8660
+18:05:28 [AP] Config conf@9, kernel kernel@1, fdt fdt@9, compat qcom,ipq8064-ap148 qcom,ipq8064
+18:05:28 [AP] Config conf@8, kernel kernel@1, fdt fdt@8, compat google,gale qcom,ipq4019
+18:05:28 [AP] Config conf@7, kernel kernel@1, fdt fdt@7, compat google,gale-v2 (match) qcom,ipq4019
+18:05:28 [AP] Config conf@6, kernel kernel@1, fdt fdt@6, compat qcom,ipq4019
+18:05:28 [AP] Config conf@5, kernel kernel@1, fdt fdt@5, compat qcom,apq8084-mtp qcom,apq8084
+18:05:28 [AP] Config conf@4, kernel kernel@1, fdt fdt@4, compat qcom,apq8084-ifc6540 qcom,apq8084
+18:05:28 [AP] Config conf@3, kernel kernel@1, fdt fdt@3, compat qcom,apq8074-dragonboard qcom,apq8074
+18:05:28 [AP] Config conf@2, kernel kernel@1, fdt fdt@2, compat qcom,apq8064-ifc6410 qcom,apq8064
+18:05:28 [AP] Config conf@1 (default), kernel kernel@1, fdt fdt@1, compat qcom,apq8064-cm-qs600 qcom,apq8064
+18:05:28 [AP] Choosing best match conf@7.
+18:05:28 [AP] Shutting down all USB controllers.
+18:05:28 [AP] Exiting depthcharge with code 4 at timestamp: 42069715
+18:05:35 [AP] 
+18:05:35 [AP] Developer Console
+18:05:35 [AP] 
+18:05:35 [AP] To return to the browser, press:
+18:05:35 [AP] 
+18:05:35 [AP]   [ Ctrl ] and [ Alt ] and [ <- ]  (F1)
+18:05:35 [AP] 
+18:05:35 [AP] To use this console, the developer mode switch must be engaged.
+18:05:35 [AP] Doing so will destroy any saved data on the system.
+18:05:35 [AP] 
+18:05:35 [AP] In developer mode, it is possible to
+18:05:35 [AP] - login and sudo as user 'chronos'
+18:05:35 [AP] - require a password for sudo and login(*)
+18:05:35 [AP] - disable power management behavior (screen dimming):
+18:05:35 [AP]   sudo initctl stop powerd
+18:05:35 [AP] - install your own operating system image!
+18:05:35 [AP] 
+18:05:35 [AP] * To set a password for 'chronos', run the following as root:
+18:05:35 [AP] 
+18:05:35 [AP] chromeos-setdevpasswd
+18:05:35 [AP] 
+18:05:35 [AP] If you are having trouble booting a self-signed kernel, you may need to
+18:05:35 [AP] enable USB booting.  To do so, run the following as root:
+18:05:35 [AP] 
+18:05:35 [AP] enable_dev_usb_boot
+18:05:35 [AP] 
+18:05:35 [AP] Have fun and send patches!
+18:05:35 [AP] 
+
+[gale-sniff-all] totals:
+  AP: 4296 bytes
+  EC_PD: 14 bytes

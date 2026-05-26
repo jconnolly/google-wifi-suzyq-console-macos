@@ -1,13 +1,23 @@
 # google-wifi-suzyq-console-macos
 
-Serial console for a **Google WiFi (Gale, AC-1304)** puck from a **Mac**,
-using a **SuzyQ / SuzyQable** USB-C debug adapter — without a Chromebook
-in the loop, and without writing a kernel extension.
+Serial console + OpenWrt flashing for a **Google WiFi (Gale, AC-1304)**
+puck from a **Mac**, using a $7 **SuzyQ / SuzyQable** USB-C debug
+adapter — without a Chromebook in the loop, and without writing a
+kernel extension.
 
-If you're trying to debug OpenWrt on a Google WiFi puck and the only guides
-you can find assume Linux + `/dev/ttyUSB0`, this repo is for you. macOS
-doesn't bind a TTY to the Gale's debug interfaces because they're
-vendor-class, not CDC-ACM. So we talk libusb directly.
+Two pieces:
+
+1. **[Serial monitor](#install)** — `tools/gale-sniff-all` reads the
+   puck's debug UART over the SuzyQ. macOS doesn't bind a TTY to it
+   (vendor-class USB, not CDC-ACM), so this talks libusb directly.
+2. **[Flashing OpenWrt](docs/flashing.md)** — adapted from
+   [kkestell/openwrt-on-google-wifi](https://github.com/kkestell/openwrt-on-google-wifi),
+   with notes on what the SuzyQ trace should look like at each step (so
+   when LED-blink-watching fails you, you have an actual log).
+
+If you're trying to debug OpenWrt on a Google WiFi puck from a Mac and
+the only guides you can find assume Linux + `/dev/ttyUSB0`, this repo is
+for you.
 
 ---
 
@@ -107,20 +117,57 @@ tools/gale-console --iface 0   # EC_PD
 
 | Interface | Label | Read | Write | What you see |
 |-----------|-------|------|-------|--------------|
-| 0 | `EC_PD` | yes | **no** (timeout) | `RST EP0 NNNN`, `TPM: command …` |
-| 1 | `AP`    | yes | **no** (timeout) | `coreboot-… bootblock start` on power-up, silent after |
-| 3 | (none)  | yes | n/a | small binary blob — likely flashing / update endpoint |
+| 0 | `EC_PD` | yes | **no** (timeout) | `RST EP0 NNNN` reset chatter |
+| 1 | `AP`    | yes | **no** (timeout) | full `coreboot` + `depthcharge` + vboot trace on power-up |
+| 3 | (none)  | yes | n/a | silent during boot — likely the flashing / update endpoint |
 
 Writes time out because **CCD (Closed Case Debugging) is locked**. On
 Cr50 / Ti50 Chromebooks you unlock CCD with `gsctool` over the same
 cable; on a stock Gale puck the unlock path isn't documented. So today
-this is a read-only diagnostic, which is still useful:
+this is a read-only diagnostic, which turns out to be a lot more useful
+than I expected:
 
-- confirm the puck powers on and hands off to the bootloader
-- confirm which firmware revision is on the H1
-- catch early-boot panics before the Marvell SoC silences the console
+- confirms the puck powers on and hands off to the bootloader
+- gives you the SoC, board name, and partition layout
+- reveals the full kernel command line (cros_secure, dm-verity, etc.)
+- catches early-boot vboot failures
 
-PRs welcome if you figure out the unlock.
+### What we actually learned from the boot trace
+
+[`captures/full-boot.txt`](captures/full-boot.txt) is the real prize.
+Highlights from one capture:
+
+- **SoC: Qualcomm IPQ4019** (depthcharge picks `conf@7` with compat
+  `google,gale-v2 qcom,ipq4019`).
+- **Board: `google,gale-v2`** — this is the 1st-gen Google WiFi puck.
+- **Firmware: coreboot bootblock `60d1b1c`, built `Mon Jan  9
+  00:04:49 UTC 2017`.** Original factory firmware, untouched.
+- **vboot kernel verification:** the signed kernel's key block signature
+  fails (`In RSAVerify(): Padding check failed!`) but vboot then falls
+  back to "hash only" and `Key block valid: 0` — recovery / dev-signed
+  kernel accepted. The puck is in dev mode.
+- **eMMC chip:** Manufacturer `000015`, product `4FTE4R`, revision
+  `0.1`, serial `2789407485`.
+- Boot lands at the **ChromeOS "Developer Console"** banner, which
+  helpfully tells us the next step is `enable_dev_usb_boot`.
+
+That's enough to start flashing OpenWrt — see
+[`docs/flashing.md`](docs/flashing.md).
+
+PRs welcome if you figure out the CCD unlock for Gale (would give us
+interactive AP shell + EC commands). See
+[`docs/ccd-unlock-research.md`](docs/ccd-unlock-research.md) for what
+we know so far.
+
+---
+
+## Flashing OpenWrt
+
+See [`docs/flashing.md`](docs/flashing.md). That doc combines the
+well-tested USB-boot procedure from
+[kkestell/openwrt-on-google-wifi](https://github.com/kkestell/openwrt-on-google-wifi)
++ [papdee's OpenWrt forum post](https://forum.openwrt.org/t/finally-installed-openwrt-on-my-google-wifi-ac-1304/183541/2)
+with notes on what the SuzyQ trace should show at each step.
 
 ---
 
