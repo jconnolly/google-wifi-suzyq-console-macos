@@ -1,0 +1,14 @@
+=== ping ===
+PING 192.168.1.1 (192.168.1.1): 56 data bytes
+64 bytes from 192.168.1.1: icmp_seq=0 ttl=64 time=0.833 ms
+64 bytes from 192.168.1.1: icmp_seq=1 ttl=64 time=0.979 ms
+
+--- 192.168.1.1 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 0.833/0.906/0.979/0.073 ms
+
+=== ssh: verify mmcblk0 contents match factory.bin ===
+911869f9188651fca565e1cbe84eb453  -
+expected: 784bb816997df54e5a3b7d66eedbc0dd (factory.bin)
+--- GPT on mmcblk0 ---
+ash: od: not found

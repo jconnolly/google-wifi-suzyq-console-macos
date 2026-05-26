@@ -1,0 +1,23 @@
+=== after port swap ===
+-- t=15s --
+	inet 169.254.112.41 netmask 0xffff0000 broadcast 169.254.255.255
+	status: active
+1 packets transmitted, 0 packets received, 100.0% packet loss
+-- t=25s --
+	inet 169.254.112.41 netmask 0xffff0000 broadcast 169.254.255.255
+	status: active
+1 packets transmitted, 0 packets received, 100.0% packet loss
+-- t=35s --
+	inet 169.254.112.41 netmask 0xffff0000 broadcast 169.254.255.255
+	status: active
+1 packets transmitted, 0 packets received, 100.0% packet loss
+
+=== final state ===
+en9: flags=8b63<UP,BROADCAST,SMART,RUNNING,PROMISC,ALLMULTI,SIMPLEX,MULTICAST> mtu 1500
+	options=6464<VLAN_MTU,TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
+	ether 00:e0:4c:1e:47:a0
+	inet6 fe80::cef:ea55:ae57:70d8%en9 prefixlen 64 secured scopeid 0xd 
+	inet 169.254.112.41 netmask 0xffff0000 broadcast 169.254.255.255
+	nd6 options=201<PERFORMNUD,DAD>
+	media: autoselect (1000baseT <full-duplex>)
+	status: active

@@ -1,0 +1,274 @@
+[gale-sniff-all] running. duration=120.0s. Ctrl-C to stop.
+18:40:04 [EC_PD] RST EP0 3220
+18:40:04 [AP] 
+18:40:04 [AP] 
+18:40:17 [AP] coreboot-60d1b1c Mon Jan  9 00:04:49 UTC 2017 bootblock startsound_start: No sound ops set.
+18:40:18 [AP] sound_start: No sound ops set.
+18:40:27 [AP] VbBootDeveloper() - trying fixed disk
+18:40:27 [AP] sound_stop: No sound ops set.
+18:40:27 [AP] VbTryLoadKernel() start, get_info_flags=0x2
+18:40:27 [AP] MMC version  = 10000042
+18:40:27 [AP] clock_config_mmc : 1
+18:40:27 [AP] clock_config_mmc : 2
+18:40:27 [AP] Man 000015 Snr 2789407485 Product 4FTE4R Revision 0.1
+18:40:27 [AP] VbTryLoadKernel() found 1 disks
+18:40:27 [AP] VbTryLoadKernel() trying disk 0
+18:40:27 [AP] GptNextKernelEntry looking at new prio partition 1
+18:40:27 [AP] GptNextKernelEntry s1 t0 p1
+18:40:27 [AP] GptNextKernelEntry likes partition 1
+18:40:27 [AP] Found kernel entry at 34 size 32768
+18:40:27 [AP] Checking key block signature...
+18:40:27 [AP]    - sig_size=512, expecting 512 for algorithm 8
+18:40:27 [AP] In RSAVerify(): Padding check failed!
+18:40:27 [AP] In RSAVerify(): Hash check failed!
+18:40:27 [AP] Invalid key block signature.
+18:40:27 [AP] Verifying key block signature failed.
+18:40:27 [AP] Checking key block hash only...
+18:40:27 [AP]    - sig_size=256, expecting 256 for algorithm 4
+18:40:27 [AP] Kernel preamble is good.
+18:40:27 [AP] Key block valid: 0
+18:40:27 [AP] Combined version: 65537
+18:40:28 [AP]    - sig_size=256, expecting 256 for algorithm 4
+18:40:28 [AP] Partition is good.
+18:40:28 [AP] In recovery mode or dev-signed kernel
+18:40:28 [AP] Good_partition >= 0
+18:40:28 [AP] VbTryLoadKernel() LoadKernel() = 0
+18:40:28 [AP] TPM: Lock physical presence
+18:40:28 [AP] TPM: command 0x4000000a returned 0x0
+18:40:28 [AP] VbSelectAndLoadKernel() returning 0
+18:40:29 [AP] Boot policy: Match for type 0 with cmdline 1
+18:40:29 [AP] Modified kernel command line: cros_secure root=PARTUUID=5452574f-2211-4433-5566-778899aabb01/PARTNROFF=1
+18:40:29 [AP] Loading FIT.
+18:40:29 [AP] Image fdt-1 has 18947 bytes.
+18:40:29 [AP] Image kernel-1 has 3409328 bytes.
+18:40:29 [AP] Compat preference: google,gale-v2
+18:40:29 [AP] Config config@1 (default), kernel kernel-1, fdt fdt-1, compat google,wifi google,gale-v2 (match) qcom,ipq4019
+18:40:29 [AP] Choosing best match config@1.
+18:40:29 [AP] Shutting down all USB controllers.
+18:40:29 [AP] Exiting depthcharge with code 4 at timestamp: 41579060
+18:40:31 [AP] [    0.000000] Booting Linux on physical CPU 0x0
+18:40:31 [AP] [    0.000000] Linux version 6.12.87 (builder@buildhost) (arm-openwrt-linux-muslgnueabi-gcc (OpenWrt GCC 14.3.0 r32933-4ccb782af7) 14.3.0, GNU ld (GNU Binutils) 2.44) #0 SMP Wed May 13 22:42:09 2026
+18:40:31 [AP] [    0.000000] CPU: ARMv7 Processor [410fc075] revision 5 (ARMv7), cr=10c5387d
+18:40:31 [AP] [    0.000000] CPU: div instructions available: patching division code
+18:40:31 [AP] [    0.000000] CPU: PIPT / VIPT nonaliasing data cache, VIPT aliasing instruction cache
+18:40:31 [AP] [    0.000000] OF: fdt: Machine model: Google WiFi (Gale)
+18:40:31 [AP] [    0.000000] Memory policy: Data cache writealloc
+18:40:31 [AP] [    0.000000] Zone ranges:
+18:40:31 [AP] [    0.000000]   Normal   [mem 0x0000000080000000-0x000000009fffffff]
+18:40:31 [AP] [    0.000000]   HighMem  empty
+18:40:31 [AP] [    0.000000] Movable zone start for each node
+18:40:31 [AP] [    0.000000] Early memory node ranges
+18:40:31 [AP] [    0.000000]   node   0: [mem 0x0000000080000000-0x00000000871fffff]
+18:40:31 [AP] [    0.000000]   node   0: [mem 0x0000000087300000-0x00000000874fffff]
+18:40:31 [AP] [    0.000000]   node   0: [mem 0x0000000088000000-0x000000009fffffff]
+18:40:31 [AP] [    0.000000] Initmem setup node 0 [mem 0x0000000080000000-0x000000009fffffff]
+18:40:31 [AP] [    0.000000] On node 0, zone Normal: 256 pages in unavailable ranges
+18:40:31 [AP] [    0.000000] On node 0, zone Normal: 768 pages in unavailable ranges
+18:40:31 [AP] [    0.000000] OF: reserved mem: 0x87e00000..0x87e7ffff (512 KiB) nomap non-reusable smem@87e00000
+18:40:31 [AP] [    0.000000] OF: reserved mem: 0x87e80000..0x87ffffff (1536 KiB) nomap non-reusable tz@87e80000
+18:40:31 [AP] [    0.000000] percpu: Embedded 14 pages/cpu s25100 r8192 d24052 u57344
+18:40:31 [AP] [    0.000000] Kernel command line: cros_secure root=PARTUUID=5452574f-2211-4433-5566-778899aabb01/PARTNROFF=1 rootwait
+18:40:31 [AP] [    0.000000] Unknown kernel command line parameters "cros_secure", will be passed to user space.
+18:40:31 [AP] [    0.000000] Dentry cache hash table entries: 65536 (order: 6, 262144 bytes, linear)
+18:40:31 [AP] [    0.000000] Inode-cache hash table entries: 32768 (order: 5, 131072 bytes, linear)
+18:40:31 [AP] [    0.000000] Built 1 zonelists, mobility grouping on.  Total pages: 128000
+18:40:31 [AP] [    0.000000] mem auto-init: stack:off, heap alloc:off, heap free:off
+18:40:31 [AP] [    0.000000] SLUB: HWalign=64, Order=0-3, MinObjects=0, CPUs=4, Nodes=1
+18:40:31 [AP] [    0.000000] rcu: Hierarchical RCU implementation.
+18:40:31 [AP] [    0.000000] 	Tracing variant of Tasks RCU enabled.
+18:40:31 [AP] [    0.000000] rcu: RCU calculated value of scheduler-enlistment delay is 10 jiffies.
+18:40:31 [AP] [    0.000000] RCU Tasks Trace: Setting shift to 2 and lim to 1 rcu_task_cb_adjust=1 rcu_task_cpu_ids=4.
+18:40:31 [AP] [    0.000000] NR_IRQS: 16, nr_irqs: 16, preallocated irqs: 16
+18:40:31 [AP] [    0.000000] rcu: srcu_init: Setting srcu_struct sizes based on contention.
+18:40:31 [AP] [    0.000000] arch_timer: cp15 timer(s) running at 48.00MHz (virt).
+18:40:31 [AP] [    0.000000] clocksource: arch_sys_counter: mask: 0xffffffffffffff max_cycles: 0xb11fd3bfb, max_idle_ns: 440795203732 ns
+18:40:31 [AP] [    0.000002] sched_clock: 56 bits at 48MHz, resolution 20ns, wraps every 4398046511096ns
+18:40:31 [AP] [    0.000022] Switching to timer-based delay loop, resolution 20ns
+18:40:31 [AP] [    0.000326] Calibrating delay loop (skipped), value calculated using timer frequency.. 96.00 BogoMIPS (lpj=480000)
+18:40:31 [AP] [    0.000348] CPU: Testing write buffer coherency: ok
+18:40:31 [AP] [    0.000403] pid_max: default: 32768 minimum: 301
+18:40:31 [AP] [    0.013045] Mount-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+18:40:31 [AP] [    0.013070] Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes, linear)
+18:40:31 [AP] [    0.018560] qcom_scm: convention: smc legacy
+18:40:31 [AP] [    0.020558] Setting up static identity map for 0x80300000 - 0x8030003c
+18:40:31 [AP] [    0.020783] rcu: Hierarchical SRCU implementation.
+18:40:31 [AP] [    0.020794] rcu: 	Max phase no-delay instances is 1000.
+18:40:31 [AP] [    0.021262] Timer migration: 1 hierarchy levels; 8 children per group; 1 crossnode level
+18:40:31 [AP] [    0.021891] smp: Bringing up secondary CPUs ...
+18:40:31 [AP] [    0.026163] smp: Brought up 1 node, 4 CPUs
+18:40:31 [AP] [    0.026188] SMP: Total of 4 processors activated (384.00 BogoMIPS).
+18:40:31 [AP] [    0.026200] CPU: All CPU(s) started in SVC mode.
+18:40:31 [AP] [    0.027363] Memory: 492232K/512000K available (7930K kernel code, 637K rwdata, 1252K rodata, 1024K init, 252K bss, 18480K reserved, 0K cma-reserved, 0K highmem)
+18:40:31 [AP] [    0.035374] VFP support v0.3: implementor 41 architecture 2 part 30 variant 7 rev 5
+18:40:31 [AP] [    0.035551] clocksource: jiffies: mask: 0xffffffff max_cycles: 0xffffffff, max_idle_ns: 19112604462750000 ns
+18:40:31 [AP] [    0.035582] futex hash table entries: 1024 (order: 4, 65536 bytes, linear)
+18:40:31 [AP] [    0.042130] pinctrl core: initialized pinctrl subsystem
+18:40:31 [AP] [    0.045573] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+18:40:31 [AP] [    0.045956] DMA: preallocated 256 KiB pool for atomic coherent allocations
+18:40:31 [AP] [    0.047412] thermal_sys: Registered thermal governor 'step_wise'
+18:40:31 [AP] [    0.047530] cpuidle: using governor ladder
+18:40:31 [AP] [    0.047574] cpuidle: using governor menu
+18:40:31 [AP] [    0.073177] cryptd: max_cpu_qlen set to 1000
+18:40:31 [AP] [    0.078076] SCSI subsystem initialized
+18:40:31 [AP] [    0.078401] usbcore: registered new interface driver usbfs
+18:40:32 [AP] [    0.078459] usbcore: registered new interface driver hub
+18:40:32 [AP] [    0.078519] usbcore: registered new device driver usb
+18:40:32 [AP] [    0.078566] pps_core: LinuxPPS API ver. 1 registered
+18:40:32 [AP] [    0.078574] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+18:40:32 [AP] [    0.078598] PTP clock support registered
+18:40:32 [AP] [    0.081567] clocksource: Switched to clocksource arch_sys_counter
+18:40:32 [AP] [    0.092280] NET: Registered PF_INET protocol family
+18:40:32 [AP] [    0.092545] IP idents hash table entries: 8192 (order: 4, 65536 bytes, linear)
+18:40:32 [AP] [    0.094880] tcp_listen_portaddr_hash hash table entries: 512 (order: 0, 4096 bytes, linear)
+18:40:32 [AP] [    0.094925] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+18:40:32 [AP] [    0.094948] TCP established hash table entries: 4096 (order: 2, 16384 bytes, linear)
+18:40:32 [AP] [    0.095015] TCP bind hash table entries: 4096 (order: 4, 65536 bytes, linear)
+18:40:32 [AP] [    0.095170] TCP: Hash tables configured (established 4096 bind 4096)
+18:40:32 [AP] [    0.095798] MPTCP token hash table entries: 512 (order: 1, 8192 bytes, linear)
+18:40:32 [AP] [    0.096190] UDP hash table entries: 256 (order: 1, 8192 bytes, linear)
+18:40:32 [AP] [    0.096229] UDP-Lite hash table entries: 256 (order: 1, 8192 bytes, linear)
+18:40:32 [AP] [    0.096995] NET: Registered PF_UNIX/PF_LOCAL protocol family
+18:40:32 [AP] [    0.097057] PCI: CLS 0 bytes, default 64
+18:40:32 [AP] [    0.098657] workingset: timestamp_bits=14 max_order=17 bucket_order=3
+18:40:32 [AP] [    0.100505] squashfs: version 4.0 (2009/01/31) Phillip Lougher
+18:40:32 [AP] [    0.100519] jffs2: version 2.2 (NAND) (SUMMARY) (LZMA) (RTIME) (CMODE_PRIORITY) (c) 2001-2006 Red Hat, Inc.
+18:40:32 [AP] [    0.425791] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 248)
+18:40:32 [AP] [    0.431992] Serial: 8250/16550 driver, 16 ports, IRQ sharing enabled
+18:40:32 [AP] [    0.435877] msm_serial 78af000.serial: msm_serial: detected port #0
+18:40:32 [AP] [    0.435992] msm_serial 78af000.serial: uartclk = 1843200
+18:40:32 [AP] [    0.436472] 78af000.serial: ttyMSM0 at MMIO 0x78af000 (irq = 30, base_baud = 115200) is a MSM
+18:40:32 [AP] [    0.436526] msm_serial: console setup on port #0
+18:40:32 [AP] [    0.436580] printk: legacy console [ttyMSM0] enabled
+18:40:32 [AP] [    1.034471] msm_serial 78b0000.serial: msm_serial: detected port #1
+18:40:32 [AP] [    1.038979] msm_serial 78b0000.serial: uartclk = 48000000
+18:40:32 [AP] [    1.045409] 78b0000.serial: ttyMSM1 at MMIO 0x78b0000 (irq = 31, base_baud = 3000000) is a MSM
+18:40:32 [AP] [    1.050866] msm_serial: driver initialized
+18:40:32 [AP] [    1.066522] loop: module loaded
+18:40:32 [AP] [    1.068196] spi_qup 78b5000.spi: IN:block:16, fifo:64, OUT:block:16, fifo:64
+18:40:32 [AP] [    1.073025] spi_qup 78b6000.spi: IN:block:16, fifo:64, OUT:block:16, fifo:64
+18:40:32 [AP] [    1.099237] ipqess-edma c080000.ethernet: using random MAC address 3e:a8:d6:5e:96:75
+18:40:32 [AP] [    1.263082] xhci-hcd xhci-hcd.0.auto: xHCI Host Controller
+18:40:32 [AP] [    1.263210] xhci-hcd xhci-hcd.0.auto: new USB bus registered, assigned bus number 1
+18:40:32 [AP] [    1.267714] xhci-hcd xhci-hcd.0.auto: hcc params 0x0228f665 hci version 0x100 quirks 0x0000808002000010
+18:40:32 [AP] [    1.275227] xhci-hcd xhci-hcd.0.auto: irq 58, io mem 0x08a00000
+18:40:32 [AP] [    1.284714] xhci-hcd xhci-hcd.0.auto: xHCI Host Controller
+18:40:32 [AP] [    1.290334] xhci-hcd xhci-hcd.0.auto: new USB bus registered, assigned bus number 2
+18:40:32 [AP] [    1.295955] xhci-hcd xhci-hcd.0.auto: Host supports USB 3.0 SuperSpeed
+18:40:32 [AP] [    1.304487] hub 1-0:1.0: USB hub found
+18:40:32 [AP] [    1.310121] hub 1-0:1.0: 1 port detected
+18:40:32 [AP] [    1.314358] usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+18:40:32 [AP] [    1.318492] hub 2-0:1.0: USB hub found
+18:40:32 [AP] [    1.326064] hub 2-0:1.0: 1 port detected
+18:40:32 [AP] [    1.330107] xhci-hcd xhci-hcd.1.auto: xHCI Host Controller
+18:40:32 [AP] [    1.333647] xhci-hcd xhci-hcd.1.auto: new USB bus registered, assigned bus number 3
+18:40:32 [AP] [    1.339065] xhci-hcd xhci-hcd.1.auto: USB3 root hub has no ports
+18:40:32 [AP] [    1.346456] xhci-hcd xhci-hcd.1.auto: hcc params 0x0220f665 hci version 0x100 quirks 0x0000808002000010
+18:40:32 [AP] [    1.352730] xhci-hcd xhci-hcd.1.auto: irq 59, io mem 0x06000000
+18:40:32 [AP] [    1.362905] hub 3-0:1.0: USB hub found
+18:40:32 [AP] [    1.367717] hub 3-0:1.0: 1 port detected
+18:40:32 [AP] [    1.372223] usbcore: registered new interface driver usb-storage
+18:40:32 [AP] [    1.375769] i2c_dev: i2c /dev entries driver
+18:40:32 [AP] [    1.381899] i2c_qup 78b7000.i2c: using default clock-frequency 100000
+18:40:32 [AP] [    1.387097] i2c_qup 78b8000.i2c: using default clock-frequency 100000
+18:40:32 [AP] [    1.461043] lp5523x 1-0032: lp5523 Programmable led chip found
+18:40:32 [AP] [    1.464908] sdhci: Secure Digital Host Controller Interface driver
+18:40:32 [AP] [    1.465794] sdhci: Copyright(c) Pierre Ossman
+18:40:32 [AP] [    1.472047] sdhci-pltfm: SDHCI platform and OF driver helper
+18:40:32 [AP] [    1.480019] NET: Registered PF_INET6 protocol family
+18:40:32 [AP] [    1.487489] Segment Routing with IPv6
+18:40:32 [AP] [    1.487625] In-situ OAM (IOAM) with IPv6
+18:40:32 [AP] [    1.490737] NET: Registered PF_PACKET protocol family
+18:40:32 [AP] [    1.494713] bridge: filtering via arp/ip/ip6tables is no longer available by default. Update your scripts to load br_netfilter if you need this.
+18:40:32 [AP] [    1.500251] 8021q: 802.1Q VLAN Support v1.8
+18:40:32 [AP] [    1.512879] Registering SWP/SWPB emulation handler
+18:40:32 [AP] [    1.530677] mmc0: SDHCI controller on 7824900.mmc [7824900.mmc] using ADMA 64-bit
+18:40:32 [AP] [    1.542533] qca8k-ipq4019 c000000.switch: configuring for fixed/internal link mode
+18:40:32 [AP] [    1.542877] qca8k-ipq4019 c000000.switch: Link is Up - 1Gbps/Full - flow control rx/tx
+18:40:32 [AP] [    1.595134] mmc0: new HS200 MMC card at address 0001
+18:40:32 [AP] [    1.596366] mmcblk0: mmc0:0001 4FTE4R 3.64 GiB
+18:40:32 [AP] [    1.601664] Alternate GPT is invalid, using primary GPT.
+18:40:32 [AP] [    1.603482]  mmcblk0: p1 p2
+18:40:32 [AP] [    1.609761] mmcblk0boot0: mmc0:0001 4FTE4R 4.00 MiB
+18:40:32 [AP] [    1.612472] mmcblk0boot1: mmc0:0001 4FTE4R 4.00 MiB
+18:40:32 [AP] [    1.616936] mmcblk0rpmb: mmc0:0001 4FTE4R 512 KiB, chardev (246:0)
+18:40:32 [AP] [    1.723439] qca8k-ipq4019 c000000.switch lan (uninitialized): PHY [90000.mdio-1:03] driver [Qualcomm QCA8072] (irq=POLL)
+18:40:32 [AP] [    1.792455] qca8k-ipq4019 c000000.switch wan (uninitialized): PHY [90000.mdio-1:04] driver [Qualcomm QCA8072] (irq=POLL)
+18:40:32 [AP] [    1.793621] ipqess-edma c080000.ethernet eth0: entered promiscuous mode
+18:40:32 [AP] [    1.802566] DSA: tree 0 setup�[    1.817218] VFS: Mounted root (squashfs filesystem) readonly on device 179:2.
+18:40:32 [AP] [    1.819252] Freeing unused kernel image (initmem) memory: 1024K
+18:40:32 [AP] [    1.823673] Run /sbin/init as init process
+18:40:33 [AP] [    2.176729] init: Console is alive
+18:40:33 [AP] [    2.177040] init: - watchdog -
+18:40:34 [AP] [    3.066635] kmodloader: loading kernel modules from /etc/modules-boot.d/*
+18:40:34 [AP] [    3.178269] gpio_button_hotplug: loading out-of-tree module taints kernel.
+18:40:34 [AP] [    3.185889] pstore: Using crash dump compression: deflate
+18:40:34 [AP] [    3.185960] printk: legacy console [ramoops-1] enabled
+18:40:34 [AP] [    3.191416] pstore: Registered ramoops as persistent store backend
+18:40:34 [AP] [    3.195431] ramoops: using 0x100000@0x9ff00000, ecc: 0
+18:40:34 [AP] [    3.216035] kmodloader: done loading kernel modules from /etc/modules-boot.d/*
+18:40:34 [AP] [    3.221601] init: - preinit -
+18:40:38 [AP] [    7.801580] random: crng init done
+18:40:39 [AP] Cannot parse config file '/etc/fw_env.config': No such file or directory
+18:40:39 [AP] Failed to find NVMEM device
+18:40:39 [AP] [    8.487486] ipqess-edma c080000.ethernet eth0: configuring for fixed/internal link mode
+18:40:39 [AP] [    8.488268] qca8k-ipq4019 c000000.switch lan: configuring for phy/psgmii link mode
+18:40:39 [AP] [    8.494415] qca8k-ipq4019 c000000.switch: PSGMII calibration!
+18:40:39 [AP] [    8.502104] ipqess-edma c080000.ethernet eth0: Link is Up - 1Gbps/Full - flow control rx/tx
+18:40:40 [AP] Press the [f] key and hit [enter] to enter failsafe mode
+18:40:40 [AP] Press the [1], [2], [3] or [4] key and hit [enter] to select the debug level
+18:40:43 [AP] [   12.392478] qca8k-ipq4019 c000000.switch lan: Link is Up - 1Gbps/Full - flow control rx/tx
+18:40:44 [AP] [   13.667874] loop0: detected capacity change from 0 to 212992
+18:40:44 [AP] [   13.701596] loop0: detected capacity change from 212992 to 202368
+18:40:44 [AP] [   13.735027] EXT4-fs (loop0): recovery complete
+18:40:44 [AP] [   13.736417] EXT4-fs (loop0): mounted filesystem 04668374-5837-4840-9be2-29fef74f674e r/w with ordered data mode. Quota mode: disabled.
+18:40:44 [AP] [   13.739520] mount_root: switching to ext4 overlay
+18:40:44 [AP] [   13.758516] urandom-seed: Seeding with /etc/urandom.seed
+18:40:44 [AP] [   13.829673] qca8k-ipq4019 c000000.switch lan: Link is Down
+18:40:44 [AP] [   13.837839] procd: - early -
+18:40:44 [AP] [   13.838121] procd: - watchdog -
+18:40:45 [AP] [   14.421623] procd: - watchdog -
+18:40:45 [AP] [   14.422719] procd: - ubus -
+18:40:45 [AP] [   14.577803] procd: - init -
+18:40:45 [AP] Please press Enter to activate this console.
+18:40:46 [AP] [   15.166168] kmodloader: loading kernel modules from /etc/modules.d/*
+18:40:46 [AP] [   15.195587] Loading modules backported from Linux version v6.18.26-0-g1fe060681
+18:40:46 [AP] [   15.195662] Backport generated by backports.git 6ecbb44
+18:40:46 [AP] [   15.378179] PPP generic driver version 2.4.2
+18:40:46 [AP] [   15.379478] NET: Registered PF_PPPOX protocol family
+18:40:47 [AP] [   15.945576] urngd: v1.0.2 started.
+18:40:47 [AP] [   16.562302] ath10k_ahb a000000.wifi: qca4019 hw1.0 target 0x01000000 chip_id 0x003b00ff sub 0000:0000
+18:40:47 [AP] [   16.562394] ath10k_ahb a000000.wifi: kconfig debug 0 debugfs 1 tracing 0 dfs 1 testmode 0
+18:40:47 [AP] [   16.574205] ath10k_ahb a000000.wifi: firmware ver 10.4b-ct-4019-fW-14-fcb240f0 api 5 features mfp,peer-flow-ctrl,peer-fixed-rate,txstatus-noack,wmi-10.x-CT,ratemask-CT,regdump-CT,txrate-CT,flush-all-CT,pingpong-CT,ch-regs-CT,nop-CT,set-special-CT,tx-rc-CT,cust-stats-CT,txrate2-CT,beacon-cb-CT,wmi-block-ack-CT,wmi-bcn-rc-CT crc32 0cc1593e
+18:40:47 [AP] [   16.704686] ath10k_ahb a000000.wifi: board_file api 2 bmi_id 0:16 crc32 9eac77d9
+18:40:49 [AP] [   17.962917] ath10k_ahb a000000.wifi: 10.4 wmi init: vdevs: 16  peers: 48  tid: 96
+18:40:49 [AP] [   17.963003] ath10k_ahb a000000.wifi: msdu-desc: 2500  skid: 32
+18:40:49 [AP] [   17.998908] ath10k_ahb a000000.wifi: wmi print 'ChipType 1100 ChipTypeID 30 BoardID 10 P 48/48 V 16 K 144 PH 176 T 186  msdu-desc: 2500  sw-crypt: 0 ct-sta: 0'
+18:40:49 [AP] [   17.999833] ath10k_ahb a000000.wifi: wmi print 'free: 53428 iram: 20552 sram: 37256'
+18:40:49 [AP] [   18.173674] ath10k_ahb a000000.wifi: htt-ver 2.2 wmi-op 6 htt-op 4 cal pre-cal-dt max-sta 32 raw 0 hwcrypto 1
+18:40:50 [AP] [   19.176834] ath10k_ahb a800000.wifi: qca4019 hw1.0 target 0x01000000 chip_id 0x003b00ff sub 0000:0000
+18:40:50 [AP] [   19.176976] ath10k_ahb a800000.wifi: kconfig debug 0 debugfs 1 tracing 0 dfs 1 testmode 0
+18:40:50 [AP] [   19.188817] ath10k_ahb a800000.wifi: firmware ver 10.4b-ct-4019-fW-14-fcb240f0 api 5 features mfp,peer-flow-ctrl,peer-fixed-rate,txstatus-noack,wmi-10.x-CT,ratemask-CT,regdump-CT,txrate-CT,flush-all-CT,pingpong-CT,ch-regs-CT,nop-CT,set-special-CT,tx-rc-CT,cust-stats-CT,txrate2-CT,beacon-cb-CT,wmi-block-ack-CT,wmi-bcn-rc-CT crc32 0cc1593e
+18:40:50 [AP] [   19.246102] ath10k_ahb a800000.wifi: board_file api 2 bmi_id 0:21 crc32 9eac77d9
+18:40:51 [AP] [   20.503188] ath10k_ahb a800000.wifi: 10.4 wmi init: vdevs: 16  peers: 48  tid: 96
+18:40:51 [AP] [   20.503280] ath10k_ahb a800000.wifi: msdu-desc: 2500  skid: 32
+18:40:51 [AP] [   20.550133] ath10k_ahb a800000.wifi: wmi print 'ChipType 1100 ChipTypeID 30 BoardID 15 P 48/48 V 16 K 144 PH 176 T 186  msdu-desc: 2500  sw-crypt: 0 ct-sta: 0'
+18:40:51 [AP] [   20.551069] ath10k_ahb a800000.wifi: wmi print 'free: 53428 iram: 20552 sram: 37256'
+18:40:51 [AP] [   20.689986] ath10k_ahb a800000.wifi: htt-ver 2.2 wmi-op 6 htt-op 4 cal pre-cal-dt max-sta 32 raw 0 hwcrypto 1
+18:40:51 [AP] [   20.810199] kmodloader: done loading kernel modules from /etc/modules.d/*
+18:40:57 [AP] [   26.640472] ipqess-edma c080000.ethernet eth0: Link is Down
+18:40:57 [AP] [   26.652059] ipqess-edma c080000.ethernet eth0: configuring for fixed/internal link mode
+18:40:57 [AP] [   26.652422] ipqess-edma c080000.ethernet eth0: Link is Up - 1Gbps/Full - flow control rx/tx
+18:40:57 [AP] [   26.664505] qca8k-ipq4019 c000000.switch lan: configuring for phy/psgmii link mode
+18:40:57 [AP] [   26.668212] br-lan: port 1(lan) entered blocking state
+18:40:57 [AP] [   26.675039] br-lan: port 1(lan) entered disabled state
+18:40:57 [AP] [   26.680105] qca8k-ipq4019 c000000.switch lan: entered allmulticast mode
+18:40:57 [AP] [   26.685269] ipqess-edma c080000.ethernet eth0: entered allmulticast mode
+18:40:57 [AP] [   26.692235] qca8k-ipq4019 c000000.switch lan: entered promiscuous mode
+18:40:57 [AP] [   26.722987] qca8k-ipq4019 c000000.switch wan: configuring for phy/psgmii link mode
+18:41:00 [AP] [   29.832720] qca8k-ipq4019 c000000.switch lan: Link is Up - 1Gbps/Full - flow control rx/tx
+18:41:00 [AP] [   29.832849] br-lan: port 1(lan) entered blocking state
+18:41:00 [AP] [   29.839919] br-lan: port 1(lan) entered forwarding state
+
+[gale-sniff-all] totals:
+  AP: 18496 bytes
+  EC_PD: 14 bytes

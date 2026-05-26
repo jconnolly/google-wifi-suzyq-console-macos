@@ -1,0 +1,54 @@
+=== ssh root@192.168.1.1 ===
+DISTRIB_ID='OpenWrt'
+DISTRIB_RELEASE='25.12.4'
+DISTRIB_REVISION='r32933-4ccb782af7'
+DISTRIB_TARGET='ipq40xx/chromium'
+DISTRIB_ARCH='arm_cortex-a7_neon-vfpv4'
+DISTRIB_DESCRIPTION='OpenWrt 25.12.4 r32933-4ccb782af7'
+DISTRIB_TAINTS=''
+--- uname ---
+Linux OpenWrt 6.12.87 #0 SMP Wed May 13 22:42:09 2026 armv7l GNU/Linux
+--- mmc ---
+brw-------    1 root     root      179,   0 Jan  1  1970 /dev/mmcblk0
+brw-------    1 root     root      179,   8 Jan  1  1970 /dev/mmcblk0boot0
+brw-------    1 root     root      179,  16 Jan  1  1970 /dev/mmcblk0boot1
+brw-------    1 root     root      179,   1 Jan  1  1970 /dev/mmcblk0p1
+brw-------    1 root     root      259,   2 Jan  1  1970 /dev/mmcblk0p10
+brw-------    1 root     root      259,   3 Jan  1  1970 /dev/mmcblk0p11
+brw-------    1 root     root      259,   4 Jan  1  1970 /dev/mmcblk0p12
+brw-------    1 root     root      179,   2 Jan  1  1970 /dev/mmcblk0p2
+brw-------    1 root     root      179,   3 Jan  1  1970 /dev/mmcblk0p3
+brw-------    1 root     root      179,   4 Jan  1  1970 /dev/mmcblk0p4
+brw-------    1 root     root      179,   5 Jan  1  1970 /dev/mmcblk0p5
+brw-------    1 root     root      179,   6 Jan  1  1970 /dev/mmcblk0p6
+brw-------    1 root     root      179,   7 Jan  1  1970 /dev/mmcblk0p7
+brw-------    1 root     root      259,   0 Jan  1  1970 /dev/mmcblk0p8
+brw-------    1 root     root      259,   1 Jan  1  1970 /dev/mmcblk0p9
+crw-------    1 root     root      246,   0 Jan  1  1970 /dev/mmcblk0rpmb
+--- partitions ---
+major minor  #blocks  name
+
+   7        0     101184 loop0
+  31        0       8192 mtdblock0
+ 179        0    3817472 mmcblk0
+ 179        1    2021376 mmcblk0p1
+ 179        2      16384 mmcblk0p2
+ 179        3     819200 mmcblk0p3
+ 179        4      16384 mmcblk0p4
+ 179        5     819200 mmcblk0p5
+ 179        6          0 mmcblk0p6
+ 179        7          0 mmcblk0p7
+ 259        0      16384 mmcblk0p8
+ 259        1          0 mmcblk0p9
+ 259        2          0 mmcblk0p10
+ 259        3       8192 mmcblk0p11
+ 259        4      16384 mmcblk0p12
+ 179        8       4096 mmcblk0boot0
+ 179       16       4096 mmcblk0boot1
+   8        0    7864320 sda
+   8        1      16384 sda1
+   8        2     106496 sda2
+--- meminfo ---
+MemTotal:         494544 kB
+MemFree:          423188 kB
+MemAvailable:     416752 kB

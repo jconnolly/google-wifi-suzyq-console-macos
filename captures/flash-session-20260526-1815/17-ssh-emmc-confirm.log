@@ -1,0 +1,56 @@
+=== ifconfig en9 ===
+en9: flags=8b63<UP,BROADCAST,SMART,RUNNING,PROMISC,ALLMULTI,SIMPLEX,MULTICAST> mtu 1500
+	options=6464<VLAN_MTU,TSO4,TSO6,CHANNEL_IO,PARTIAL_CSUM,ZEROINVERT_CSUM>
+	ether 00:e0:4c:1e:47:a0
+	inet6 fe80::cef:ea55:ae57:70d8%en9 prefixlen 64 secured scopeid 0xd 
+	inet 192.168.1.2 netmask 0xffffff00 broadcast 192.168.1.255
+	nd6 options=201<PERFORMNUD,DAD>
+
+=== ping puck ===
+PING 192.168.1.1 (192.168.1.1): 56 data bytes
+64 bytes from 192.168.1.1: icmp_seq=0 ttl=64 time=0.915 ms
+64 bytes from 192.168.1.1: icmp_seq=1 ttl=64 time=0.792 ms
+64 bytes from 192.168.1.1: icmp_seq=2 ttl=64 time=0.856 ms
+
+--- 192.168.1.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 0.792/0.854/0.915/0.050 ms
+
+=== SSH verify ===
+=== /etc/openwrt_release ===
+DISTRIB_ID='OpenWrt'
+DISTRIB_RELEASE='25.12.4'
+DISTRIB_REVISION='r32933-4ccb782af7'
+DISTRIB_TARGET='ipq40xx/chromium'
+DISTRIB_ARCH='arm_cortex-a7_neon-vfpv4'
+DISTRIB_DESCRIPTION='OpenWrt 25.12.4 r32933-4ccb782af7'
+DISTRIB_TAINTS=''
+
+=== uname ===
+Linux OpenWrt 6.12.87 #0 SMP Wed May 13 22:42:09 2026 armv7l GNU/Linux
+
+=== uptime ===
+ 22:46:09 up 3 min,  load average: 0.03, 0.10, 0.05
+
+=== mount mmcblk ===
+
+=== df ===
+Filesystem                Size      Used Available Use% Mounted on
+/dev/root                 5.3M      5.3M         0 100% /rom
+tmpfs                   241.5M    216.0K    241.3M   0% /tmp
+/dev/loop0               87.1M     63.0K     80.1M   0% /overlay
+overlayfs:/overlay       87.1M     63.0K     80.1M   0% /
+tmpfs                   512.0K         0    512.0K   0% /dev
+
+=== network ===
+5: br-lan: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP qlen 1000
+    link/ether 58:cb:52:aa:16:26 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.1/24 brd 192.168.1.255 scope global br-lan
+       valid_lft forever preferred_lft forever
+    inet6 fdcb:68b3:cc02::1/60 scope global noprefixroute 
+       valid_lft forever preferred_lft forever
+    inet6 fe80::5acb:52ff:feaa:1626/64 scope link 
+       valid_lft forever preferred_lft forever
+
+=== which boot ===
+cros_secure root=PARTUUID=5452574f-2211-4433-5566-778899aabb01/PARTNROFF=1 rootwait

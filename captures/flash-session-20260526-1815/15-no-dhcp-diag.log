@@ -1,0 +1,20 @@
+=== arp scan en9 ===
+
+=== try common OpenWrt IPs ===
+-- ping 192.168.1.1 --
+1 packets transmitted, 0 packets received, 100.0% packet loss
+-- ping 192.168.8.1 --
+1 packets transmitted, 0 packets received, 100.0% packet loss
+-- ping 192.168.0.1 --
+1 packets transmitted, 0 packets received, 100.0% packet loss
+-- ping 10.0.0.1 --
+1 packets transmitted, 0 packets received, 100.0% packet loss
+
+=== broadcast ping to discover ===
+PING 169.254.255.255 (169.254.255.255): 56 data bytes
+Request timeout for icmp_seq 0
+
+--- 169.254.255.255 ping statistics ---
+2 packets transmitted, 0 packets received, 100.0% packet loss
+
+=== arp after pings ===

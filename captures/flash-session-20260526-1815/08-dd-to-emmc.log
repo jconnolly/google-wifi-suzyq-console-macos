@@ -1,0 +1,33 @@
+=== dd 1/2: zero secondary GPT header at sector 7634911 ===
+33+0 records in
+33+0 records out
+
+=== dd 2/2: write factory.bin to /dev/mmcblk0 ===
+43316+1 records in
+43316+1 records out
+--- post-dd partitions ---
+major minor  #blocks  name
+
+   7        0     101184 loop0
+  31        0       8192 mtdblock0
+ 179        0    3817472 mmcblk0
+ 179        1    2021376 mmcblk0p1
+ 179        2      16384 mmcblk0p2
+ 179        3     819200 mmcblk0p3
+ 179        4      16384 mmcblk0p4
+ 179        5     819200 mmcblk0p5
+ 179        6          0 mmcblk0p6
+ 179        7          0 mmcblk0p7
+ 259        0      16384 mmcblk0p8
+ 259        1          0 mmcblk0p9
+ 259        2          0 mmcblk0p10
+ 259        3       8192 mmcblk0p11
+ 259        4      16384 mmcblk0p12
+ 179        8       4096 mmcblk0boot0
+ 179       16       4096 mmcblk0boot1
+   8        0    7864320 sda
+   8        1      16384 sda1
+   8        2     106496 sda2
+
+=== reboot puck ===
+(ssh backgrounded, reboot triggered)

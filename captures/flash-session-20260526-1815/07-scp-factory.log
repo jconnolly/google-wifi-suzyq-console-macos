@@ -1,0 +1,8 @@
+=== scp factory.bin -> puck:/tmp ===
+
+=== verify on puck ===
+-rw-r--r--    1 root     root      22178050 May 13 22:43 /tmp/openwrt-25.12.4-ipq40xx-chromium-google_wifi-squashfs-factory.bin
+784bb816997df54e5a3b7d66eedbc0dd  /tmp/openwrt-25.12.4-ipq40xx-chromium-google_wifi-squashfs-factory.bin
+
+=== md5 on Mac ===
+784bb816997df54e5a3b7d66eedbc0dd

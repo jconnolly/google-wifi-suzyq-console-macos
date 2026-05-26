@@ -1,0 +1,9 @@
+/dev/disk4 (external, physical):
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *8.1 GB     disk4
+   1: FE3A2A5D-4F32-41A7-B725-ACCC3285A309               16.8 MB    disk4s1
+   2:           Linux Filesystem                         109.1 MB   disk4s2
+                    (free space)                         7.9 GB     -
+
+file=3e2caba093827981a4f1688dacdd69fb659d719da90c5bba21209c3769d05ec2
+drive=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
