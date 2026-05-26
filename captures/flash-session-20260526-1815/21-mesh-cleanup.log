@@ -1,0 +1,85 @@
+=== remove bss_transition (not in wpad-basic) ===
+  _______                     ________        __
+ |       |.-----.-----.-----.|  |  |  |.----.|  |_
+ |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
+ |_______||   __|_____|__|__||________||__|  |____|
+          |__| W I R E L E S S   F R E E D O M
+ -----------------------------------------------------
+ OpenWrt 25.12.4, r32933-4ccb782af7 Dave's Guitar
+ -----------------------------------------------------
+
+ === WARNING! =====================================
+ There is no root password defined on this device!
+ Use the "passwd" command to set up a new password
+ in order to prevent unauthorized SSH logins.
+ --------------------------------------------------
+
+
+ OpenWrt recently switched to the "apk" package manager!
+
+ OPKG Command           APK Equivalent      Description
+ ------------------------------------------------------------------
+ opkg install <pkg>     apk add <pkg>       Install a package
+ opkg remove <pkg>      apk del <pkg>       Remove a package
+ opkg upgrade           apk upgrade         Upgrade all packages
+ opkg files <pkg>       apk info -L <pkg>   List package contents
+ opkg list-installed    apk info            List installed packages
+ opkg update            apk update          Update package lists
+ opkg search <pkg>      apk search <pkg>    Search for packages
+ ------------------------------------------------------------------
+
+For more information visit:
+https://openwrt.org/docs/guide-user/additional-software/opkg-to-apk-cheatsheet
+
+--- iw dev ---
+phy#1
+	Interface phy1-ap0
+		ifindex 10
+		wdev 0x100000003
+		addr 5a:cb:52:aa:16:28
+		ssid Cinque Veddy Much
+		type AP
+		channel 36 (5180 MHz), width: 80 MHz, center1: 5210 MHz
+		txpower 23.00 dBm
+		multicast TXQ:
+			qsz-byt	qsz-pkt	flows	drops	marks	overlmt	hashcol	tx-bytes	tx-packets
+			0	0	0	0	0	0	0	0		0
+	Interface phy1-mesh0
+		ifindex 7
+		wdev 0x100000001
+		addr 58:cb:52:aa:16:28
+		type mesh point
+		channel 36 (5180 MHz), width: 80 MHz, center1: 5210 MHz
+		txpower 23.00 dBm
+		multicast TXQ:
+			qsz-byt	qsz-pkt	flows	drops	marks	overlmt	hashcol	tx-bytes	tx-packets
+			0	0	11	0	0	0	0	1990		11
+phy#0
+	Interface phy0-ap0
+		ifindex 9
+		wdev 0x2
+		addr 58:cb:52:aa:16:2c
+		ssid Cinque Veddy Much
+		type AP
+		channel 1 (2412 MHz), width: 20 MHz, center1: 2412 MHz
+		txpower 30.00 dBm
+		multicast TXQ:
+			qsz-byt	qsz-pkt	flows	drops	marks	overlmt	hashcol	tx-bytes	tx-packets
+			0	0	0	0	0	0	0	0		0
+--- logread tail ---
+Wed May 13 22:55:48 2026 daemon.notice hostapd: Set new config for phy phy1: /var/run/hostapd-phy1.conf
+Wed May 13 22:55:48 2026 daemon.notice hostapd: Could not find previous interface phy1-ap0
+Wed May 13 22:55:48 2026 daemon.notice hostapd: Restart interface for phy phy1
+Wed May 13 22:55:48 2026 daemon.notice hostapd: Configuration file: <inline> (phy phy1) --> new PHY
+Wed May 13 22:55:48 2026 daemon.notice hostapd: Configuration file: Reading configuration file '<inline>'
+Wed May 13 22:55:49 2026 daemon.notice hostapd: Configuration file: Reading configuration file '<inline>'
+Wed May 13 22:55:49 2026 daemon.notice wpa_supplicant[1103]: Start pending MLD interfaces
+Wed May 13 22:55:49 2026 daemon.notice hostapd: phy1-ap0: interface state UNINITIALIZED->COUNTRY_UPDATE
+Wed May 13 22:55:49 2026 daemon.notice hostapd: phy1-ap0: interface state COUNTRY_UPDATE->ENABLED
+Wed May 13 22:55:49 2026 daemon.notice hostapd: phy1-ap0: AP-ENABLED
+--- br-lan ---
+bridge name	bridge id		STP enabled	interfaces
+br-lan		7fff.58cb52aa1626	no		lan
+							phy0-ap0
+							phy1-ap0
+							phy1-mesh0
