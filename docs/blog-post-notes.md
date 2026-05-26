@@ -150,6 +150,82 @@ colors and ping responses.
 - Document the actual Mac-↔-puck ethernet link issue once I've got
   serial to look at it.
 
+## Two pucks, two firmware generations — the "wall" theory in serial form
+
+Captured boot traces on two pucks back-to-back. They are visibly
+different firmware generations, which lines up with the community
+hypothesis that auto-updated pucks (running online 24/7) get a newer
+Google firmware that won't sustain unsigned dev USB boot.
+
+|                     | Puck A (mesh1, flashed cleanly)             | Puck B (suspected "walled")                       |
+|---------------------|----------------------------------------------|----------------------------------------------------|
+| eMMC chip           | `4FTE4R` rev 0.1, S/N 2789407485             | `4FPD3R` rev 0.2, S/N 2986147503                  |
+| vboot key block     | RSA padding check **fails**, falls through to hash-only ("In recovery mode or dev-signed kernel") | RSA signature **passes outright** — kernel preamble + partition both good, "Same kernel version" |
+| rootfs mount        | `root=PARTUUID=cc24514c-...` (label-based)   | `root=/dev/dm-0` (dm-verity verified rootfs)      |
+| cmdline extras      | `noinitrd`, no DRM tracing                   | `drm.trace=0x106`, `dm_verity.dev_wait=1`         |
+| Kernel PARTUUID     | `cc24514c-062f-2e48-b5f6-05f5233499a4`       | `f1bcbf9a-8da7-454b-98f5-208d7cde9fb7`            |
+| Vboot dev branch    | `VbBootDeveloper() - trying fixed disk`      | Multiple `VbBootDeveloper() - user pressed Ctrl+U; try USB` retries before falling back to fixed disk |
+| Boot lands at       | ChromeOS Developer Console banner            | Direct kernel boot (no banner shown)              |
+| coreboot bootblock  | `60d1b1c` 2017-01-09                         | `60d1b1c` 2017-01-09 (same — wall is above coreboot) |
+
+Puck A flashed first try with the standard kkestell procedure (the rest
+of this post). Puck B has not been flashed yet at time of writing. The
+dm-verity rootfs + hard RSA-pass on B is exactly the "newer firmware
+that refuses unsigned dev USB boot" pattern. We won't know for sure
+until we try the SW7 dance with an OpenWrt USB drive on B.
+
+## Workarounds for "walled" pucks — what's out there
+
+Searched the OpenWrt forums, kkestell guide, MrChromebox docs, and
+related write-ups for a known fix when the SW7 USB-boot reverts on a
+newer-firmware puck. **There is no clean software-only fix.** Summary:
+
+- **OnHub Recovery Utility** only offers a single firmware version (the
+  latest). You can't pick an older image from inside it. So flashing
+  the "factory image" doesn't downgrade past whatever the puck is
+  already running.
+- Older Google WiFi factory firmware images are **not publicly
+  hosted** anywhere I could find. Forum threads explicitly note "such a
+  file doesn't seem to be publicly available."
+- **galeforce** (`github.com/marcosscriven/galeforce`) is a rooted
+  Google firmware fork, but it uses the same SW7 dev-mode USB-boot
+  path — so a walled puck reverts galeforce too. Confirmed in an
+  earlier session of this project (see memory note 2026-05-22).
+- **CH341A SPI flash programmer** + SOIC-8 clip is the hardware-level
+  fallback used on Chromebooks via
+  [MrChromebox's unbricking guide](https://docs.mrchromebox.tech/docs/support/unbricking/unbrick-ch341a.html).
+  The MrChromebox docs are Chromebook-specific and don't mention
+  AC-1304, but the principle should transfer: open the case, clip the
+  Winbond SPI chip, dump current firmware, write an older coreboot
+  image that allows dev USB boot. The catch: where do you get an older
+  coreboot image for Gale? Nobody seems to have published one. So this
+  is "dump it yourself from an older puck, then reflash a walled one."
+- **SuzyQ CCD unlock** could in theory let you change CCD/firmware-mgmt
+  flags from a Mac/Linux host via the existing debug interfaces — but
+  on Gale's H1 chip the unlock procedure is undocumented (see
+  [`docs/ccd-unlock-research.md`](ccd-unlock-research.md)). Open research.
+- **Source older un-updated pucks** — buy used / pull from sat-offline
+  inventory. Lottery.
+- **Pragmatic exit:** if N of M pucks are walled, deploy 1 OpenWrt
+  router + use cheap dedicated OpenWrt APs (e.g. GL.iNet, Belkin
+  RT3200, or any IPQ40xx ≠ Gale) for mesh. Stops the puck collection
+  from being load-bearing.
+
+So the honest blog-post conclusion for a walled puck is: **try the
+SW7 dance first, and if it reverts, you're looking at CH341A or
+recycling.** The serial console doesn't unblock flashing on a walled
+puck, but it DOES let you definitively confirm which side of the wall
+each puck is on without trial-and-error LED-watching.
+
+Sources I checked:
+- [OpenWrt forum: Google WiFi flash firmware failure thread](https://forum.openwrt.org/t/google-wifi-flash-firmware-failure/184617)
+- [OpenWrt forum: how can to stock firmware in google wifi (ac 1304)](https://forum.openwrt.org/t/how-can-to-stock-firmware-in-google-wifi-ac-1304/235366)
+- [OpenWrt forum: Finally installed OpenWRT on my Google WIFI(AC-1304)](https://forum.openwrt.org/t/finally-installed-openwrt-on-my-google-wifi-ac-1304/183541)
+- [MrChromebox CH341A unbricking](https://docs.mrchromebox.tech/docs/support/unbricking/unbrick-ch341a.html)
+- [galeforce project](https://github.com/marcosscriven/galeforce)
+- [krishnendu.com — OpenWrt on AC-1304](https://krishnendu.com/openwrt-on-google-wifi-ac1304-easy-way-thow-i-turned-my-lost-qr-google-wifi-into-an-openwrt-beast/)
+- [Google Nest Community: need to downgrade my AC-1304](https://www.googlenestcommunity.com/t5/Nest-Wifi/Need-to-downgrade-my-Google-Wifi-Ac1304/m-p/408325)
+
 ## The "didn't take no for an answer" arc
 
 The shape of the story matters more than the raw technical content:
