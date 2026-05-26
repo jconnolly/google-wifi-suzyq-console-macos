@@ -1,0 +1,13 @@
+$ python3 tools/gale-sniff --duration 90
+[gale-sniff] iface 1 (AP). duration=90s. Ctrl-C to stop.
+
+coreboot-60d1b1c Mon Jan  9 00:04:49 UTC 2017 bootblock start
+[gale-sniff] captured 65 bytes
+
+Notes:
+- coreboot bootblock line is the only AP output observed.
+- After bootblock the AP UART goes silent (console redirected away from USB
+  by the firmware, or only TX'd briefly before the H1 hands off).
+- EC_PD interface (iface 0) emits "RST EP0 NNNN" reset chatter +
+  intermittent "TPM: command 0xXX returned 0x0" messages.
+- All writes time out -> CCD is locked, this is read-only.

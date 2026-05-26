@@ -1,0 +1,148 @@
+#!/usr/bin/env python3
+"""gale-sniff — read-only USB sniffer for the Google WiFi (Gale, AC-1304)
+debug console exposed via a SuzyQ / SuzyQable adapter.
+
+Output goes to stdout. Default interface is the AP (Application Processor)
+console, which is what a typical user wants to see U-Boot / kernel boot
+messages on. Use `--iface` to switch interfaces; `--scan` enumerates them.
+
+The Gale debug interfaces are vendor-class (bInterfaceClass=0xFF), so macOS
+does NOT bind a TTY (`/dev/cu.usbmodem*`). This script talks bulk endpoints
+directly through libusb.
+
+CCD (Closed Case Debugging) is locked by default on Gale: only the device's
+TX is observable. Writing to the device requires an unlock dance that is not
+implemented here. So this is sniff-only.
+
+Typical use:
+    gale-sniff                 # AP console, run forever
+    gale-sniff --duration 60   # AP console, 60 s then exit
+    gale-sniff --iface 0       # EC_PD console
+    gale-sniff --scan          # list every interface and label
+"""
+import argparse
+import sys
+import time
+import usb.core
+import usb.util
+
+VID = 0x18D1   # Google Inc.
+PID = 0x500F   # Gale debug
+
+
+def find_device():
+    dev = usb.core.find(idVendor=VID, idProduct=PID)
+    if dev is None:
+        sys.exit(
+            "Gale debug device not found.\n"
+            "  - is the puck powered on (LED lit)?\n"
+            "  - is the SuzyQ USB-A end plugged DIRECTLY into the Mac "
+            "(not through a hub/dock)?\n"
+            "  - try flipping the USB-C orientation on the puck"
+        )
+    return dev
+
+
+def iface_label(dev, intf):
+    if intf.iInterface:
+        try:
+            return usb.util.get_string(dev, intf.iInterface) or "?"
+        except Exception:
+            return "?"
+    return "?"
+
+
+def claim(dev, n):
+    try:
+        if dev.is_kernel_driver_active(n):
+            dev.detach_kernel_driver(n)
+    except (NotImplementedError, usb.core.USBError):
+        pass
+    usb.util.claim_interface(dev, n)
+
+
+def endpoints(intf):
+    ep_in = next(
+        (ep for ep in intf
+         if usb.util.endpoint_direction(ep.bEndpointAddress) == usb.util.ENDPOINT_IN),
+        None,
+    )
+    ep_out = next(
+        (ep for ep in intf
+         if usb.util.endpoint_direction(ep.bEndpointAddress) == usb.util.ENDPOINT_OUT),
+        None,
+    )
+    return ep_in, ep_out
+
+
+def cmd_scan(dev):
+    cfg = dev.get_active_configuration()
+    print(f"VID=0x{VID:04x}  PID=0x{PID:04x}  product={usb.util.get_string(dev, dev.iProduct)!r}")
+    print(f"interfaces in active config:")
+    for intf in cfg:
+        print(
+            f"  iface {intf.bInterfaceNumber}  "
+            f"label={iface_label(dev, intf)!r}  "
+            f"subclass=0x{intf.bInterfaceSubClass:02x}  "
+            f"endpoints={intf.bNumEndpoints}"
+        )
+
+
+def cmd_sniff(dev, iface_num, duration):
+    cfg = dev.get_active_configuration()
+    intf = cfg[(iface_num, 0)]
+    label = iface_label(dev, intf)
+    print(
+        f"[gale-sniff] iface {iface_num} ({label}). "
+        f"duration={duration if duration > 0 else 'forever'}s. Ctrl-C to stop.",
+        file=sys.stderr, flush=True,
+    )
+
+    claim(dev, iface_num)
+    ep_in, _ = endpoints(intf)
+    if ep_in is None:
+        sys.exit(f"interface {iface_num} has no IN endpoint")
+
+    end = (time.time() + duration) if duration > 0 else float("inf")
+    total = 0
+    try:
+        while time.time() < end:
+            try:
+                chunk = ep_in.read(ep_in.wMaxPacketSize, timeout=500)
+                if chunk:
+                    total += len(chunk)
+                    sys.stdout.write(bytes(chunk).decode("utf-8", "replace"))
+                    sys.stdout.flush()
+            except usb.core.USBError as e:
+                msg = str(e).lower()
+                if "timeout" in msg or getattr(e, "errno", None) == 60:
+                    continue
+                raise
+    except KeyboardInterrupt:
+        pass
+    finally:
+        usb.util.release_interface(dev, iface_num)
+        print(f"\n[gale-sniff] captured {total} bytes", file=sys.stderr)
+
+
+def main():
+    p = argparse.ArgumentParser(
+        description="Read-only sniffer for Google WiFi (Gale) SuzyQ debug console.",
+    )
+    p.add_argument("--iface", type=int, default=1,
+                   help="USB interface number (0=EC_PD, 1=AP, default 1)")
+    p.add_argument("--duration", type=float, default=0,
+                   help="seconds to capture (0 = run forever, default)")
+    p.add_argument("--scan", action="store_true",
+                   help="list every interface on the device and exit")
+    args = p.parse_args()
+
+    dev = find_device()
+    if args.scan:
+        cmd_scan(dev)
+        return
+    cmd_sniff(dev, args.iface, args.duration)
+
+
+if __name__ == "__main__":
+    main()
