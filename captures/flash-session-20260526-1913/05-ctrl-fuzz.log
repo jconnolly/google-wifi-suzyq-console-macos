@@ -1,0 +1,20 @@
+SPI interface: 3
+baseline SPI test: DISABLED
+
+=== sweeping vendor IN requests (0xC0, wValue=0, wIndex=0) ===
+  IN sweep: 0 non-stalled requests
+
+=== sweeping vendor IN requests on iface 3 (0xC1) ===
+  IN-iface sweep: 0 non-stalled
+
+=== sweeping vendor IN requests on iface 0 (0xC1) ===
+  IN-iface sweep: 0 non-stalled
+
+after IN sweeps SPI test: DISABLED
+
+=== sweeping vendor OUT requests (0x40, wValue=0, wIndex=0, 0B payload) ===
+  OUT sweep: enabled_at = None
+
+after OUT sweep: STILL DISABLED
+
+=== nothing landed. Trying interface-targeted OUT sweeps ===

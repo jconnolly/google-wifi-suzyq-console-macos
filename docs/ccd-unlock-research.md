@@ -108,26 +108,53 @@ as one of its capabilities) by running `gsctool` from ChromeOS shell.
 **Gale does not expose a `0x53` interface.** Only `0x50` (UART) and
 `0x51` (SPI). So the gsctool unlock path is structurally unavailable.
 
-### Open questions to research
+### Software-only directions: all dead
 
-1. Does the H1 on Gale accept a CCD-unlock-equivalent command in-band
-   over UART (iface 0 EC_PD console)? UART writes currently time out
-   too, but maybe a specific magic string triggers an unlock-prompt
-   sequence (similar to Cr50's `ccd open` over its own console).
-2. Is there a physical write-protect screw on the Gale mainboard that
-   needs to be removed to allow CCD to be opened? On Chromebooks this
-   is a SOIC-8-area screw. The 2026-05-22 memory note speculates this
-   exists.
-3. Could SET_INTERFACE alt-setting toggle on iface 3 enable the
-   bridge? Unlikely (no alt settings shown in descriptors) but cheap
-   to try.
-4. Is there a vendor-specific control transfer (bRequest range
-   0xA0-0xFF) that flips the CCD state? Most GSCs use control
-   transfers for capability management.
-5. Could we extract the H1 firmware via JTAG / SWD pads on the
-   mainboard and patch the CCD-lock check out? Same answer as
-   "CH341A on the AP SPI" — needs hardware + extracted firmware
-   keys + RE work.
+Tried and confirmed unavailable on Gale:
+
+1. **In-band UART CCD console** (typing `ccd open` etc.) — Cr50 exposes a
+   3rd UART interface for the GSC console itself. Gale's H1 only
+   exposes `bNumInterfaces=3` with interfaces 0 (EC_PD), 1 (AP), 3
+   (SPI). **No interface 2** = no GSC console = no in-band command
+   path. Stripped-down H1 firmware compared to Cr50.
+
+2. **Vendor-specific USB control transfers** — wrote a fuzzer
+   ([`tools/gale-ctrl-fuzz`](../tools/gale-ctrl-fuzz)) that swept all
+   256 bRequest values across four bmRequestType variants
+   (`0xC0`, `0xC1`, `0x40`, `0x41`) at device + interface targets.
+   Result: 1024 control transfers, **every single one STALLed**. Gale's
+   H1 firmware implements no vendor-specific control handlers at all,
+   so there's no in-band "enable SPI bridge" command available
+   through control transfers either.
+
+3. **`gsctool` equivalent** — requires `USB_SUBCLASS_GOOGLE_UPDATE`
+   (`0x53`) interface. Gale doesn't expose it. Not available.
+
+4. **SET_INTERFACE alt-setting toggle on iface 3** — descriptors show
+   no alternate settings. Tried by inference; no effect.
+
+### Hardware directions: still open
+
+5. **Physical write-protect screw + CH341A SPI programmer.** On
+   Chromebooks there's a WP-disable screw near the SPI flash chip on
+   the mainboard. Removing it disables firmware-write-protect on the
+   coreboot region. If Gale has one, the procedure would be:
+   - Open puck case (already required for SW7 access)
+   - Find + remove the WP screw
+   - Optionally re-attempt the SPI bridge enable (might succeed once
+     hardware WP is off)
+   - If still locked: clip the SOIC-8 SPI flash chip with a CH341A
+     programmer ($10 part), dump the firmware, patch out the kernel
+     signature check, reflash
+   - Caveat: nobody seems to have published an older Gale coreboot
+     image, so the patch would need to be developed from scratch or
+     extracted from a non-walled puck (e.g. mesh1).
+
+6. **JTAG / SWD on the H1 chip.** The H1 is an ARM Cortex-M3-class
+   security chip. If we can find the SWD pads or pry off the package,
+   we can attach a debugger and potentially read/write H1 firmware
+   directly — but this is well beyond the scope of a $7 cable + Python
+   script project.
 
 ### Why this matters
 

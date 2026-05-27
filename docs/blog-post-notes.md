@@ -320,6 +320,60 @@ CCD unlock — please get in touch. Notes are at
 [docs/ccd-unlock-research.md](ccd-unlock-research.md) and the probe
 tool is [tools/gale-spi-probe](../tools/gale-spi-probe).
 
+## Hack attempt #2 — fuzzing vendor control transfers
+
+After confirming the SPI bridge is disabled by software, the next
+question: is there a *backdoor* control transfer that toggles the
+bridge on? GSC firmware on standard Cr50 implements lots of
+vendor-specific control transfers; maybe Gale's H1 does too, just
+without documentation.
+
+Wrote a fuzzer ([`tools/gale-ctrl-fuzz`](../tools/gale-ctrl-fuzz))
+that sweeps all 256 bRequest values across four bmRequestType variants
+(`0xC0`, `0xC1`, `0x40`, `0x41`) at device and interface targets.
+
+Result: 1024 total control transfers, **every single one returned
+STALL**. Gale's H1 firmware implements no vendor-specific control
+transfer handlers at all. So the "vendor backdoor" door isn't just
+locked, it's not even installed.
+
+## Hack attempt #3 — looking for the H1 CCD console interface
+
+On a standard Chromebook with Cr50, you'd type `ccd open` at the
+GSC's own console. That console lives on a third UART interface,
+in the same USB device, alongside the AP and EC consoles.
+
+I checked Gale's USB device descriptor. **`bNumInterfaces = 3`**.
+Three interfaces: 0 (EC_PD), 1 (AP), 3 (SPI). Interface 2 — the
+one that on Cr50 would be the GSC console — is missing. Gone.
+Not just hidden behind alt-settings, not just CCD-locked, it just
+isn't there.
+
+Gale's H1 ships a stripped-down firmware that drops the GSC console
+interface entirely. There's no way to type `ccd open` at this puck,
+because the surface to type it at doesn't exist.
+
+## Summary — the software wall is real
+
+Across all three hack attempts I could do from a Mac with the SuzyQ
+cable alone:
+
+| Attempt | Result |
+|---------|--------|
+| Talk SPI raiden protocol on iface 3 | Protocol works. Bridge explicitly disabled. |
+| Fuzz vendor control transfers for a backdoor | 1024 fuzz hits, all STALL. No handlers. |
+| Look for the H1 CCD console interface | Doesn't exist on Gale (Cr50 has it). |
+
+So the realistic remaining options for a walled puck are hardware:
+- Physical WP screw + CH341A SOIC-8 reflash (need to find the screw
+  on the Gale mainboard, and develop a firmware patch from scratch —
+  no published older Gale coreboot)
+- JTAG/SWD on H1 (overkill, requires scope + RE work)
+
+Or pragmatic: don't fight the wall, route around it. Deploy the few
+non-walled pucks as APs, use dedicated cheap OpenWrt routers
+(GL.iNet, Belkin RT3200, generic IPQ40xx) for additional mesh nodes.
+
 ## The "didn't take no for an answer" arc
 
 The shape of the story matters more than the raw technical content:

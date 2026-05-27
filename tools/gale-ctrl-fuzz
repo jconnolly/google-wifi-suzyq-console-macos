@@ -1,0 +1,178 @@
+#!/usr/bin/env python3
+"""gale-ctrl-fuzz — fuzz vendor-specific USB control transfers on the Gale
+debug device to look for an "enable SPI bridge" backdoor.
+
+USB control transfers are out-of-band from any interface; the device can
+implement them globally. Standard USB bRequest values are 0x00-0x0C; vendor
+requests live in the 0x00-0xFF space when bmRequestType has the vendor bit
+(0x40) set.
+
+Strategy:
+1. Sweep vendor IN requests (host reads from device) — these are safe; no
+   side effects expected, just queries.
+2. After each successful query, re-run the SPI probe to see if the bridge
+   has been enabled.
+3. Sweep vendor OUT requests (host writes to device) with zero-byte payload
+   to look for state-change commands.
+
+Stops if SPI bridge becomes enabled.
+
+NOTE: this fuzzes a security chip. There's a non-zero chance some control
+transfer puts the device in a weird state. The Gale puck is power-cycle
+recoverable (just unplug the SuzyQ); if it stops responding, replug.
+"""
+import struct
+import sys
+import time
+import usb.core
+import usb.util
+
+VID = 0x18D1
+PID = 0x500F
+
+
+def find():
+    d = usb.core.find(idVendor=VID, idProduct=PID)
+    if d is None:
+        sys.exit("Gale debug device not found")
+    return d
+
+
+def find_spi_iface(dev):
+    cfg = dev.get_active_configuration()
+    for i in cfg:
+        if i.bInterfaceSubClass == 0x51:
+            return i
+    return None
+
+
+def test_spi_bridge(dev, intf):
+    """Send SPI READ_ID; return True if bridge is enabled (status != 0x0005)."""
+    iface_num = intf.bInterfaceNumber
+    try:
+        if dev.is_kernel_driver_active(iface_num):
+            dev.detach_kernel_driver(iface_num)
+    except (NotImplementedError, usb.core.USBError):
+        pass
+    try:
+        usb.util.claim_interface(dev, iface_num)
+    except usb.core.USBError:
+        return False
+    try:
+        ep_out = next(ep for ep in intf
+                      if usb.util.endpoint_direction(ep.bEndpointAddress) == usb.util.ENDPOINT_OUT)
+        ep_in = next(ep for ep in intf
+                     if usb.util.endpoint_direction(ep.bEndpointAddress) == usb.util.ENDPOINT_IN)
+        ep_out.write(bytes([1, 3, 0x9F]), timeout=1000)
+        rsp = bytes(ep_in.read(64, timeout=1000))
+        if len(rsp) >= 2:
+            status = struct.unpack("<H", rsp[:2])[0]
+            return status != 0x0005
+    except Exception:
+        pass
+    finally:
+        usb.util.release_interface(dev, iface_num)
+    return False
+
+
+def sweep_in_requests(dev):
+    """bmRequestType = 0xC0 (device-to-host, vendor, device-targeted).
+    Sweep bRequest 0x00-0xFF with wValue=0, wIndex=0, expect up to 64 bytes."""
+    print("\n=== sweeping vendor IN requests (0xC0, wValue=0, wIndex=0) ===")
+    hits = []
+    for req in range(256):
+        try:
+            data = dev.ctrl_transfer(0xC0, req, 0, 0, 64, timeout=500)
+            print(f"  req=0x{req:02x}: {len(data)}B {bytes(data).hex()}")
+            hits.append((req, bytes(data)))
+        except usb.core.USBError:
+            pass  # silent — most requests will STALL
+    print(f"  IN sweep: {len(hits)} non-stalled requests")
+    return hits
+
+
+def sweep_in_requests_iface(dev, iface_num):
+    """bmRequestType = 0xC1 (device-to-host, vendor, interface-targeted)."""
+    print(f"\n=== sweeping vendor IN requests on iface {iface_num} (0xC1) ===")
+    hits = []
+    for req in range(256):
+        try:
+            data = dev.ctrl_transfer(0xC1, req, 0, iface_num, 64, timeout=500)
+            print(f"  req=0x{req:02x}: {len(data)}B {bytes(data).hex()}")
+            hits.append((req, bytes(data)))
+        except usb.core.USBError:
+            pass
+    print(f"  IN-iface sweep: {len(hits)} non-stalled")
+    return hits
+
+
+def sweep_out_requests(dev, spi_intf):
+    """bmRequestType = 0x40 (host-to-device, vendor, device-targeted).
+    Zero-byte payload. After each successful one, re-test SPI bridge."""
+    print("\n=== sweeping vendor OUT requests (0x40, wValue=0, wIndex=0, 0B payload) ===")
+    enabled_at = None
+    for req in range(256):
+        try:
+            dev.ctrl_transfer(0x40, req, 0, 0, b"", timeout=500)
+            print(f"  req=0x{req:02x}: accepted (no err)")
+            time.sleep(0.05)
+            if test_spi_bridge(dev, spi_intf):
+                print(f"  *** SPI BRIDGE NOW ENABLED after OUT req 0x{req:02x} ***")
+                enabled_at = req
+                break
+        except usb.core.USBError:
+            pass
+    print(f"  OUT sweep: enabled_at = {enabled_at}")
+    return enabled_at
+
+
+def sweep_out_with_values(dev, spi_intf, req):
+    """For a known accepted req, sweep wValue 0..255 with empty payload."""
+    print(f"\n=== sweeping wValue for req 0x{req:02x} ===")
+    for v in range(256):
+        try:
+            dev.ctrl_transfer(0x40, req, v, 0, b"", timeout=300)
+            time.sleep(0.05)
+            if test_spi_bridge(dev, spi_intf):
+                print(f"  *** SPI BRIDGE ENABLED at req=0x{req:02x} wValue=0x{v:04x} ***")
+                return v
+        except usb.core.USBError:
+            pass
+    return None
+
+
+def main():
+    dev = find()
+    spi_intf = find_spi_iface(dev)
+    if spi_intf is None:
+        sys.exit("no SPI interface found")
+    print(f"SPI interface: {spi_intf.bInterfaceNumber}")
+    print(f"baseline SPI test: {'ENABLED' if test_spi_bridge(dev, spi_intf) else 'DISABLED'}")
+
+    in_hits = sweep_in_requests(dev)
+    in_iface_hits = sweep_in_requests_iface(dev, spi_intf.bInterfaceNumber)
+    in_iface0_hits = sweep_in_requests_iface(dev, 0)
+
+    print(f"\nafter IN sweeps SPI test: {'ENABLED' if test_spi_bridge(dev, spi_intf) else 'DISABLED'}")
+
+    enabled = sweep_out_requests(dev, spi_intf)
+    if enabled is not None:
+        print(f"\n=== WIN — req 0x{enabled:02x} enabled the bridge ===")
+        return
+
+    print(f"\nafter OUT sweep: {'ENABLED' if test_spi_bridge(dev, spi_intf) else 'STILL DISABLED'}")
+    print("\n=== nothing landed. Trying interface-targeted OUT sweeps ===")
+    for iface_target in (0, 1, 3):
+        for req in range(256):
+            try:
+                dev.ctrl_transfer(0x41, req, 0, iface_target, b"", timeout=300)
+                time.sleep(0.03)
+                if test_spi_bridge(dev, spi_intf):
+                    print(f"  *** ENABLED via iface-targeted 0x41 req=0x{req:02x} iface={iface_target} ***")
+                    return
+            except usb.core.USBError:
+                pass
+
+
+if __name__ == "__main__":
+    main()
