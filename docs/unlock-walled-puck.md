@@ -46,27 +46,24 @@ Reflashing the **official factory firmware** restores the working
 flashrom binary. From there `enable_dev_usb_boot` actually persists,
 and you're back to the standard kkestell flow.
 
-## ⚠️ Verification status (2026-05-27)
+## Verification status (2026-05-27, A/B tested)
 
-This recipe **worked end-to-end on one walled puck (mesh2)** but has
-NOT yet been minimized — every step listed below has at least one
-plausible "maybe-we-can-skip" question against it, and a publishable
-recipe should answer those before going wide. Things to test on the
-remaining pucks:
+The recipe has been **verified end-to-end on three walled pucks** and
+two of the candidate "skip me" steps have been A/B tested. Results:
 
-| Step | Question | Test |
-|------|----------|------|
-| WP screw removal | Is this strictly needed to type at UART, or only to enable HW writes to flash regions? | Try chronos login on a puck WITHOUT removing WP screw. If UART writes work without WP off, the screw can stay in. |
-| Factory recovery flash | Always needed, or only on auto-updated pucks where `flashrom` is missing? | On a fresh / never-online puck, try `sudo enable_dev_usb_boot` straight after dev mode enable. If `dev_boot_usb=1` persists, recovery flash is unnecessary for that unit. |
-| SW7 recovery dance for dev mode | Already-in-dev-mode pucks need only the post-recovery dance. Can we detect "already in dev mode" via UART trace first? | Capture stock boot. If `VbBootDeveloper()` appears (not `VbBootNormal()`), dance is redundant. |
-| Powerwash wait time | I waited 3-5 min; is that always needed or only after dev-mode flag transitions? | Time the actual chronos-login-ready window vs powerwash flag. |
-| `crossystem dev_boot_signed_only=0` + `dev_default_boot=usb` | The `dev_boot_usb=1` alone might be enough — the other two are belt-and-suspenders. | Try with only `dev_boot_usb=1` set and see if USB-boot still works. |
-| Static IP on Mac side after eMMC boot | Or was DHCP eventually working and I just didn't wait long enough? | Wait 60s after eMMC boot before falling back to static. |
+| Step | Question | Test result |
+|------|----------|-------------|
+| **WP screw removal** | Is this strictly needed to type at UART? | **REQUIRED.** Tested on puck B with WP screw IN: both EC_PD and AP UART writes return `[Errno 60] Operation timed out`. Removing the screw immediately unlocks UART writes. Without it, you can't type `chronos` at the login prompt. |
+| **Factory recovery flash** | Always needed, or only on auto-updated pucks? | **REQUIRED on auto-updated pucks.** Tested on puck B with dev mode enabled but no factory recovery: ChromeOS gets stuck in an endless dev-mode-first-boot powerwash cycle — `localhost login:` flashes briefly each cycle but Linux reboots before chronos shell stabilises, so `enable_dev_usb_boot` never gets a chance to run. After factory recovery, the powerwash completes in 3-5 min and chronos sticks. Hypothesis: the auto-updated image is missing a component (probably `flashrom`) that the powerwash flow needs to finish. |
+| SW7 recovery dance for dev mode | Already-in-dev-mode pucks could skip the post-recovery dance | Untested but probably true — factory recovery wipes the TPM dev flag, so the SW7 dance must come after recovery regardless. |
+| Powerwash wait time | Can we cut the 3-5 min wait? | Untested. The cycle is firmware-driven; probably can't be shortened from the host side. |
+| `crossystem dev_boot_signed_only=0` + `dev_default_boot=usb` | Are these belt-and-suspenders next to `dev_boot_usb=1`? | Untested but probably yes — `dev_boot_usb=1` is the load-bearing flag per `enable_dev_usb_boot`'s own output. The other two just make USB the preferred boot source. Safe to keep; cheap to set. |
+| Static IP on Mac side after eMMC boot | Or was DHCP just slow? | Untested in isolation. Static works reliably; DHCP race-with-dnsmasq-startup is well documented. Keep static fallback. |
 
-The recipe below is the **conservative superset** — every step that
-worked in the one successful run. Some of these are almost certainly
-redundant on a never-online puck. Use the upcoming two-puck test runs
-to narrow this down before publishing.
+**The recipe below is the minimum-known-working set.** Both attempts
+to skip steps confirmed those steps are necessary. If you have a
+*never-online* puck (no auto-update), it's possible the recovery
+flash can be skipped — but I don't have one of those to test on.
 
 ## The unlock — 10 minute recipe (unverified-minimum)
 

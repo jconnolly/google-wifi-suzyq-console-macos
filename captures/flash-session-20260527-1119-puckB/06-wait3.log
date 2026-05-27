@@ -1,0 +1,119 @@
+11:25:30 [EC_PD] RST EP0 3220
+11:25:30 [AP] 
+11:25:30 [AP] 
+11:25:30 [AP] coreboot-60d1b1c Mon Jan  9 00:04:49 UTC 2017 bootblock start000
+11:25:30 [AP] IMD small region:
+11:25:30 [AP]   IMD ROOT    0. 8727ec00 00000400
+11:25:30 [AP]   VBOOT SEL   1. 8727ebe0 00000008
+11:25:30 [AP] BS: BS_WRITE_TABLES times (us): entry 2 run 120573 exit 2
+11:25:30 [AP] CBFS: 'VBOOT' located CBFS at [402000:485e40)
+11:25:30 [AP] CBFS: Locating 'fallback/payload'
+11:25:30 [AP] CBFS: Found @ offset 73ac0 size 10341
+11:25:30 [AP] Loading segment from rom address 0x872e0028
+11:25:30 [AP]   code (compression=1)
+11:25:30 [AP]   New segment dstaddr 0x88104040 memsize 0x1249b70 srcaddr 0x872e0060 filesize 0x10309
+11:25:30 [AP] Loading segment from rom address 0x872e0044
+11:25:30 [AP]   Entry Point 0x88104041
+11:25:30 [AP] Bounce Buffer at 9ffcf000, 197488 bytes
+11:25:30 [AP] Loading Segment: addr: 0x0000000088104040 memsz: 0x0000000001249b70 filesz: 0x0000000000010309
+11:25:30 [AP] lb: [0x0000000087300000, 0x00000000873181b8)
+11:25:30 [AP] Post relocation: addr: 0x0000000088104040 memsz: 0x0000000001249b70 filesz: 0x0000000000010309
+11:25:30 [AP] using LZMA
+11:25:30 [AP] [ 0x88104040, 88121470, 0x8934dbb0) <- 872e0060
+11:25:31 [AP] Clearing Segment: addr: 0x0000000088121470 memsz: 0x000000000122c740
+11:25:31 [AP] dest 88104040, end 8934dbb0, bouncebuffer 9ffcf000
+11:25:31 [AP] Loaded segments
+11:25:31 [AP] BS: BS_PAYLOAD_LOAD times (us): entry 2 run 175397 exit 2
+11:25:31 [AP] Jumping to boot code at 88104041(8724c000)
+11:25:31 [AP] CPU0: stack: 0a8fc000 - 0a900000, lowest used address 0a8ff5a0, stack used: 2656 bytes
+11:25:31 [AP] 
+11:25:31 [AP] 
+11:25:31 [AP] Starting depthcharge on gale...
+11:25:31 [AP] WARNING: can't convert coreboot GPIOs, 'lid' won't be resampled at runtime!
+11:25:31 [AP] WARNING: can't convert coreboot GPIOs, 'power' won't be resampled at runtime!
+11:25:31 [AP] clock_config_mmc : 1
+11:25:31 [AP] WW_RING: initialized controller found at 0x32
+11:25:31 [AP] WW_RING: initialized 1 out of 1
+11:25:31 [AP] The GBB signature is at 0x88004020 and is:  24 47 42 42
+11:25:31 [AP] Wipe memory regions:
+11:25:31 [AP] 	[0x00000080000000, 0x00000080208000)
+11:25:31 [AP] 	[0x00000080208200, 0x0000008724c000)
+11:25:31 [AP] 	[0x00000087280000, 0x00000087500000)
+11:25:31 [AP] 	[0x0000008934dbb0, 0x0000009ff00000)
+11:25:31 [AP] Initializing XHCI USB controller at 0x8a00000.
+11:25:31 [AP] Calling VbSelectAndLoadKernel().
+11:25:31 [AP] TPM: TlclRead(0x1008, 13)
+11:25:31 [AP] 1.2 TPM (chip type slb9645tt device-id 0x1A)
+11:25:31 [AP] TPM: command 0xcf returned 0x0
+11:25:31 [AP] TPM: command 0x65 returned 0x0
+11:25:31 [AP] TPM: RollbackKernelRead 10001
+11:25:31 [AP] Entering VbBootDeveloper()
+11:25:32 [AP] VbAudioOpen() - ticks_per_msec is 1000
+11:25:32 [AP] sound_stop: No sound ops set.
+11:25:32 [AP] VbAudioOpen() - VbExBeep() is limited
+11:25:32 [AP] VbGetDevMusicNotes: use_short is 0, hdr is 0x0, maxsize is 0
+11:25:32 [AP] VbGetDevMusicNotes: using 5 default notes
+11:25:32 [AP] VbAudioOpen() - note count 5
+11:25:52 [AP] sound_start: No sound ops set.
+11:25:52 [AP] sound_start: No sound ops set.
+11:26:02 [AP] VbBootDeveloper() - trying fixed disk
+11:26:02 [AP] sound_stop: No sound ops set.
+11:26:02 [AP] VbTryLoadKernel() start, get_info_flags=0x2
+11:26:02 [AP] MMC version  = 10000042
+11:26:02 [AP] clock_config_mmc : 1
+11:26:02 [AP] clock_config_mmc : 2
+11:26:02 [AP] Man 000015 Snr 2940973631 Product 4FPD3R Revision 0.2
+11:26:02 [AP] VbTryLoadKernel() found 1 disks
+11:26:02 [AP] VbTryLoadKernel() trying disk 0
+11:26:02 [AP] GptNextKernelEntry looking at new prio partition 2
+11:26:02 [AP] GptNextKernelEntry s1 t0 p2
+11:26:02 [AP] GptNextKernelEntry looking at new prio partition 4
+11:26:02 [AP] GptNextKernelEntry s1 t0 p1
+11:26:02 [AP] GptNextKernelEntry looking at new prio partition 6
+11:26:02 [AP] GptNextKernelEntry s0 t15 p0
+11:26:02 [AP] GptNextKernelEntry likes partition 2
+11:26:02 [AP] Found kernel entry at 20480 size 32768
+11:26:02 [AP] Checking key block signature...
+11:26:02 [AP]    - sig_size=512, expecting 512 for algorithm 8
+11:26:02 [AP]    - sig_size=256, expecting 256 for algorithm 4
+11:26:02 [AP] Kernel preamble is good.
+11:26:03 [AP]    - sig_size=256, expecting 256 for algorithm 4
+11:26:03 [AP] Partition is good.
+11:26:03 [AP] Same kernel version
+11:26:03 [AP] Good_partition >= 0
+11:26:03 [AP] VbTryLoadKernel() LoadKernel() = 0
+11:26:03 [AP] TPM: Lock physical presence
+11:26:03 [AP] TPM: command 0x4000000a returned 0x0
+11:26:03 [AP] VbSelectAndLoadKernel() returning 0
+11:26:03 [AP] Boot policy: Match for type 0 with cmdline 1
+11:26:03 [AP] Modified kernel command line: cros_secure console= loglevel=7 init=/sbin/init cros_secure drm.trace=0x106 root=/dev/dm-0 rootwait ro dm_verity.error_behavior=3 dm_verity.max_bios=-1 dm_verity.dev_wait=1 dm="1 vroot none ro 1,0 1536000 verity payload=PARTUUID=f1bcbf9a-8da7-454b-98f5-208d7cde9fb7/PARTNROFF=1 hashtree=PARTUUID=f1bcbf9a-8da7-454b-98f5-208d7cde9fb7/PARTNROFF=1 hashstart=1536000 alg=sha256 root_hexdigest=a482e7c3cffa5c528c0c63db72d2ddef1edfb7839ac47cccac6b03fda0c74a87 salt=06e853d514db8481b67f105f6576e074ce227d980d9c4b2702a40ffd94f74f63" noinitrd vt.global_cursor_default=0 kern_guid=f1bcbf9a-8da7-454b-98f5-208d7cde9fb7 coherent_pool=2M  
+11:26:03 [AP] Loading FIT.
+11:26:03 [AP] Image fdt@12 has 4873 bytes.
+11:26:03 [AP] Image fdt@11 has 4975 bytes.
+11:26:03 [AP] Image fdt@10 has 4166 bytes.
+11:26:03 [AP] Image fdt@9 has 6023 bytes.
+11:26:03 [AP] Image fdt@8 has 20486 bytes.
+11:26:03 [AP] Image fdt@7 has 18929 bytes.
+11:26:03 [AP] Image fdt@6 has 14467 bytes.
+11:26:03 [AP] Image fdt@5 has 4369 bytes.
+11:26:03 [AP] Image fdt@4 has 4506 bytes.
+11:26:03 [AP] Image fdt@3 has 5523 bytes.
+11:26:03 [AP] Image fdt@2 has 7318 bytes.
+11:26:03 [AP] Image fdt@1 has 7302 bytes.
+11:26:03 [AP] Image kernel@1 has 4642880 bytes.
+11:26:03 [AP] Compat preference: google,gale-v2
+11:26:03 [AP] Config conf@12, kernel kernel@1, fdt fdt@12, compat sony,xperia-honami qcom,msm8974
+11:26:03 [AP] Config conf@11, kernel kernel@1, fdt fdt@11, compat qcom,msm8960-cdp qcom,msm8960
+11:26:03 [AP] Config conf@10, kernel kernel@1, fdt fdt@10, compat qcom,msm8660-surf qcom,msm8660
+11:26:03 [AP] Config conf@9, kernel kernel@1, fdt fdt@9, compat qcom,ipq8064-ap148 qcom,ipq8064
+11:26:03 [AP] Config conf@8, kernel kernel@1, fdt fdt@8, compat google,gale qcom,ipq4019
+11:26:03 [AP] Config conf@7, kernel kernel@1, fdt fdt@7, compat google,gale-v2 (match) qcom,ipq4019
+11:26:03 [AP] Config conf@6, kernel kernel@1, fdt fdt@6, compat qcom,ipq4019
+11:26:03 [AP] Config conf@5, kernel kernel@1, fdt fdt@5, compat qcom,apq8084-mtp qcom,apq8084
+11:26:03 [AP] Config conf@4, kernel kernel@1, fdt fdt@4, compat qcom,apq8084-ifc6540 qcom,apq8084
+11:26:03 [AP] Config conf@3, kernel kernel@1, fdt fdt@3, compat qcom,apq8074-dragonboard qcom,apq8074
+11:26:03 [AP] Config conf@2, kernel kernel@1, fdt fdt@2, compat qcom,apq8064-ifc6410 qcom,apq8064
+11:26:03 [AP] Config conf@1 (default), kernel kernel@1, fdt fdt@1, compat qcom,apq8064-cm-qs600 qcom,apq8064
+11:26:03 [AP] Choosing best match conf@7.
+11:26:03 [AP] Shutting down all USB controllers.
+11:26:03 [AP] Exiting depthcharge with code 4 at timestamp: 47049965

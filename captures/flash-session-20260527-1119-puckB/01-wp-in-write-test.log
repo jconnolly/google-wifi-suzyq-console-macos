@@ -1,0 +1,2 @@
+iface 0 (EC_PD): write fail (timeout? CCD lock?): [Errno 60] Operation timed out
+iface 1 (AP): write fail (timeout? CCD lock?): [Errno 60] Operation timed out
