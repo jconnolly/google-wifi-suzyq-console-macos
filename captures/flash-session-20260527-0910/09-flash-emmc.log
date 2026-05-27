@@ -1,0 +1,32 @@
+=== ping ===
+PING 192.168.1.1 (192.168.1.1): 56 data bytes
+64 bytes from 192.168.1.1: icmp_seq=0 ttl=64 time=0.896 ms
+64 bytes from 192.168.1.1: icmp_seq=1 ttl=64 time=0.832 ms
+64 bytes from 192.168.1.1: icmp_seq=2 ttl=64 time=1.007 ms
+
+--- 192.168.1.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 0.832/0.912/1.007/0.072 ms
+
+=== ssh ===
+DISTRIB_ID='OpenWrt'
+DISTRIB_RELEASE='25.12.4'
+DISTRIB_REVISION='r32933-4ccb782af7'
+Linux OpenWrt 6.12.87 #0 SMP Wed May 13 22:42:09 2026 armv7l GNU/Linux
+/dev/mmcblk0
+
+=== scp factory.bin ===
+
+=== md5 verify ===
+784bb816997df54e5a3b7d66eedbc0dd  /tmp/openwrt-25.12.4-ipq40xx-chromium-google_wifi-squashfs-factory.bin
+expected: 784bb816997df54e5a3b7d66eedbc0dd
+
+=== dd zero alt GPT + write factory + reboot ===
+33+0 records in
+33+0 records out
+43316+1 records in
+43316+1 records out
+DONE
+
+=== reboot ===
+(reboot triggered)

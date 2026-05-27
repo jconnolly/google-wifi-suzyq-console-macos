@@ -1,0 +1,21 @@
+=== identify puck ===
+sudo: a password is required
+	inet 192.168.10.2 netmask 0xffffff00 broadcast 192.168.10.255
+	inet 192.168.1.10 netmask 0xffffff00 broadcast 192.168.1.255
+--- 192.168.1.1 ping statistics ---
+2 packets transmitted, 2 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 0.674/0.800/0.926/0.126 ms
+
+=== ssh + verify booted from eMMC ===
+ 22:52:14 up 9 min,  load average: 0.00, 0.02, 0.02
+
+cros_secure root=PARTUUID=5452574f-2211-4433-5566-778899aabb01/PARTNROFF=1 rootwait
+
+5: br-lan: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP qlen 1000
+    link/ether 70:3a:cb:d3:d0:97 brd ff:ff:ff:ff:ff:ff
+
+=== applying mesh3 config ===
+Changing password for root
+New password: 
+Retype password: 
+passwd: password for root changed by root

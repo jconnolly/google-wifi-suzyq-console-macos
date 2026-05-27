@@ -1,0 +1,8 @@
+=== set root password (currently empty) ===
+Changing password for root
+New password: 
+Retype password: 
+passwd: password for root changed by root
+
+=== switch LAN to DHCP (last step) ===
+DONE

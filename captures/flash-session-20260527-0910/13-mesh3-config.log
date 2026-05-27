@@ -1,0 +1,21 @@
+root@192.168.1.1's password: 
+Permission denied, please try again.
+root@192.168.1.1's password: 
+mmit wireless
+uci commit dhcp
+wifi reload
+sleep 2
+printf '<ROOT_PW_REDACTED>\n<ROOT_PW_REDACTED>\n' | passwd root
+uci set network.lan.proto='dhcp'
+uci -q delete network.lan.ipaddr
+uci -q delete network.lan.netmask
+uci commit network
+echo "===DONE==="
+uci show system | grep host
+uci show network.lan
+iw dev | grep -E "Interface|type"
+
+EOSCRIPT
+exit
+Permission denied, please try again.
+root@192.168.1.1's password: 

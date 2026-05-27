@@ -1,0 +1,91 @@
+10:32:26 [AP] sound_start: No sound ops set.
+10:32:26 [AP] sound_start: No sound ops set.
+10:32:29 [AP] VbBootDeveloper() - trying fixed disk
+10:32:29 [AP] sound_stop: No sound ops set.
+10:32:29 [AP] VbTryLoadKernel() start, get_info_flags=0x2
+10:32:29 [AP] MMC version  = 10000042
+10:32:29 [AP] clock_config_mmc : 1
+10:32:29 [AP] clock_config_mmc : 2
+10:32:29 [AP] Man 000015 Snr 3625238654 Product 4FPD3R Revision 0.2
+10:32:29 [AP] VbTryLoadKernel() found 1 disks
+10:32:29 [AP] VbTryLoadKernel() trying disk 0
+10:32:29 [AP] GptNextKernelEntry looking at new prio partition 2
+10:32:29 [AP] GptNextKernelEntry s1 t0 p1
+10:32:29 [AP] GptNextKernelEntry looking at new prio partition 4
+10:32:29 [AP] GptNextKernelEntry s0 t15 p0
+10:32:29 [AP] GptNextKernelEntry looking at new prio partition 6
+10:32:29 [AP] GptNextKernelEntry s0 t15 p0
+10:32:29 [AP] GptNextKernelEntry likes partition 2
+10:32:29 [AP] Found kernel entry at 20480 size 32768
+10:32:29 [AP] Checking key block signature...
+10:32:29 [AP]    - sig_size=512, expecting 512 for algorithm 8
+10:32:29 [AP]    - sig_size=256, expecting 256 for algorithm 4
+10:32:29 [AP] Kernel preamble is good.
+10:32:30 [AP]    - sig_size=256, expecting 256 for algorithm 4
+10:32:30 [AP] Partition is good.
+10:32:30 [AP] Same kernel version
+10:32:30 [AP] Good_partition >= 0
+10:32:30 [AP] VbTryLoadKernel() LoadKernel() = 0
+10:32:30 [AP] TPM: Lock physical presence
+10:32:30 [AP] TPM: command 0x4000000a returned 0x0
+10:32:30 [AP] VbSelectAndLoadKernel() returning 0
+10:32:30 [AP] Boot policy: Match for type 0 with cmdline 1
+10:32:30 [AP] Modified kernel command line: cros_secure console= loglevel=7 init=/sbin/init cros_secure oops=panic panic=-1 root=/dev/dm-0 rootwait ro dm_verity.error_behavior=3 dm_verity.max_bios=-1 dm_verity.dev_wait=1 dm="1 vroot none ro 1,0 1536000 verity payload=PARTUUID=e92d74d8-8c6d-0541-9434-3c42a974a216/PARTNROFF=1 hashtree=PARTUUID=e92d74d8-8c6d-0541-9434-3c42a974a216/PARTNROFF=1 hashstart=1536000 alg=sha1 root_hexdigest=25009619ed1c7b8e4eae62d0d4cc7f794507d4d6 salt=8da0ac678592acf6395953f6dca6310b5682844dc5ae70c2e96c88474c273afa" noinitrd vt.global_cursor_default=0 kern_guid=e92d74d8-8c6d-0541-9434-3c42a974a216 coherent_pool=2M  
+10:32:30 [AP] Loading FIT.
+10:32:30 [AP] Image fdt@12 has 4873 bytes.
+10:32:30 [AP] Image fdt@11 has 4975 bytes.
+10:32:30 [AP] Image fdt@10 has 4166 bytes.
+10:32:30 [AP] Image fdt@9 has 6023 bytes.
+10:32:30 [AP] Image fdt@8 has 20301 bytes.
+10:32:30 [AP] Image fdt@7 has 18611 bytes.
+10:32:30 [AP] Image fdt@6 has 14306 bytes.
+10:32:30 [AP] Image fdt@5 has 4369 bytes.
+10:32:30 [AP] Image fdt@4 has 4506 bytes.
+10:32:30 [AP] Image fdt@3 has 5523 bytes.
+10:32:30 [AP] Image fdt@2 has 7318 bytes.
+10:32:30 [AP] Image fdt@1 has 7302 bytes.
+10:32:30 [AP] Image kernel@1 has 4574040 bytes.
+10:32:30 [AP] Compat preference: google,gale-v2
+10:32:30 [AP] Config conf@12, kernel kernel@1, fdt fdt@12, compat sony,xperia-honami qcom,msm8974
+10:32:31 [AP] Config conf@11, kernel kernel@1, fdt fdt@11, compat qcom,msm8960-cdp qcom,msm8960
+10:32:31 [AP] Config conf@10, kernel kernel@1, fdt fdt@10, compat qcom,msm8660-surf qcom,msm8660
+10:32:31 [AP] Config conf@9, kernel kernel@1, fdt fdt@9, compat qcom,ipq8064-ap148 qcom,ipq8064
+10:32:31 [AP] Config conf@8, kernel kernel@1, fdt fdt@8, compat google,gale qcom,ipq4019
+10:32:31 [AP] Config conf@7, kernel kernel@1, fdt fdt@7, compat google,gale-v2 (match) qcom,ipq4019
+10:32:31 [AP] Config conf@6, kernel kernel@1, fdt fdt@6, compat qcom,ipq4019
+10:32:31 [AP] Config conf@5, kernel kernel@1, fdt fdt@5, compat qcom,apq8084-mtp qcom,apq8084
+10:32:31 [AP] Config conf@4, kernel kernel@1, fdt fdt@4, compat qcom,apq8084-ifc6540 qcom,apq8084
+10:32:31 [AP] Config conf@3, kernel kernel@1, fdt fdt@3, compat qcom,apq8074-dragonboard qcom,apq8074
+10:32:31 [AP] Config conf@2, kernel kernel@1, fdt fdt@2, compat qcom,apq8064-ifc6410 qcom,apq8064
+10:32:31 [AP] Config conf@1 (default), kernel kernel@1, fdt fdt@1, compat qcom,apq8064-cm-qs600 qcom,apq8064
+10:32:31 [AP] Choosing best match conf@7.
+10:32:31 [AP] Shutting down all USB controllers.
+10:32:31 [AP] Exiting depthcharge with code 4 at timestamp: 42317806
+10:32:39 [AP] 
+10:32:39 [AP] Developer Console
+10:32:39 [AP] 
+10:32:39 [AP] To return to the browser, press:
+10:32:39 [AP] 
+10:32:39 [AP]   [ Ctrl ] and [ Alt ] and [ <- ]  (F1)
+10:32:39 [AP] 
+10:32:39 [AP] To use this console, the developer mode switch must be engaged.
+10:32:39 [AP] Doing so will destroy any saved data on the system.
+10:32:39 [AP] 
+10:32:39 [AP] In developer mode, it is possible to
+10:32:39 [AP] - login and sudo as user 'chronos'
+10:32:39 [AP] - require a password for sudo and login(*)
+10:32:39 [AP] - disable power management behavior (screen dimming):
+10:32:39 [AP]   sudo initctl stop powerd
+10:32:39 [AP] - install your own operating system image!
+10:32:39 [AP] 
+10:32:39 [AP] * To set a password for 'chronos', run the following as root:
+10:32:39 [AP] 
+10:32:39 [AP] chromeos-setdevpasswd
+10:32:39 [AP] 
+10:32:39 [AP] If you are having trouble booting a self-signed kernel, you may need to
+10:32:39 [AP] enable USB booting.  To do so, run the following as root:
+10:32:39 [AP] 
+10:32:39 [AP] enable_dev_usb_boot
+10:32:39 [AP] 
+10:32:40 [AP] Have fun and send patches!
+10:32:40 [AP] 

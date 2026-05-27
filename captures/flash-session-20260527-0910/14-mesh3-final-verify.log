@@ -1,0 +1,60 @@
+=== state ===
+system.cfg01e48a.hostname='mesh3'
+network.lan=interface
+network.lan.device='br-lan'
+network.lan.proto='static'
+network.lan.ipaddr='192.168.1.1/24'
+network.lan.ip6assign='60'
+
+wireless.radio0.htmode='VHT20'
+wireless.radio0.country='US'
+wireless.radio0.disabled='0'
+wireless.default_radio0.mode='ap'
+wireless.default_radio0.ssid='Cinque Veddy Much'
+wireless.default_radio0.encryption='psk2'
+wireless.default_radio0.disabled='0'
+wireless.radio1.htmode='VHT80'
+wireless.radio1.country='US'
+wireless.radio1.disabled='0'
+wireless.default_radio1.mode='ap'
+wireless.default_radio1.ssid='Cinque Veddy Much'
+wireless.default_radio1.encryption='psk2'
+wireless.default_radio1.disabled='0'
+wireless.mesh.mode='mesh'
+wireless.mesh.mesh_id='cinque-mesh'
+wireless.mesh.encryption='sae'
+
+=== iw dev ===
+	Interface phy1-ap0
+		type AP
+		channel 36 (5180 MHz), width: 80 MHz, center1: 5210 MHz
+	Interface phy1-mesh0
+		type mesh point
+		channel 36 (5180 MHz), width: 80 MHz, center1: 5210 MHz
+	Interface phy0-ap0
+		type AP
+		channel 1 (2412 MHz), width: 20 MHz, center1: 2412 MHz
+
+=== br-lan ===
+bridge name	bridge id		STP enabled	interfaces
+br-lan		7fff.703acbd3d097	no		lan
+							phy0-ap0
+							phy1-ap0
+							phy1-mesh0
+
+=== dhcp.lan ===
+dhcp.lan=dhcp
+dhcp.lan.interface='lan'
+dhcp.lan.start='100'
+dhcp.lan.limit='150'
+dhcp.lan.leasetime='12h'
+dhcp.lan.dhcpv4='server'
+dhcp.lan.dhcpv6='server'
+dhcp.lan.ra='server'
+dhcp.lan.ra_slaac='1'
+dhcp.lan.ra_flags='managed-config' 'other-config'
+dhcp.lan.ignore='1'
+
+=== boot info ===
+ 23:00:43 up 8 min,  load average: 0.16, 0.05, 0.02
+cros_secure root=PARTUUID=5452574f-2211-4433-5566-778899aabb01/PARTNROFF=1 rootwait
