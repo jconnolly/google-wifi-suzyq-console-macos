@@ -1,0 +1,8 @@
+[gale-sniff-all] running. duration=60.0s. Ctrl-C to stop.
+20:36:11 [EC_PD] RST EP0 3220
+20:36:11 [AP] 
+20:36:11 [AP] 
+
+[gale-sniff-all] totals:
+  AP: 65 bytes
+  EC_PD: 14 bytes

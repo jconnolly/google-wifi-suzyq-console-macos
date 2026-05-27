@@ -1,0 +1,9 @@
+=== applying mesh2 config ===
+=== hostname mesh2 ===
+=== radios + AP + mesh ===
+=== set root pw ===
+Changing password for root
+New password: 
+Retype password: 
+passwd: password for root changed by root
+=== switch LAN to DHCP (auto-join mesh) ===

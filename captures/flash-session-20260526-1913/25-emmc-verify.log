@@ -1,0 +1,46 @@
+=== verify static IP ===
+	inet 192.168.1.10 netmask 0xffffff00 broadcast 192.168.1.255
+
+=== ping ===
+PING 192.168.1.1 (192.168.1.1): 56 data bytes
+64 bytes from 192.168.1.1: icmp_seq=0 ttl=64 time=0.830 ms
+64 bytes from 192.168.1.1: icmp_seq=1 ttl=64 time=0.743 ms
+64 bytes from 192.168.1.1: icmp_seq=2 ttl=64 time=0.961 ms
+
+--- 192.168.1.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 0.743/0.845/0.961/0.090 ms
+
+=== SSH (running on eMMC now) ===
+DISTRIB_ID='OpenWrt'
+DISTRIB_RELEASE='25.12.4'
+DISTRIB_REVISION='r32933-4ccb782af7'
+DISTRIB_TARGET='ipq40xx/chromium'
+DISTRIB_ARCH='arm_cortex-a7_neon-vfpv4'
+DISTRIB_DESCRIPTION='OpenWrt 25.12.4 r32933-4ccb782af7'
+DISTRIB_TAINTS=''
+
+Linux OpenWrt 6.12.87 #0 SMP Wed May 13 22:42:09 2026 armv7l GNU/Linux
+
+ 22:42:53 up 1 min,  load average: 0.33, 0.10, 0.03
+
+cros_secure root=PARTUUID=5452574f-2211-4433-5566-778899aabb01/PARTNROFF=1 rootwait
+
+major minor  #blocks  name
+
+   7        0     101184 loop0
+  31        0       8192 mtdblock0
+ 179        0    3817472 mmcblk0
+ 179        1      16384 mmcblk0p1
+ 179        2     106496 mmcblk0p2
+ 179        8       4096 mmcblk0boot0
+ 179       16       4096 mmcblk0boot1
+
+5: br-lan: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP qlen 1000
+    link/ether 70:3a:cb:d3:ac:11 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.1/24 brd 192.168.1.255 scope global br-lan
+       valid_lft forever preferred_lft forever
+    inet6 fdb0:186:f0ab::1/60 scope global noprefixroute 
+       valid_lft forever preferred_lft forever
+    inet6 fe80::723a:cbff:fed3:ac11/64 scope link 
+       valid_lft forever preferred_lft forever

@@ -1,0 +1,93 @@
+
+>>> 
+andlers installed.
+SF: Detected W25Q64 with sector size 0x1000,
+>>> chronos
+VbBootDeveloper() - pressed key 99
+VbBootDeveloper() - pressed key 104
+VbBootDeveloper() - pressed key 114
+VbBootDeveloper() - pressed key 111
+VbBootDeveloper() - pressed key 110
+VbBootDeveloper() - pressed key 111
+VbBootDeveloper() - pressed key 115
+sound_start: No sound ops set.
+
+>>> which flashrom 2>&1; ls /usr/sbin/flash* /sbin/flash* /usr/local/sbin/flash* 2>&1 | head -10
+VbBootDeveloper() - pressed key 119
+VbBootDeveloper() - pressed key 104
+VbBootDeveloper() - pressed key 105
+VbBootDeveloper() - pressed key 99
+VbBootDeveloper() - pressed key 104
+VbBootDeveloper shared->flags=0xc414
+sound_stop: No sound ops set.
+ww_ring_display_screen: did not find program for screen 517
+Entering VbUserConfirms(0x0)
+VbUserConfirms() - Space (0)
+VbUserConfirms() - Space (0)
+VbUserConfirms() - Space (0)
+VbUserConfirms() - Space (0)
+VbUserConfirms() - Space (0)
+VbUserConfirms() - Space (0)
+VbUserConfirms() - Space (0)
+VbUserConfirms() - Space (0)
+VbUserConfirms() - Space (0)
+VbUserConfirms() - Yes (1)
+VbBootDeveloper() - leaving dev-mode.
+ww_ring_display_screen: did not find program for screen 519
+
+>>> find / -name 'flashrom*' -o -name 'vbnv*' 2>/dev/null | head -10
+VbSelectAndLoadKernel() returning 65543
+VbSelectAndLoadKernel returned 65543, Doing a cold reboot.
+Exiting depthcharge with code 1 at timestamp: 41153631
+Rebooting...
+Data Abort Exception
+R0 = 0x88145cb0
+R1 = 0x00000000
+R2 = 0x01940000
+R3 = 0x00000000
+R4 = 0x00010007
+R5 = 0x00000001
+R6 = 0x00000294
+R7 = 0x0a8fff70
+R8 = 0x000000b0
+R9 = 0x8730c088
+R10 = 0x8730c088
+R11 = 0x8730bb6c
+IP = 0x89349a48
+SP = 0x89349b68
+LR = 0x8810bf3d
+PC = 0x881088f0
+CPSR = 0x600000ff
+DFAR = 0x00000000
+DFSR = 0x00001c06
+ADFSR = 0x00000000
+Dumping stack:
+0x89349d60: 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0x89349d40: 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0x89349d20: 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0x89349d00: 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0x89349ce0: 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0x89349cc0: 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0x89349ca0: 00000000 00000000 00000000 00000000 00000000 00000000 0
+>>> cat /usr/bin/enable_dev_usb_boot 2>/dev/null | head -40
+0000000 00000000 
+0x89349c80: 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0x89349c60: 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0x89349c40: 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0x89349c20: 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0x89349c00: 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0x89349be0: 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0x89349bc0: 00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0x89349ba0: 00000000 00000000 88144b50 88104065 00000000 00000000 00000000 00000000 
+0x89349b80: 00000000 00000000 00000000 00000000 00000000 00000000 8725c000 8810c3a3 
+0x89349b60: 00010007 8810bf3d 80208000 02000000 00000000 00000000 00000000 00000000 
+
+>>> which crossystem mosys vpd dump_vpd 2>&1
+
+>>> ls /dev/mtd* /dev/cros_ec 2>/dev/null
+
+>>> ls /sys/firmware/ 2>/dev/null
+
+>>> sudo -n crossystem dev_boot_usb=1 dev_boot_legacy=1 dev_default_boot=usb 2>&1
+
+>>> sudo -n crossystem dev_boot_usb 2>&1

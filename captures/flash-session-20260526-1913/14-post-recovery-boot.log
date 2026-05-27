@@ -1,0 +1,344 @@
+[gale-sniff-all] waiting for device... (plug SuzyQ in)
+[gale-sniff-all] running. duration=90.0s. Ctrl-C to stop.
+08:31:24 [EC_PD] RST EP0 3220
+08:31:24 [AP] 
+08:31:24 [AP] 
+08:31:24 [AP] coreboot-60d1b1c Mon Jan  9 00:04:49 UTC 2017 bootblock starts writeback
+08:31:24 [AP] Creating new subtable @0a0f4800 for [0x08600000:0x08700000)
+08:31:24 [AP] Mapping address range [0x08600000:0x08608000) as writeback
+08:31:24 [AP] Setting address range [0x80000000:0xa0000000) as unmapped
+08:31:24 [AP] Setting address range [0x87300000:0x87500000) as unmapped
+08:31:24 [AP] Setting address range [0xa0000000:0x00000000) as unmapped
+08:31:24 [AP] Creating new subtable @0a0f4c00 for [0x00000000:0x00100000)
+08:31:24 [AP] Setting address range [0x00000000:0x00000400) as unmapped
+08:31:24 [AP] No uber-sbl parameter detected
+08:31:24 [AP] SF: Detected W25Q64 with sector size 0x1000, total 0x800000
+08:31:24 [AP] VBOOT: Loading verstage.
+08:31:24 [AP] CBFS @ 20000 size 2e0000
+08:31:24 [AP] CBFS: 'Master Header Locator' located CBFS at [20000:300000)
+08:31:24 [AP] CBFS: Locating 'fallback/verstage'
+08:31:24 [AP] CBFS: Found @ offset 1cf40 size 987c
+08:31:24 [AP] 
+08:31:24 [AP] 
+08:31:24 [AP] coreboot-60d1b1c Mon Jan  9 00:04:49 UTC 2017 verstage starting...
+08:31:24 [AP] Exception handlers installed.
+08:31:24 [AP] SF: Detected W25Q64 with sector size 0x1000, total 0x800000
+08:31:24 [AP] FMAP: Found "FMAP" version 1.0 at 300000.
+08:31:24 [AP] FMAP: base = 0 size = 800000 #areas = 24
+08:31:24 [AP] FMAP: area RW_NVRAM found @ 6f0000 (65536 bytes)
+08:31:25 [AP] tis_init: ValidSts bit set(1) in TPM_ACCESS register after 8 ms
+08:31:25 [AP] 1.2 TPM (chip type slb9645tt device-id 0x1A)
+08:31:25 [AP] TPM: Startup
+08:31:25 [AP] TPM: command 0x99 returned 0x0
+08:31:25 [AP] TPM: Asserting physical presence
+08:31:25 [AP] TPM: command 0x4000000a returned 0x0
+08:31:25 [AP] TPM: command 0x65 returned 0x0
+08:31:25 [AP] TPM: flags disable=0, deactivated=0, nvlocked=1
+08:31:25 [AP] setup_tpm():320: TPM: SetupTPM() succeeded
+08:31:25 [AP] TPM: tlcl_read(0x1007, 10)
+08:31:25 [AP] TPM: command 0xcf returned 0x0
+08:31:25 [AP] Reading tristate GPIOs: 0 Z 0 = 10 (binary_first base3 number system)
+08:31:25 [AP] Board ID 10
+08:31:25 [AP] WW_RING: initialized 1 out of 1
+08:31:25 [AP] Phase 1
+08:31:25 [AP] FMAP: area GBB found @ 301000 (913152 bytes)
+08:31:25 [AP] VB2:vb2_check_recovery() Recovery reason from previous boot: 0x0 / 0x0
+08:31:25 [AP] Phase 2
+08:31:25 [AP] Phase 3
+08:31:25 [AP] FMAP: area GBB found @ 301000 (913152 bytes)
+08:31:25 [AP] FMAP: area VBLOCK_A found @ 400000 (8192 bytes)
+08:31:25 [AP] FMAP: area VBLOCK_A found @ 400000 (8192 bytes)
+08:31:25 [AP] VB2:vb2_verify_keyblock() Checking key block signature...
+08:31:26 [AP] FMAP: area VBLOCK_A found @ 400000 (8192 bytes)
+08:31:26 [AP] FMAP: area VBLOCK_A found @ 400000 (8192 bytes)
+08:31:26 [AP] VB2:vb2_verify_fw_preamble() Verifying preamble.
+08:31:27 [AP] Phase 4
+08:31:27 [AP] FMAP: area FW_MAIN_A found @ 402000 (1367808 bytes)
+08:31:27 [AP] VB2:vb2api_init_hash() HW crypto for hash_alg 2 not supported, using SW
+08:31:30 [AP] Saving nvdata
+08:31:30 [AP] SF: Detected W25Q64 with sector size 0x1000, total 0x800000
+08:31:30 [AP] TPM: command 0x14 returned 0x0
+08:31:30 [AP] TPM: command 0x14 returned 0x0
+08:31:30 [AP] TPM: Set global lock
+08:31:30 [AP] TPM: tlcl_write(0x0, 0)
+08:31:31 [AP] TPM: command 0xcd returned 0x0
+08:31:31 [AP] Slot A is selected
+08:31:31 [AP] CBFS: 'VBOOT' located CBFS at [402000:42f240)
+08:31:31 [AP] CBFS: Locating 'fallback/romstage'
+08:31:31 [AP] CBFS: Found @ offset 0 size 469b
+08:31:31 [AP] 
+08:31:31 [AP] 
+08:31:31 [AP] coreboot-60d1b1c Mon Jan  9 00:04:49 UTC 2017 romstage starting...
+08:31:31 [AP] SF: Detected W25Q64 with sector size 0x1000, total 0x800000
+08:31:31 [AP] CBFS: 'VBOOT' located CBFS at [402000:42f240)
+08:31:31 [AP] CBFS: Locating 'cdt.mbn'
+08:31:31 [AP] CBFS: Found @ offset bac0 size 1ac
+08:31:31 [AP] CBFS: 'VBOOT' located CBFS at [402000:42f240)
+08:31:31 [AP] CBFS: Locating 'ddr.mbn'
+08:31:31 [AP] CBFS: Found @ offset bcc0 size 7d38
+08:31:31 [AP] DDR version private build initialized
+08:31:31 [AP] SDI Entry: 0x860038d
+08:31:31 [AP] Mapping address range [0x80000000:0xa0000000) as writeback
+08:31:31 [AP] Mapping address range [0x87300000:0x87500000) as uncached
+08:31:31 [AP] CBMEM:
+08:31:31 [AP] IMD: root @ 8727f000 254 entries.
+08:31:31 [AP] IMD: root @ 8727ec00 62 entries.
+08:31:31 [AP] creating vboot_handoff structure
+08:31:31 [AP] Reading tristate GPIOs: 0 Z 0 = 10 (binary_first base3 number system)
+08:31:31 [AP] Board ID 10
+08:31:31 [AP] Copying FW preamble
+08:31:31 [AP] CBFS: 'VBOOT' located CBFS at [402000:42f240)
+08:31:31 [AP] CBFS: Locating 'fallback/ramstage'
+08:31:31 [AP] CBFS: Found @ offset 4700 size 6f3b
+08:31:32 [AP] 
+08:31:32 [AP] 
+08:31:32 [AP] coreboot-60d1b1c Mon Jan  9 00:04:49 UTC 2017 ramstage starting...
+08:31:32 [AP] SF: Detected W25Q64 with sector size 0x1000, total 0x800000
+08:31:32 [AP] FMAP: Found "FMAP" version 1.0 at 300000.
+08:31:32 [AP] FMAP: base = 0 size = 800000 #areas = 24
+08:31:32 [AP] FMAP: area RO_VPD found @ 3e0000 (131072 bytes)
+08:31:32 [AP] FMAP: area RW_VPD found @ 6e0000 (32768 bytes)
+08:31:32 [AP] FMAP: area RO_VPD found @ 3e0000 (131072 bytes)
+08:31:32 [AP] FMAP: area RW_VPD found @ 6e0000 (32768 bytes)
+08:31:32 [AP] Exception handlers installed.
+08:31:32 [AP] BS: BS_PRE_DEVICE times (us): entry 9 run 15 exit 9
+08:31:32 [AP] BS: BS_DEV_INIT_CHIPS times (us): entry 9 run 29 exit 9
+08:31:32 [AP] Enumerating buses...
+08:31:32 [AP] Show all devs... Before device enumeration.
+08:31:32 [AP] Root Device: enabled 1
+08:31:32 [AP] CPU_CLUSTER: 0: enabled 1
+08:31:32 [AP] Compare with tree...
+08:31:32 [AP] Root Device: enabled 1
+08:31:32 [AP]  CPU_CLUSTER: 0: enabled 1
+08:31:32 [AP] Root Device scanning...
+08:31:32 [AP] root_dev_scan_bus for Root Device
+08:31:32 [AP] CPU_CLUSTER: 0 enabled
+08:31:32 [AP] root_dev_scan_bus for Root Device done
+08:31:32 [AP] scan_bus: scanning of bus Root Device took 12403 usecs
+08:31:32 [AP] done
+08:31:32 [AP] BS: BS_DEV_ENUMERATE times (us): entry 10 run 37274 exit 9
+08:31:32 [AP] Allocating resources...
+08:31:32 [AP] Reading resources...
+08:31:32 [AP] Root Device read_resources bus 0 link: 0
+08:31:32 [AP] Root Device read_resources bus 0 link: 0 done
+08:31:32 [AP] Done reading resources.
+08:31:32 [AP] Show resources in subtree (Root Device)...After reading.
+08:31:32 [AP]  Root Device child on link 0 CPU_CLUSTER: 0
+08:31:32 [AP]   CPU_CLUSTER: 0
+08:31:32 [AP]   CPU_CLUSTER: 0 resource base 80000000 size 7500000 align 0 gran 0 limit 0 flags e0004200 index 0
+08:31:32 [AP]   CPU_CLUSTER: 0 resource base 87500000 size b00000 align 0 gran 0 limit 0 flags f0004200 index 1
+08:31:32 [AP]   CPU_CLUSTER: 0 resource base 88000000 size 18000000 align 0 gran 0 limit 0 flags e0004200 index 2
+08:31:32 [AP] Setting resources...
+08:31:32 [AP] Root Device assign_resources, bus 0 link: 0
+08:31:32 [AP] CPU_CLUSTER: 0 missing set_resources
+08:31:32 [AP] Root Device assign_resources, bus 0 link: 0
+08:31:32 [AP] Done setting resources.
+08:31:32 [AP] Show resources in subtree (Root Device)...After assigning values.
+08:31:32 [AP]  Root Device child on link 0 CPU_CLUSTER: 0
+08:31:32 [AP]   CPU_CLUSTER: 0
+08:31:32 [AP]   CPU_CLUSTER: 0 resource base 80000000 size 7500000 align 0 gran 0 limit 0 flags e0004200 index 0
+08:31:32 [AP]   CPU_CLUSTER: 0 resource base 87500000 size b00000 align 0 gran 0 limit 0 flags f0004200 index 1
+08:31:32 [AP]   CPU_CLUSTER: 0 resource base 88000000 size 18000000 align 0 gran 0 limit 0 flags e0004200 index 2
+08:31:32 [AP] Done allocating resources.
+08:31:32 [AP] BS: BS_DEV_RESOURCES times (us): entry 9 run 120219 exit 9
+08:31:32 [AP] Enabling resources...
+08:31:32 [AP] done.
+08:31:32 [AP] BS: BS_DEV_ENABLE times (us): entry 9 run 2985 exit 9
+08:31:32 [AP] Initializing devices...
+08:31:32 [AP] Root Device init ...
+08:31:32 [AP] CBFS: 'VBOOT' located CBFS at [402000:42f240)
+08:31:32 [AP] CBFS: Locating 'tzbsp_no_xpu.mbn'
+08:31:32 [AP] CBFS: Found @ offset 13a40 size 9428
+08:31:32 [AP] Starting TZBSP
+08:31:32 [AP] Translation table is @ 0a0f0000
+08:31:32 [AP] Mapping address range [0x00000000:0x00000000) as uncached
+08:31:32 [AP] Creating new subtable @0a0f4000 for [0x0a000000:0x0a100000)
+08:31:32 [AP] Mapping address range [0x0a0c0000:0x0a100000) as writeback
+08:31:32 [AP] Creating new subtable @0a0f4400 for [0x0a800000:0x0a900000)
+08:31:32 [AP] Mapping address range [0x0a8c0000:0x0a900000) as writeback
+08:31:32 [AP] Creating new subtable @0a0f4800 for [0x08600000:0x08700000)
+08:31:32 [AP] Mapping address range [0x08600000:0x08608000) as writeback
+08:31:32 [AP] Mapping address range [0x80000000:0xa0000000) as writeback
+08:31:32 [AP] Mapping address range [0x87300000:0x87500000) as uncached
+08:31:32 [AP] Setting address range [0xa0000000:0x00000000) as unmapped
+08:31:32 [AP] Creating new subtable @0a0f4c00 for [0x00000000:0x00100000)
+08:31:32 [AP] Setting address range [0x00000000:0x00000400) as unmapped
+08:31:32 [AP] Setting up USB HOST1 controller.
+08:31:32 [AP] Version = 5533270a
+08:31:32 [AP] software reset done
+08:31:33 [AP] USB Host mode reg = 101004
+08:31:33 [AP] cbmem_add_vpd_calibration_data: added wifi_base64_calibration0 to CBMEM
+08:31:33 [AP] cbmem_add_vpd_calibration_data: added wifi_base64_calibration1 to CBMEM
+08:31:33 [AP] Root Device init finished in 532643 usecs
+08:31:33 [AP] CPU_CLUSTER: 0 init ...
+08:31:33 [AP] CPU: QCA 40xx
+08:31:33 [AP] CPU_CLUSTER: 0 init finished in 3789 usecs
+08:31:33 [AP] Devices initialized
+08:31:33 [AP] Show all devs... After init.
+08:31:33 [AP] Root Device: enabled 1
+08:31:33 [AP] CPU_CLUSTER: 0: enabled 1
+08:31:33 [AP] BS: BS_DEV_INIT times (us): entry 9 run 556802 exit 2
+08:31:33 [AP] Finalize devices...
+08:31:33 [AP] Devices finalized
+08:31:33 [AP] BS: BS_POST_DEVICE times (us): entry 2 run 3790 exit 2
+08:31:33 [AP] BS: BS_OS_RESUME_CHECK times (us): entry 2 run 4 exit 2
+08:31:33 [AP] Writing coreboot table at 0x8724c000
+08:31:33 [AP] rom_table_end = 0x8724c000
+08:31:33 [AP] ... aligned to 0x87250000
+08:31:33 [AP]  0. 0000000080000000-000000008724bfff: RAM
+08:31:33 [AP]  1. 000000008724c000-000000008727ffff: CONFIGURATION TABLES
+08:31:33 [AP]  2. 0000000087280000-00000000874fffff: RAM
+08:31:33 [AP]  3. 0000000087500000-0000000087ffffff: RESERVED
+08:31:33 [AP]  4. 0000000088000000-000000009fffffff: RAM
+08:31:33 [AP] Reading tristate GPIOs: 0 Z 0 = 10 (binary_first base3 number system)
+08:31:33 [AP] Board ID 10
+08:31:33 [AP] Passing 5 GPIOs to payload:
+08:31:33 [AP]             NAME |       PORT | POLARITY |     VALUE
+08:31:33 [AP]        developer | 0x00000029 |      low |       low
+08:31:33 [AP]         recovery | 0x00000039 |      low |       low
+08:31:33 [AP]    write protect | 0x00000035 |      low |       low
+08:31:33 [AP]            power |  undefined |      low |       low
+08:31:33 [AP]              lid |  undefined |      low |      high
+08:31:33 [AP] CBFS: 'VBOOT' located CBFS at [402000:42f240)
+08:31:33 [AP] Wrote coreboot table at: 8724c000, 0x320 bytes, checksum 38bf
+08:31:33 [AP] coreboot table: 824 bytes.
+08:31:33 [AP] IMD ROOT    0. 8727f000 00001000
+08:31:33 [AP] IMD SMALL   1. 8727e000 00001000
+08:31:33 [AP] CONSOLE     2. 8725e000 00020000
+08:31:33 [AP] TIME STAMP  3. 8725d000 00000400
+08:31:33 [AP] VBOOT       4. 8725c000 00000c0c
+08:31:33 [AP] VPD         5. 87254000 00007fec
+08:31:33 [AP] WIFI CLBR   6. 8724e000 00005e94
+08:31:33 [AP] COREBOOT    7. 8724c000 00002000
+08:31:33 [AP] IMD small region:
+08:31:33 [AP]   IMD ROOT    0. 8727ec00 00000400
+08:31:33 [AP]   VBOOT SEL   1. 8727ebe0 00000008
+08:31:33 [AP] BS: BS_WRITE_TABLES times (us): entry 1 run 120558 exit 2
+08:31:33 [AP] CBFS: 'VBOOT' located CBFS at [402000:42f240)
+08:31:33 [AP] CBFS: Locating 'fallback/payload'
+08:31:33 [AP] CBFS: Found @ offset 1cec0 size 10341
+08:31:33 [AP] Loading segment from rom address 0x87289428
+08:31:33 [AP]   code (compression=1)
+08:31:33 [AP]   New segment dstaddr 0x88104040 memsize 0x1249b70 srcaddr 0x87289460 filesize 0x10309
+08:31:33 [AP] Loading segment from rom address 0x87289444
+08:31:33 [AP]   Entry Point 0x88104041
+08:31:33 [AP] Bounce Buffer at 9ffcf000, 197488 bytes
+08:31:33 [AP] Loading Segment: addr: 0x0000000088104040 memsz: 0x0000000001249b70 filesz: 0x0000000000010309
+08:31:33 [AP] lb: [0x00000000872e0000, 0x00000000872f81b8)
+08:31:33 [AP] Post relocation: addr: 0x0000000088104040 memsz: 0x0000000001249b70 filesz: 0x0000000000010309
+08:31:33 [AP] using LZMA
+08:31:33 [AP] [ 0x88104040, 88121470, 0x8934dbb0) <- 87289460
+08:31:33 [AP] Clearing Segment: addr: 0x0000000088121470 memsz: 0x000000000122c740
+08:31:33 [AP] dest 88104040, end 8934dbb0, bouncebuffer 9ffcf000
+08:31:33 [AP] Loaded segments
+08:31:33 [AP] BS: BS_PAYLOAD_LOAD times (us): entry 2 run 175582 exit 3
+08:31:33 [AP] Jumping to boot code at 88104041(8724c000)
+08:31:33 [AP] CPU0: stack: 0a8fc000 - 0a900000, lowest used address 0a8ff5f0, stack used: 2576 bytes
+08:31:33 [AP] 
+08:31:33 [AP] 
+08:31:33 [AP] Starting depthcharge on gale...
+08:31:33 [AP] WARNING: can't convert coreboot GPIOs, 'lid' won't be resampled at runtime!
+08:31:33 [AP] WARNING: can't convert coreboot GPIOs, 'power' won't be resampled at runtime!
+08:31:33 [AP] clock_config_mmc : 1
+08:31:33 [AP] WW_RING: initialized controller found at 0x32
+08:31:33 [AP] WW_RING: initialized 1 out of 1
+08:31:33 [AP] The GBB signature is at 0x88004020 and is:  24 47 42 42
+08:31:33 [AP] Calling VbSelectAndLoadKernel().
+08:31:33 [AP] TPM: TlclRead(0x1008, 13)
+08:31:33 [AP] 1.2 TPM (chip type slb9645tt device-id 0x1A)
+08:31:33 [AP] TPM: command 0xcf returned 0x0
+08:31:34 [AP] TPM: command 0x65 returned 0x0
+08:31:34 [AP] TPM: RollbackKernelRead 10001
+08:31:34 [AP] Entering VbBootNormal()
+08:31:34 [AP] VbTryLoadKernel() start, get_info_flags=0x2
+08:31:34 [AP] MMC version  = 10000042
+08:31:34 [AP] clock_config_mmc : 1
+08:31:34 [AP] clock_config_mmc : 2
+08:31:34 [AP] Man 000015 Snr 2986147503 Product 4FPD3R Revision 0.2
+08:31:34 [AP] VbTryLoadKernel() found 1 disks
+08:31:34 [AP] VbTryLoadKernel() trying disk 0
+08:31:34 [AP] GptNextKernelEntry looking at new prio partition 2
+08:31:34 [AP] GptNextKernelEntry s1 t0 p1
+08:31:34 [AP] GptNextKernelEntry looking at new prio partition 4
+08:31:34 [AP] GptNextKernelEntry s0 t15 p0
+08:31:34 [AP] GptNextKernelEntry looking at new prio partition 6
+08:31:34 [AP] GptNextKernelEntry s0 t15 p0
+08:31:34 [AP] GptNextKernelEntry likes partition 2
+08:31:34 [AP] Found kernel entry at 20480 size 32768
+08:31:34 [AP] Checking key block signature...
+08:31:34 [AP]    - sig_size=512, expecting 512 for algorithm 8
+08:31:34 [AP]    - sig_size=256, expecting 256 for algorithm 4
+08:31:34 [AP] Kernel preamble is good.
+08:31:35 [AP]    - sig_size=256, expecting 256 for algorithm 4
+08:31:35 [AP] Partition is good.
+08:31:35 [AP] Same kernel version
+08:31:35 [AP] Good_partition >= 0
+08:31:35 [AP] VbTryLoadKernel() LoadKernel() = 0
+08:31:35 [AP] Checking if TPM kernel version needs advancing
+08:31:35 [AP] TPM: Lock physical presence
+08:31:35 [AP] TPM: command 0x4000000a returned 0x0
+08:31:35 [AP] VbSelectAndLoadKernel() returning 0
+08:31:35 [AP] Boot policy: Match for type 0 with cmdline 1
+08:31:35 [AP] Modified kernel command line: cros_secure console= loglevel=7 init=/sbin/init cros_secure oops=panic panic=-1 root=/dev/dm-0 rootwait ro dm_verity.error_behavior=3 dm_verity.max_bios=-1 dm_verity.dev_wait=1 dm="1 vroot none ro 1,0 1536000 verity payload=PARTUUID=3975819c-69c9-cb4b-81bf-68b32381b104/PARTNROFF=1 hashtree=PARTUUID=3975819c-69c9-cb4b-81bf-68b32381b104/PARTNROFF=1 hashstart=1536000 alg=sha1 root_hexdigest=25009619ed1c7b8e4eae62d0d4cc7f794507d4d6 salt=8da0ac678592acf6395953f6dca6310b5682844dc5ae70c2e96c88474c273afa" noinitrd vt.global_cursor_default=0 kern_guid=3975819c-69c9-cb4b-81bf-68b32381b104 coherent_pool=2M  
+08:31:35 [AP] Loading FIT.
+08:31:35 [AP] Image fdt@12 has 4873 bytes.
+08:31:35 [AP] Image fdt@11 has 4975 bytes.
+08:31:35 [AP] Image fdt@10 has 4166 bytes.
+08:31:35 [AP] Image fdt@9 has 6023 bytes.
+08:31:35 [AP] Image fdt@8 has 20301 bytes.
+08:31:35 [AP] Image fdt@7 has 18611 bytes.
+08:31:35 [AP] Image fdt@6 has 14306 bytes.
+08:31:35 [AP] Image fdt@5 has 4369 bytes.
+08:31:35 [AP] Image fdt@4 has 4506 bytes.
+08:31:35 [AP] Image fdt@3 has 5523 bytes.
+08:31:35 [AP] Image fdt@2 has 7318 bytes.
+08:31:35 [AP] Image fdt@1 has 7302 bytes.
+08:31:35 [AP] Image kernel@1 has 4574040 bytes.
+08:31:35 [AP] Compat preference: google,gale-v2
+08:31:35 [AP] Config conf@12, kernel kernel@1, fdt fdt@12, compat sony,xperia-honami qcom,msm8974
+08:31:35 [AP] Config conf@11, kernel kernel@1, fdt fdt@11, compat qcom,msm8960-cdp qcom,msm8960
+08:31:35 [AP] Config conf@10, kernel kernel@1, fdt fdt@10, compat qcom,msm8660-surf qcom,msm8660
+08:31:35 [AP] Config conf@9, kernel kernel@1, fdt fdt@9, compat qcom,ipq8064-ap148 qcom,ipq8064
+08:31:35 [AP] Config conf@8, kernel kernel@1, fdt fdt@8, compat google,gale qcom,ipq4019
+08:31:35 [AP] Config conf@7, kernel kernel@1, fdt fdt@7, compat google,gale-v2 (match) qcom,ipq4019
+08:31:35 [AP] Config conf@6, kernel kernel@1, fdt fdt@6, compat qcom,ipq4019
+08:31:35 [AP] Config conf@5, kernel kernel@1, fdt fdt@5, compat qcom,apq8084-mtp qcom,apq8084
+08:31:35 [AP] Config conf@4, kernel kernel@1, fdt fdt@4, compat qcom,apq8084-ifc6540 qcom,apq8084
+08:31:35 [AP] Config conf@3, kernel kernel@1, fdt fdt@3, compat qcom,apq8074-dragonboard qcom,apq8074
+08:31:35 [AP] Config conf@2, kernel kernel@1, fdt fdt@2, compat qcom,apq8064-ifc6410 qcom,apq8064
+08:31:35 [AP] Config conf@1 (default), kernel kernel@1, fdt fdt@1, compat qcom,apq8064-cm-qs600 qcom,apq8064
+08:31:35 [AP] Choosing best match conf@7.
+08:31:35 [AP] dt_set_wifi_calibration: did not find mapping for (NULL)
+08:31:35 [AP] Exiting depthcharge with code 4 at timestamp: 11322191
+08:31:41 [AP] 
+08:31:41 [AP] Developer Console
+08:31:41 [AP] 
+08:31:41 [AP] To return to the browser, press:
+08:31:41 [AP] 
+08:31:41 [AP]   [ Ctrl ] and [ Alt ] and [ <- ]  (F1)
+08:31:41 [AP] 
+08:31:41 [AP] To use this console, the developer mode switch must be engaged.
+08:31:41 [AP] Doing so will destroy any saved data on the system.
+08:31:41 [AP] 
+08:31:41 [AP] In developer mode, it is possible to
+08:31:41 [AP] - login and sudo as user 'chronos'
+08:31:41 [AP] - require a password for sudo and login(*)
+08:31:41 [AP] - disable power management behavior (screen dimming):
+08:31:41 [AP]   sudo initctl stop powerd
+08:31:41 [AP] - install your own operating system image!
+08:31:41 [AP] 
+08:31:41 [AP] * To set a password for 'chronos', run the following as root:
+08:31:41 [AP] 
+08:31:41 [AP] chromeos-setdevpasswd
+08:31:41 [AP] 
+08:31:41 [AP] If you are having trouble booting a self-signed kernel, you may need to
+08:31:41 [AP] enable USB booting.  To do so, run the following as root:
+08:31:41 [AP] 
+08:31:41 [AP] enable_dev_usb_boot
+08:31:41 [AP] 
+08:31:41 [AP] Have fun and send patches!
+08:31:41 [AP] 
+
+[gale-sniff-all] totals:
+  AP: 14407 bytes
+  EC_PD: 14 bytes

@@ -1,0 +1,28 @@
+=== ensure en9 has static IP ===
+	inet 192.168.1.10 netmask 0xffffff00 broadcast 192.168.1.255
+	status: active
+
+(if no 192.168.1.x — run: ! sudo ifconfig en9 inet 192.168.1.2 netmask 255.255.255.0)
+
+=== ping puck ===
+PING 192.168.1.1 (192.168.1.1): 56 data bytes
+64 bytes from 192.168.1.1: icmp_seq=0 ttl=64 time=0.853 ms
+64 bytes from 192.168.1.1: icmp_seq=1 ttl=64 time=0.773 ms
+64 bytes from 192.168.1.1: icmp_seq=2 ttl=64 time=0.893 ms
+
+--- 192.168.1.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 0.773/0.840/0.893/0.050 ms
+
+=== ssh check ===
+DISTRIB_ID='OpenWrt'
+DISTRIB_RELEASE='25.12.4'
+DISTRIB_REVISION='r32933-4ccb782af7'
+DISTRIB_TARGET='ipq40xx/chromium'
+DISTRIB_ARCH='arm_cortex-a7_neon-vfpv4'
+DISTRIB_DESCRIPTION='OpenWrt 25.12.4 r32933-4ccb782af7'
+DISTRIB_TAINTS=''
+
+Linux OpenWrt 6.12.87 #0 SMP Wed May 13 22:42:09 2026 armv7l GNU/Linux
+
+brw-------    1 root     root      179,   0 Jan  1  1970 /dev/mmcblk0

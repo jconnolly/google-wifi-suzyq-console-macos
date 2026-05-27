@@ -1,0 +1,159 @@
+
+Developer Console
+
+To return to the browser, press:
+
+  [ C
+
+>>> ''
+
+localhost login: 
+localhost login: 
+
+##### attempting chronos / '' #####
+
+>>> 'chronos'
+chronos
+[?25h[?0cchronos@localhost $ chronos@localhost $ 
+
+>>> ''
+
+
+chronos@localhost $ chronos@localhost $ 
+
+>>> 'id'
+id
+
+uid=1000(chronos) gid=1000(chronos) groups=1000(chronos),7(lp),18(audio),27(video),208(pkcs11),222(input),264(buffet),420(crash-user-access),1001(chronos-access),20162(traced-producer),20164(traced-consumer)
+chronos@localhost $ chronos@localhost $ 
+
+*** GOT SHELL as chronos with pw='' ***
+
+>>> 'sudo -n whoami'
+sudo -n whoami
+
+sudo: a password is required
+chronos@localhost $ chronos@localhost $ 
+
+>>> 'sudo enable_dev_usb_boot'
+sudo enable_dev_usb_boot
+
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+
+    SUCCESS: Booting any self-signed kernel from SSD/USB/SDCard slot is enabled.
+
+    Insert bootable media into USB / SDCard slot and press Ctrl-U in developer
+    screen to boot your self-signed image.
+    
+chronos@localhost $ chronos@localhost $ 
+
+>>> 'crossystem dev_boot_usb dev_boot_legacy'
+crossystem dev_boot_usb dev_boot_legacy
+
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.Ae2oKY
+chronos@localhost $ chronos@localhost $ 
+
+>>> 'crossystem'
+crossystem
+
+arch                    = arm                            # [RO/str] Platform architecture
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.k5PDKB
+backup_nvram_request    = (error)                        # [RW/int] Backup the nvram she next boot. Cleared on success.
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.Z0sJ1z
+battery_cutoff_request  = (error)                        # [RW/int] Cut off battery and shutdown on next boot
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.e3v77A
+block_devmode           = (error)                        # [RW/int] Block all use of developer mode
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.GMu5eD
+clear_tpm_owner_done    = (error)                        # [RW/int] Clear TPM owner done
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.qCF2yC
+clear_tpm_owner_request = (error)                        # [RW/int] Clear TPM owner on next boot
+cros_debug              = 1                              # [RO/int] OS should allow debug features
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.I605Oz
+dbg_reset               = (error)                        # [RW/int] Debug reset mode request
+debug_build             = 0                              # [RO/int] OS image built for debug features
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.8SiDsz
+dev_boot_altfw          = (error)                        # [RW/int] Enable developer mode alternate bootloader
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.zwNTiD
+dev_boot_signed_only    = (error)                        # [RW/int] Enable developer mode boot only from official kernels
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.9JGk3z
+dev_boot_usb            = (error)                        # [RW/int] Enable developer mode boot from external disk (USB/SD)
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.iKhORz
+dev_default_boot        = unknown                        # [RW/str] Default boot from disk, altfw or usb
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.H34rEz
+dev_enable_udc          = (error)                        # [RW/int] Enable USB Device Controller
+devsw_boot              = 1                              # [RO/int] Developer switch position at boot
+devsw_cur               = 1                              # [RO/int] Developer switch current position
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.5BklJz
+diagnostic_request      = (error)                        # [RW/int] Request diagnostic rom run on next boot
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.9ipqOD
+disable_dev_request     = (error)                        # [RW/int] Disable virtual dev-mode on next boot
+Unable to open FDT property active-ec-firmware
+ecfw_act                = (error)                        # [RO/str] Active EC firmware
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.EZyddA
+post_ec_sync_delay      = (error)                        # [RW/int] Short delay after EC software sync (persistent, writable, eve only)
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.wDEr4z
+fw_prev_result          = unknown                        # [RO/str] Firmware result of previous boot
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.0e16JC
+fw_prev_tried           = B                              # [RO/str] Firmware tried on previous boot (A or B)
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.76dJxz
+fw_result               = unknown                        # [RW/str] Firmware result this boot
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.7RWtQz
+fw_tried                = B                              # [RO/str] Firmware tried this boot (A or B)
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.gHiUvB
+fw_try_count            = (error)                        # [RW/int] Number of times to try fw_try_next
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.0nNsTA
+fw_try_next             = B                              # [RW/str] Firmware to try next (A or B)
+fw_vboot2               = 1                              # [RO/int] 1 if firmware was selected by vboot2 or 0 otherwise
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.NThasC
+fwb_tries               = (error)                        # [RW/int] Try firmware B count
+fwid                    = Google_Gale.8281.47.0          # [RO/str] Active firmware ID
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.Rhrm9z
+fwupdate_tries          = (error)                        # [RW/int] Times to try OS firmware update (inside kern_nv)
+hwid                    = GALE C2I-A2I-A3C-A4I-E5K       # [RO/str] Hardware ID
+inside_vm               = 0                              # [RO/int] Running in a VM?
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.mag8kD
+kern_nv                 = (error)                        # [RO/int] Non-volatile field for kernel use
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.iRbMEB
+kernel_max_rollforward  = (error)                        # [RW/int] Max kernel version to store into TPM
+kernkey_vfy             = sig                            # [RO/str] Type of verification done on kernel keyblock
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.BuJQwD
+loc_idx                 = (error)                        # [RW/int] Localization index for firmware screens
+mainfw_act              = A                              # [RO/str] Active main firmware
+mainfw_type             = developer                      # [RO/str] Active main firmware type
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.nDqdMz
+minios_priority         = B                              # [RW/str] miniOS image to try first (A or B)
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.3AQyhB
+nvram_cleared           = (error)                        # [RW/int] Have NV settings been lost?  Write 0 to clear
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.SlbmOD
+display_request         = (error)                        # [RW/int] Should we initialize the display at boot?
+phase_enforcement       = (error)                        # [RO/int] Board should have full security settings applied
+recovery_reason         = 0                              # [RO/int] Recovery mode reason for current boot
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.gdYRQD
+recovery_request        = (error)                        # [RW/int] Recovery mode request
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.Z0gW8A
+recovery_subcode        = (error)                        # [RW/int] Recovery reason subcode
+recoverysw_boot         = 0                              # [RO/int] Recovery switch position at boot
+recoverysw_cur          = (error)                        # [RO/int] Recovery switch current position
+recoverysw_ec_boot      = 0                              # [RO/int] Recovery switch position at EC boot
+ro_fwid                 = Google_Gale.8281.38.0          # [RO/str] Read-only firmware ID
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.ZQnl3C
+tpm_attack              = (error)                        # [RW/int] TPM was interrupted since this flag was cleared
+tpm_fwver               = 0x00010001                     # [RO/int] Firmware version stored in TPM
+tpm_kernver             = 0x00010001                     # [RO/int] Kernel version stored in TPM
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.mGAyQD
+tpm_rebooted            = (error)                        # [RO/int] TPM requesting repeated reboot
+tried_fwb               = 0                              # [RO/int] Tried firmware B before A this boot
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.nVknqC
+try_ro_sync             = (error)                        # [RO/int] try read only software sync
+vdat_flags              = 0x0000c416                     # [RO/int] Flags from VbSharedData
+Flashrom invocation failed (exit status 127): flashrom -p host -r -i RW_NVRAM:/tmp/vb2_flashrom.gGhKsC
+wipeout_request         = (error)                        # [RW/int] Firmware requested factory reset (wipeout)
+wpsw_cur                = 0                              # [RO/int] Firmware write protect hardware switch current position
+chronos@localhost $ chronos@localhost $ 

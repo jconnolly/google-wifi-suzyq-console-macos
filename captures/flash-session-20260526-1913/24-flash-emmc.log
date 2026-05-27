@@ -1,0 +1,15 @@
+=== scp factory.bin to puck ===
+
+=== verify md5 ===
+784bb816997df54e5a3b7d66eedbc0dd  /tmp/openwrt-25.12.4-ipq40xx-chromium-google_wifi-squashfs-factory.bin
+expected: 784bb816997df54e5a3b7d66eedbc0dd
+
+=== dd zero alt GPT + write factory + reboot ===
+33+0 records in
+33+0 records out
+43316+1 records in
+43316+1 records out
+DONE
+
+=== triggering reboot (will drop SSH) ===
+(reboot triggered)

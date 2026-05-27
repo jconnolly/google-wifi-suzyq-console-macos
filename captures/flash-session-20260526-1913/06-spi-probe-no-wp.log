@@ -1,0 +1,9 @@
+interface 3: subclass=0x51 (GOOGLE_SPI ✓)
+endpoints: IN=0x83 max=64, OUT=0x03 max=64
+
+[probe] SPI READ_ID (opcode 0x9F) — universal flash identification
+[v1 xfer] JEDEC_ID: OUT 01039f (write_count=1, read_count=3)
+  IN 05009f9f9f  status=0x0005  payload=3B
+  ERROR status 0x0005
+
+=== verdict: SPI interface is unreachable (locked or unimplemented).

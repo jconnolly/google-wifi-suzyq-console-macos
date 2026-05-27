@@ -1,0 +1,31 @@
+
+>>> id
+id
+uid=1000(chronos) gid=1000(chronos) groups=1000(chronos),7(lp
+
+>>> which flashrom mosys crossystem enable_dev_usb_boot
+which flashrom mosys crossystem enable_dev_usb_boot
+which: no fl
+
+>>> sudo enable_dev_usb_boot
+sudo enable_dev_usb_boot
+
+We trust you have received the usual 
+    SUCCESS: Booting any self-signed kernel from SSD/USB/SDCard slot is enabled.
+
+    Insert bootable media into USB / SDCard slot and press Ctrl-U in developer
+    screen to boot your self-signed image.
+    
+chronos@localhost $ 
+
+>>> sudo crossystem dev_boot_usb
+sudo crossystem dev_boot_usb
+1chronos@localhost $ 
+
+>>> sudo crossystem dev_boot_usb=1 dev_default_boot=usb
+sudo crossystem dev_boot_usb=1 dev_default_boot=usb
+
+
+>>> sudo crossystem dev_boot_usb
+sudo crossystem dev_boot_usb
+ chronos@localhost $ 
