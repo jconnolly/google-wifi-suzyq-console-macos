@@ -46,7 +46,29 @@ Reflashing the **official factory firmware** restores the working
 flashrom binary. From there `enable_dev_usb_boot` actually persists,
 and you're back to the standard kkestell flow.
 
-## The unlock — 10 minute recipe
+## ⚠️ Verification status (2026-05-27)
+
+This recipe **worked end-to-end on one walled puck (mesh2)** but has
+NOT yet been minimized — every step listed below has at least one
+plausible "maybe-we-can-skip" question against it, and a publishable
+recipe should answer those before going wide. Things to test on the
+remaining pucks:
+
+| Step | Question | Test |
+|------|----------|------|
+| WP screw removal | Is this strictly needed to type at UART, or only to enable HW writes to flash regions? | Try chronos login on a puck WITHOUT removing WP screw. If UART writes work without WP off, the screw can stay in. |
+| Factory recovery flash | Always needed, or only on auto-updated pucks where `flashrom` is missing? | On a fresh / never-online puck, try `sudo enable_dev_usb_boot` straight after dev mode enable. If `dev_boot_usb=1` persists, recovery flash is unnecessary for that unit. |
+| SW7 recovery dance for dev mode | Already-in-dev-mode pucks need only the post-recovery dance. Can we detect "already in dev mode" via UART trace first? | Capture stock boot. If `VbBootDeveloper()` appears (not `VbBootNormal()`), dance is redundant. |
+| Powerwash wait time | I waited 3-5 min; is that always needed or only after dev-mode flag transitions? | Time the actual chronos-login-ready window vs powerwash flag. |
+| `crossystem dev_boot_signed_only=0` + `dev_default_boot=usb` | The `dev_boot_usb=1` alone might be enough — the other two are belt-and-suspenders. | Try with only `dev_boot_usb=1` set and see if USB-boot still works. |
+| Static IP on Mac side after eMMC boot | Or was DHCP eventually working and I just didn't wait long enough? | Wait 60s after eMMC boot before falling back to static. |
+
+The recipe below is the **conservative superset** — every step that
+worked in the one successful run. Some of these are almost certainly
+redundant on a never-online puck. Use the upcoming two-puck test runs
+to narrow this down before publishing.
+
+## The unlock — 10 minute recipe (unverified-minimum)
 
 ### What you need
 
