@@ -1,0 +1,31 @@
+=== applying mesh config to gw-main ===
+=== add 802.11s mesh point on radio1 (5G) ===
+=== verify ===
+-- wireless.mesh --
+wireless.mesh=wifi-iface
+wireless.mesh.device='radio1'
+wireless.mesh.network='lan'
+wireless.mesh.mode='mesh'
+wireless.mesh.mesh_id='cinque-mesh'
+wireless.mesh.encryption='sae'
+wireless.mesh.key=<REDACTED>
+
+-- iw dev --
+	Interface phy1-mesh0
+		type mesh point
+		channel 36 (5180 MHz), width: 80 MHz, center1: 5210 MHz
+	Interface phy1-ap0
+		type AP
+		channel 36 (5180 MHz), width: 80 MHz, center1: 5210 MHz
+	Interface phy0-ap0
+		type AP
+		channel 1 (2412 MHz), width: 20 MHz, center1: 2412 MHz
+
+-- mesh peers (empty until mesh nodes power on) --
+
+-- br-lan members --
+bridge name	bridge id		STP enabled	interfaces
+br-lan		7fff.58cb52aa3a49	no		lan
+							phy0-ap0
+							phy1-ap0
+							phy1-mesh0
