@@ -1,0 +1,17 @@
+Changing password for root
+New password: 
+Retype password: 
+passwd: password for root changed by root
+===DONE===
+system.@system[0].hostname='mesh5'
+network.lan=interface
+network.lan.device='br-lan'
+network.lan.proto='dhcp'
+network.lan.ip6assign='60'
+	Interface phy0-ap0
+		type AP
+bridge name	bridge id		STP enabled	interfaces
+br-lan		7fff.58cb52afcd9f	no		lan
+							phy0-ap0
+5: br-lan: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP qlen 1000
+    link/ether 58:cb:52:af:cd:9f brd ff:ff:ff:ff:ff:ff

@@ -1,0 +1,26 @@
+	Interface phy1-ap0
+		type AP
+		channel 36 (5180 MHz), width: 80 MHz, center1: 5210 MHz
+	Interface phy1-mesh0
+		type mesh point
+		channel 36 (5180 MHz), width: 80 MHz, center1: 5210 MHz
+	Interface phy0-ap0
+		type AP
+		channel 1 (2412 MHz), width: 20 MHz, center1: 2412 MHz
+---
+bridge name	bridge id		STP enabled	interfaces
+br-lan		7fff.58cb52afcd9f	no		lan
+							phy0-ap0
+							phy1-ap0
+							phy1-mesh0
+---
+Wed May 13 22:43:00 2026 daemon.notice netifd: radio1 (2568): wifi-scripts: Configuring 'phy1' txantenna: 4294967295, rxantenna: 4294967295 distance: 0
+Wed May 13 22:43:00 2026 daemon.notice netifd: radio1 (2568): wifi-scripts: Preparing interface: phy1-ap0 with MAC: 58:cb:52:af:cd:a1
+Wed May 13 22:43:00 2026 daemon.notice netifd: radio1 (2568): wifi-scripts: Preparing interface: phy1-mesh0 with MAC: 5a:cb:52:af:cd:a1
+Wed May 13 22:43:00 2026 daemon.notice wpa_supplicant[1234]: Start pending MLD interfaces
+Wed May 13 22:43:00 2026 kern.info kernel: [   66.943878] ath10k_ahb a800000.wifi: rts threshold -1
+Wed May 13 22:43:00 2026 kern.info kernel: [   66.954172] ath10k_ahb a800000.wifi phy1-ap0: entered allmulticast mode
+Wed May 13 22:43:00 2026 kern.info kernel: [   66.959939] ath10k_ahb a800000.wifi phy1-ap0: entered promiscuous mode
+Wed May 13 22:43:00 2026 daemon.notice hostapd: phy1-ap0: interface state UNINITIALIZED->COUNTRY_UPDATE
+Wed May 13 22:43:01 2026 daemon.notice hostapd: phy1-ap0: interface state COUNTRY_UPDATE->ENABLED
+Wed May 13 22:43:01 2026 daemon.notice hostapd: phy1-ap0: AP-ENABLED
