@@ -276,6 +276,50 @@ Sources I checked:
 - [krishnendu.com — OpenWrt on AC-1304](https://krishnendu.com/openwrt-on-google-wifi-ac1304-easy-way-thow-i-turned-my-lost-qr-google-wifi-into-an-openwrt-beast/)
 - [Google Nest Community: need to downgrade my AC-1304](https://www.googlenestcommunity.com/t5/Nest-Wifi/Need-to-downgrade-my-Google-Wifi-Ac1304/m-p/408325)
 
+## Hack attempt #1 — talking to the SPI flash chip through the SuzyQ
+
+After confirming the walled puck is genuinely walled (5 minutes of
+SSH-race, 135 attempts, 0 hits), I spent an hour cracking open the
+Gale debug device's third USB interface — the one we'd been ignoring
+because it was silent during boot.
+
+Turns out **subclass `0x51` = `USB_SUBCLASS_GOOGLE_SPI`** —
+`flashrom`'s "raiden" protocol. If accessible, this lets you READ AND
+WRITE the puck's SPI flash chip directly through the $7 cable. No
+soldering, no CH341A, no SOIC-8 clip.
+
+I sent a JEDEC-ID SPI READ request (opcode `0x9F`) through the bridge:
+
+```
+[v1 xfer] JEDEC_ID: OUT 01039f (write_count=1, read_count=3)
+  IN 05009f9f9f  status=0x0005  payload=3B
+  ERROR status 0x0005
+```
+
+`status=0x0005` is the defined error code from the chromiumos
+`chip/stm32/usb_spi.h` header:
+
+> 0x0005: The SPI bridge is disabled.
+
+So:
+- ✓ Iface 3 IS the SPI bridge, on `bInterfaceProtocol=0x01` (v1 spec)
+- ✓ It speaks the raiden protocol — defined error codes, no garbage
+- ✓ Writes are NOT blanket-blocked (unlike the AP/EC UART writes, which
+  silently time out)
+- ✗ The bridge is **explicitly disabled** by the H1's CCD lock
+
+So the hardware path is fully implemented and works. The bridge has
+just been deliberately turned off. On a Chromebook you'd flip it on
+with `gsctool ... ccd-set FlashAP`, but Gale doesn't expose the
+`USB_SUBCLASS_GOOGLE_UPDATE` (`0x53`) interface that `gsctool` talks
+to. Wedge identified, lock still in place.
+
+This still feels like the highest-leverage research direction in the
+whole project. If anyone reading the blog post knows the Gale-specific
+CCD unlock — please get in touch. Notes are at
+[docs/ccd-unlock-research.md](ccd-unlock-research.md) and the probe
+tool is [tools/gale-spi-probe](../tools/gale-spi-probe).
+
 ## The "didn't take no for an answer" arc
 
 The shape of the story matters more than the raw technical content:

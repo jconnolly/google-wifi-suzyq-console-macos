@@ -1,0 +1,171 @@
+#!/usr/bin/env python3
+"""gale-spi-probe — read-only probe of the Gale debug device's SPI interface
+(iface 3, subclass 0x51 = USB_SUBCLASS_GOOGLE_SPI, "raiden" protocol v2).
+
+If the Gale's H1 (GSC) allows SPI access via this endpoint, we can READ
+the puck's coreboot/AP SPI flash chip directly through the SuzyQ — no
+CH341A hardware needed.
+
+Step 1: send CMD_GET_USB_SPI_CONFIG (packet_id=0). Safe, read-only.
+        Expect RSP_USB_SPI_CONFIG with max-write-size + feature bitmap.
+Step 2: if config worked, attempt SPI READ of first 64 bytes of flash
+        (opcode 0x03 + 24-bit address + read length).
+Step 3: if both worked, the puck's SPI flash is dumpable from this Mac.
+
+This script makes NO writes to the SPI flash. Even if CCD allows writes,
+nothing is sent. Writing modified firmware is a separate, dangerous step
+that should only happen after a verified read.
+"""
+import struct
+import sys
+import time
+import usb.core
+import usb.util
+
+VID = 0x18D1   # Google Inc.
+PID = 0x500F   # Gale debug
+IFACE_SPI = 3  # subclass 0x51 = USB_SUBCLASS_GOOGLE_SPI
+
+# packet_id_type from chip/stm32/usb_spi.h
+PKT_CMD_GET_USB_SPI_CONFIG = 0
+PKT_RSP_USB_SPI_CONFIG     = 1
+PKT_CMD_TRANSFER_START     = 2
+PKT_CMD_TRANSFER_CONTINUE  = 3
+PKT_CMD_RESTART_RESPONSE   = 4
+PKT_RSP_TRANSFER_START     = 5
+PKT_RSP_TRANSFER_CONTINUE  = 6
+
+
+def find_device():
+    dev = usb.core.find(idVendor=VID, idProduct=PID)
+    if dev is None:
+        sys.exit("Gale debug device not found")
+    return dev
+
+
+def claim(dev, iface):
+    try:
+        if dev.is_kernel_driver_active(iface):
+            dev.detach_kernel_driver(iface)
+    except (NotImplementedError, usb.core.USBError):
+        pass
+    usb.util.claim_interface(dev, iface)
+
+
+def endpoints(intf):
+    ep_in = next(
+        (ep for ep in intf
+         if usb.util.endpoint_direction(ep.bEndpointAddress) == usb.util.ENDPOINT_IN),
+        None,
+    )
+    ep_out = next(
+        (ep for ep in intf
+         if usb.util.endpoint_direction(ep.bEndpointAddress) == usb.util.ENDPOINT_OUT),
+        None,
+    )
+    return ep_in, ep_out
+
+
+def send_packet(ep_out, payload, timeout=2000):
+    """Send a single raw packet (no framing — raiden v2 uses raw bulk)."""
+    return ep_out.write(payload, timeout=timeout)
+
+
+def recv_packet(ep_in, max_len=64, timeout=2000):
+    return bytes(ep_in.read(max_len, timeout=timeout))
+
+
+def v1_spi_xfer(ep_in, ep_out, write_bytes, read_count, label=""):
+    """USB-SPI v1: 1B write_count, 1B read_count, then write bytes. Response = 2B
+    little-endian status, then read_count bytes."""
+    write_count = len(write_bytes)
+    if write_count + read_count > 62:
+        print(f"  v1 limit: write+read must be <=62 (got {write_count}+{read_count})")
+        return None
+    pkt = bytes([write_count, read_count]) + write_bytes
+    if label:
+        print(f"[v1 xfer] {label}: OUT {pkt.hex()} (write_count={write_count}, read_count={read_count})")
+    try:
+        ep_out.write(pkt, timeout=2000)
+    except usb.core.USBError as e:
+        print(f"  WRITE FAILED: {e}")
+        return None
+    try:
+        rsp = bytes(ep_in.read(64, timeout=3000))
+    except usb.core.USBError as e:
+        print(f"  READ FAILED: {e}")
+        return None
+    if len(rsp) < 2:
+        print(f"  response too short: {rsp.hex()}")
+        return None
+    status = struct.unpack("<H", rsp[:2])[0]
+    payload = rsp[2:]
+    print(f"  IN {rsp.hex()}  status=0x{status:04x}  payload={len(payload)}B")
+    if status != 0:
+        print(f"  ERROR status 0x{status:04x}")
+        return None
+    return payload
+
+
+def probe_config(ep_in, ep_out):
+    """v1 has no CONFIG_GET. Try a SPI JEDEC ID read (0x9F + 3 dummy) instead.
+    Every SPI flash chip responds to 0x9F with mfr/dev id."""
+    print("[probe] SPI READ_ID (opcode 0x9F) — universal flash identification")
+    return v1_spi_xfer(ep_in, ep_out, bytes([0x9F]), 3, label="JEDEC_ID")
+
+
+def probe_read(ep_in, ep_out, addr=0, count=32):
+    """READ (opcode 0x03 + 3-byte big-endian address). v1 caps at ~60 bytes
+    of read per packet."""
+    spi_cmd = bytes([0x03,
+                     (addr >> 16) & 0xff,
+                     (addr >>  8) & 0xff,
+                     (addr      ) & 0xff])
+    return v1_spi_xfer(ep_in, ep_out, spi_cmd, count,
+                       label=f"READ @ 0x{addr:06x}, {count}B")
+
+
+def main():
+    dev = find_device()
+    cfg = dev.get_active_configuration()
+    # pyusb indexes interfaces by descriptor order, not bInterfaceNumber.
+    # Find the SPI interface by subclass 0x51 instead.
+    intf = None
+    for i in cfg:
+        if i.bInterfaceSubClass == 0x51:
+            intf = i
+            break
+    if intf is None:
+        sys.exit("no interface with subclass 0x51 (GOOGLE_SPI) found")
+    iface_num = intf.bInterfaceNumber
+    sub = intf.bInterfaceSubClass
+    print(f"interface {iface_num}: subclass=0x{sub:02x} "
+          f"({'GOOGLE_SPI ✓' if sub == 0x51 else 'NOT SPI!'})")
+    claim(dev, iface_num)
+    ep_in, ep_out = endpoints(intf)
+    print(f"endpoints: IN=0x{ep_in.bEndpointAddress:02x} max={ep_in.wMaxPacketSize}, "
+          f"OUT=0x{ep_out.bEndpointAddress:02x} max={ep_out.wMaxPacketSize}")
+    print()
+
+    cfg_info = probe_config(ep_in, ep_out)
+    if cfg_info is None:
+        print()
+        print("=== verdict: SPI interface is unreachable (locked or unimplemented).")
+        usb.util.release_interface(dev, iface_num)
+        return
+
+    print()
+    payload = probe_read(ep_in, ep_out, addr=0, count=64)
+    print()
+    if payload is None:
+        print("=== verdict: config works but READ failed — SPI bridge may be "
+              "disabled until CCD is unlocked.")
+    else:
+        print("=== verdict: SPI READ WORKS. Can dump full flash through SuzyQ.")
+        print("=== first 64 bytes of SPI flash printed above.")
+
+    usb.util.release_interface(dev, iface_num)
+
+
+if __name__ == "__main__":
+    main()
