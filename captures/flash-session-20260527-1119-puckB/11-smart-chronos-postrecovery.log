@@ -1,0 +1,612 @@
+watching for 'localhost login:' for up to 10 min...
+
+
+coreboot-60d1b1c Mon Jan  9 00:04:49 UTC 2017 bootblock starttis_init: ValidSts bit set(1) in TPM_ACCESS register after 8 ms
+1.2 TPM (chip type slb9645tt device-id 0x1A)
+TPM: Startup
+TPM: command 0x99 returned 0x0
+TPM: Asserting physical presence
+TPM: command 0x4000000a returned 0x0
+TPM: command 0x65 returned 0x0
+TPM: flags disable=0, deactivated=0, nvlocked=1
+setup_tpm():320: TPM: SetupTPM() succeeded
+TPM: tlcl_read(0x1007, 10)
+TPM: command 0xcf returned 0x0
+Reading tristate GPIOs: 0 Z 0 = 10 (binary_first base3 number system)
+Board ID 10
+WW_RING: initialized 1 out of 1
+recovery button pressed
+wipeout requested, checking recovery
+recovery requested
+Phase 1
+FMAP: area GBB found @ 301000 (913152 bytes)
+VB2:vb2_check_recovery() Recovery reason from previous boot: 0x0 / 0x0
+VB2:vb2_check_recovery() Recovery was requested manually
+VB2:vb2_check_recovery() We have a recovery request: 0x2 / 0x0
+Clearing TPM owner
+tpm_clear_and_reenable():57: TPM: Clear and re-enable
+TPM: Force clear
+TPM: command 0x5d returned 0x0
+TPM: Enabling TPM
+TPM: command 0x6f returned 0x0
+TPM: SetDeactivated(0)
+TPM: command 0x72 returned 0x0
+Recovery requested (1009000e)
+Saving nvdata
+SF: Detected W25Q64 with sector size 0x1000, total 0x800000
+Saving secdata
+TPM: tlcl_write(0x1007, 10)
+TPM: command 0xcd returned 0x0
+TPM: tlcl_read(0x1007, 10)
+TPM: command 0xcf returned 0x0
+TPM: command 0x14 returned 0x0
+TPM: command 0x14 returned 0x0
+CBFS @ 20000 size 2e0000
+CBFS: 'Master Header Locator' located CBFS at [20000:300000)
+CBFS: Locating 'fallback/romstage'
+CBFS: Found @ offset 80 size 469b
+
+
+coreboot-60d1b1c Mon Jan  9 00:04:49 UTC 2017 romstage starting...
+SF: Detected W25Q64 with sector size 0x1000, total 0x800000
+CBFS @ 20000 size 2e0000
+CBFS: 'Master Header Locator' located CBFS at [20000:300000)
+CBFS: Locating 'cdt.mbn'
+CBFS: Found @ offset bb40 size 1ac
+CBFS @ 20000 size 2e0000
+CBFS: 'Master Header Locator' located CBFS at [20000:300000)
+CBFS: Locating 'ddr.mbn'
+CBFS: Found @ offset bd40 size 7d38
+DDR version private build initialized
+SDI Entry: 0x860038d
+Mapping address range [0x80000000:0xa0000000) as writeback
+Mapping address range [0x87300000:0x87500000) as uncached
+CBMEM:
+IMD: root @ 8727f000 254 entries.
+IMD: root @ 8727ec00 62 entries.
+creating vboot_handoff structure
+Reading tristate GPIOs: 0 Z 0 = 10 (binary_first base3 number system)
+Board ID 10
+CBFS @ 20000 size 2e0000
+CBFS: 'Master Header Locator' located CBFS at [20000:300000)
+CBFS: Locating 'fallback/ramstage'
+CBFS: Found @ offset 4780 size 6f3b
+
+
+coreboot-60d1b1c Mon Jan  9 00:04:49 UTC 2017 ramstage starting...
+SF: Detected W25Q64 with sector size 0x1000, total 0x800000
+FMAP: Found "FMAP" version 1.0 at 300000.
+FMAP: base = 0 size = 800000 #areas = 24
+FMAP: area RO_VPD found @ 3e0000 (131072 bytes)
+FMAP: area RW_VPD found @ 6e0000 (32768 bytes)
+FMAP: area RO_VPD found @ 3e0000 (131072 bytes)
+FMAP: area RW_VPD found @ 6e0000 (32768 bytes)
+Exception handlers installed.
+BS: BS_PRE_DEVICE times (us): entry 9 run 14 exit 9
+BS: BS_DEV_INIT_CHIPS times (us): entry 9 run 29 exit 9
+Enumerating buses...
+Show all devs... Before device enumeration.
+Root Device: enabled 1
+CPU_CLUSTER: 0: enabled 1
+Compare with tree...
+Root Device: enabled 1
+ CPU_CLUSTER: 0: enabled 1
+Root Device scanning...
+root_dev_scan_bus for Root Device
+CPU_CLUSTER: 0 enabled
+root_dev_scan_bus for Root Device done
+scan_bus: scanning of bus Root Device took 12402 usecs
+done
+BS: BS_DEV_ENUMERATE times (us): entry 10 run 37280 exit 10
+Allocating resources...
+Reading resources...
+Root Device read_resources bus 0 link: 0
+Root Device read_resources bus 0 link: 0 done
+Done reading resources.
+Show resources in subtree (Root Device)...After reading.
+ Root Device child on link 0 CPU_CLUSTER: 0
+  CPU_CLUSTER: 0
+  CPU_CLUSTER: 0 resource base 80000000 size 7500000 align 0 gran 0 limit 0 flags e0004200 index 0
+  CPU_CLUSTER: 0 resource base 87500000 size b00000 align 0 gran 0 limit 0 flags f0004200 index 1
+  CPU_CLUSTER: 0 resource base 88000000 size 18000000 align 0 gran 0 limit 0 flags e0004200 index 2
+Setting resources...
+Root Device assign_resources, bus 0 link: 0
+CPU_CLUSTER: 0 missing set_resources
+Root Device assign_resources, bus 0 link: 0
+Done setting resources.
+Show resources in subtree (Root Device)...After assigning values.
+ Root Device child on link 0 CPU_CLUSTER: 0
+  CPU_CLUSTER: 0
+  CPU_CLUSTER: 0 resource base 80000000 size 7500000 align 0 gran 0 limit 0 flags e0004200 index 0
+  CPU_CLUSTER: 0 resource base 87500000 size b00000 align 0 gran 0 limit 0 flags f0004200 index 1
+  CPU_CLUSTER: 0 resource base 88000000 size 18000000 align 0 gran 0 limit 0 flags e0004200 index 2
+Done allocating resources.
+BS: BS_DEV_RESOURCES times (us): entry 9 run 120205 exit 9
+Enabling resources...
+done.
+BS: BS_DEV_ENABLE times (us): entry 9 run 2981 exit 9
+Initializing devices...
+Root Device init ...
+CBFS @ 20000 size 2e0000
+CBFS: 'Master Header Locator' located CBFS at [20000:300000)
+CBFS: Locating 'tzbsp_no_xpu.mbn'
+CBFS: Found @ offset 13ac0 size 9428
+Starting TZBSP
+Translation table is @ 0a0f0000
+Mapping address range [0x00000000:0x00000000) as uncached
+Creating new subtable @0a0f4000 for [0x0a000000:0x0a100000)
+Mapping address range [0x0a0c0000:0x0a100000) as writeback
+Creating new subtable @0a0f4400 for [0x0a800000:0x0a900000)
+Mapping address range [0x0a8c0000:0x0a900000) as writeback
+Creating new subtable @0a0f4800 for [0x08600000:0x08700000)
+Mapping address range [0x08600000:0x08608000) as writeback
+Mapping address range [0x80000000:0xa0000000) as writeback
+Mapping address range [0x87300000:0x87500000) as uncached
+Setting address range [0xa0000000:0x00000000) as unmapped
+Creating new subtable @0a0f4c00 for [0x00000000:0x00100000)
+Setting address range [0x00000000:0x00000400) as unmapped
+Setting up USB HOST1 controller.
+Version = 5533270a
+software reset done
+USB Host mode reg = 101004
+cbmem_add_vpd_calibration_data: added wifi_base64_calibration0 to CBMEM
+cbmem_add_vpd_calibration_data: added wifi_base64_calibration1 to CBMEM
+Root Device init finished in 537332 usecs
+CPU_CLUSTER: 0 init ...
+CPU: QCA 40xx
+CPU_CLUSTER: 0 init finished in 3788 usecs
+Devices initialized
+Show all devs... After init.
+Root Device: enabled 1
+CPU_CLUSTER: 0: enabled 1
+BS: BS_DEV_INIT times (us): entry 9 run 561484 exit 2
+Finalize devices...
+Devices finalized
+BS: BS_POST_DEVICE times (us): entry 2 run 3787 exit 2
+BS: BS_OS_RESUME_CHECK times (us): entry 2 run 4 exit 1
+Writing coreboot table at 0x8724c000
+rom_table_end = 0x8724c000
+... aligned to 0x87250000
+ 0. 0000000080000000-000000008724bfff: RAM
+ 1. 000000008724c000-000000008727ffff: CONFIGURATION TABLES
+ 2. 0000000087280000-00000000874fffff: RAM
+ 3. 0000000087500000-0000000087ffffff: RESERVED
+ 4. 0000000088000000-000000009fffffff: RAM
+Reading tristate GPIOs: 0 Z 0 = 10 (binary_first base3 number system)
+Board ID 10
+Passing 5 GPIOs to payload:
+            NAME |       PORT | POLARITY |     VALUE
+       developer | 0x00000029 |      low |       low
+        recovery | 0x00000039 |      low |      high
+   write protect | 0x00000035 |      low |       low
+           power |  undefined |      low |       low
+             lid |  undefined |      low |      high
+CBFS @ 20000 size 2e0000
+CBFS: 'Master Header Locator' located CBFS at [20000:300000)
+Wrote coreboot table at: 8724c000, 0x320 bytes, checksum 2758
+coreboot table: 824 bytes.
+IMD ROOT    0. 8727f000 00001000
+IMD SMALL   1. 8727e000 00001000
+CONSOLE     2. 8725e000 00020000
+TIME STAMP  3. 8725d000 00000400
+VBOOT       4. 8725c000 00000c0c
+VPD         5. 87254000 00007fec
+WIFI CLBR   6. 8724e000 00005e94
+COREBOOT    7. 8724c000 00002000
+IMD small region:
+  IMD ROOT    0. 8727ec00 00000400
+  VBOOT SEL   1. 8727ebe0 00000008
+BS: BS_WRITE_TABLES times (us): entry 2 run 124599 exit 1
+CBFS @ 20000 size 2e0000
+CBFS: 'Master Header Locator' located CBFS at [20000:300000)
+CBFS: Locating 'fallback/payload'
+CBFS: Found @ offset 26800 size 10341
+Loading segment from rom address 0x87289428
+  code (compression=1)
+  New segment dstaddr 0x88104040 memsize 0x1249b70 srcaddr 0x87289460 filesize 0x10309
+Loading segment from rom address 0x87289444
+  Entry Point 0x88104041
+Bounce Buffer at 9ffcf000, 197488 bytes
+Loading Segment: addr: 0x0000000088104040 memsz: 0x0000000001249b70 filesz: 0x0000000000010309
+lb: [0x00000000872e0000, 0x00000000872f81b8)
+Post relocation: addr: 0x0000000088104040 memsz: 0x0000000001249b70 filesz: 0x0000000000010309
+using LZMA
+[ 0x88104040, 88121470, 0x8934dbb0) <- 87289460
+Clearing Segment: addr: 0x0000000088121470 memsz: 0x000000000122c740
+dest 88104040, end 8934dbb0, bouncebuffer 9ffcf000
+Loaded segments
+BS: BS_PAYLOAD_LOAD times (us): entry 2 run 179549 exit 2
+Jumping to boot code at 88104041(8724c000)
+CPU0: stack: 0a8fc000 - 0a900000, lowest used address 0a8ff5a0, stack used: 2656 bytes
+
+
+Starting depthcharge on gale...
+WARNING: can't convert coreboot GPIOs, 'lid' won't be resampled at runtime!
+WARNING: can't convert coreboot GPIOs, 'power' won't be resampled at runtime!
+clock_config_mmc : 1
+WW_RING: initialized controller found at 0x32
+WW_RING: initialized 1 out of 1
+The GBB signature is at 0x88004020 and is:  24 47 42 42
+Wipe memory regions:
+	[0x00000080000000, 0x00000080208000)
+	[0x00000080208200, 0x0000008724c000)
+	[0x00000087280000, 0x00000087500000)
+	[0x0000008934dbb0, 0x0000009ff00000)
+Initializing XHCI USB controller at 0x8a00000.
+Calling VbSelectAndLoadKernel().
+TPM: TlclRead(0x1008, 13)
+1.2 TPM (chip type slb9645tt device-id 0x1A)
+TPM: command 0xcf returned 0x0
+TPM: command 0x65 returned 0x0
+TPM: RollbackKernelRead 10001
+VbBootRecovery() start
+VbBootRecovery() waiting for a recovery image
+VbBootRecovery() attempting to load kernel2
+VbTryLoadKernel() start, get_info_flags=0x1
+VbTryLoadKernel() found 0 disks
+VbSetRecoveryRequest(90)
+VbSetRecoveryRequest(0)
+VbBootRecovery() attempting to load kernel2
+VbTryLoadKernel() start, get_info_flags=0x1
+VbTryLoadKernel() found 0 disks
+VbSetRecoveryRequest(90)
+VbSetRecoveryRequest(0)
+VbBootRecovery() attempting to load kernel2
+VbTryLoadKernel() start, get_info_flags=0x1
+VbTryLoadKernel() found 0 disks
+VbSetRecoveryRequest(90)
+VbSetRecoveryRequest(0)
+The EC which doesn't exist isn't untrusted.
+Entering VbUserConfirms(0x3)
+VbUserConfirms() - Yes (1)
+VbBootRecovery() Enabling dev-mode...
+TPM: Entering SetVirtualDevMode()
+TPM: TlclRead(0x1007, 10)
+TPM: command 0xcf returned 0x0
+TPM: flags were 0x00
+TPM: flags are now 0x02
+TPM: TlclWrite(0x1007, 10)
+TPM: command 0xcd returned 0x0
+TPM: TlclRead(0x1007, 10)
+TPM: command 0xcf returned 0x0
+TPM: Leaving SetVirtualDevMode()
+VbBootRecovery() Reboot so it will take effect
+VbAllowUsbBoot
+VbSelectAndLoadKernel() returning 65543
+VbSelectAndLoadKernel returned 65543, Doing a cold reboot.
+Exiting depthcharge with code 1 at timestamp: 24805569
+Rebooting...�
+
+coreboot-60d1b1c Mon Jan  9 00:04:49 UTC 2017 bootblock starting...
+Exception handlers installed.
+Translation table is @ 0a0f0000
+Mapping address range [0x00000000:0x00000000) as uncached
+Creating new subtable @0a0f4000 for [0x0a000000:0x0a100000)
+Mapping address range [0x0a0c0000:0x0a100000) as writeback
+Creating new subtable @0a0f4400 for [0x0a800000:0x0a900000)
+Mapping address range [0x0a8c0000:0x0a900000) as writeback
+Creating new subtable @0a0f4800 for [0x08600000:0x08700000)
+Mapping address range [0x08600000:0x08608000) as writeback
+Setting address range [0x80000000:0xa0000000) as unmapped
+Setting address range [0x87300000:0x87500000) as unmapped
+Setting address range [0xa0000000:0x00000000) as unmapped
+Creating new subtable @0a0f4c00 for [0x00000000:0x00100000)
+Setting address range [0x00000000:0x00000400) as unmapped
+No uber-sbl parameter detected
+SF: Detected W25Q64 with sector size 0x1000, total 0x800000
+VBOOT: Loading verstage.
+CBFS @ 20000 size 2e0000
+CBFS: 'Master Header Locator' located CBFS at [20000:300000)
+CBFS: Locating 'fallback/verstage'
+CBFS: Found @ offset 1cf40 size 987c
+
+
+coreboot-60d1b1c Mon Jan  9 00:04:49 UTC 2017 verstage starting...
+Exception handlers installed.
+SF: Detected W25Q64 with sector size 0x1000, total 0x800000
+FMAP: Found "FMAP" version 1.0 at 300000.
+FMAP: base = 0 size = 800000 #areas = 24
+FMAP: area RW_NVRAM found @ 6f0000 (65536 bytes)
+tis_init: ValidSts bit set(1) in TPM_ACCESS register after 8 ms
+1.2 TPM (chip type slb9645tt device-id 0x1A)
+TPM: Startup
+TPM: command 0x99 returned 0x0
+TPM: Asserting physical presence
+TPM: command 0x4000000a returned 0x0
+TPM: command 0x65 returned 0x0
+TPM: flags disable=0, deactivated=0, nvlocked=1
+setup_tpm():320: TPM: SetupTPM() succeeded
+TPM: tlcl_read(0x1007, 10)
+TPM: command 0xcf returned 0x0
+Reading tristate GPIOs: 0 Z 0 = 10 (binary_first base3 number system)
+Board ID 10
+WW_RING: initialized 1 out of 1
+Phase 1
+FMAP: area GBB found @ 301000 (913152 bytes)
+VB2:vb2_check_recovery() Recovery reason from previous boot: 0x0 / 0x0
+Clearing TPM owner
+tpm_clear_and_reenable():57: TPM: Clear and re-enable
+TPM: Force clear
+TPM: command 0x5d returned 0x0
+TPM: Enabling TPM
+TPM: command 0x6f returned 0x0
+TPM: SetDeactivated(0)
+TPM: command 0x72 returned 0x0
+Phase 2
+Phase 3
+FMAP: area GBB found @ 301000 (913152 bytes)
+FMAP: area VBLOCK_A found @ 400000 (8192 bytes)
+FMAP: area VBLOCK_A found @ 400000 (8192 bytes)
+VB2:vb2_verify_keyblock() Checking key block signature...
+FMAP: area VBLOCK_A found @ 400000 (8192 bytes)
+FMAP: area VBLOCK_A found @ 400000 (8192 bytes)
+VB2:vb2_verify_fw_preamble() Verifying preamble.
+Phase 4
+FMAP: area FW_MAIN_A found @ 402000 (1367808 bytes)
+VB2:vb2api_init_hash() HW crypto for hash_alg 2 not supported, using SW
+Saving nvdata
+SF: Detected W25Q64 with sector size 0x1000, total 0x800000
+Saving secdata
+TPM: tlcl_write(0x1007, 10)
+TPM: command 0xcd returned 0x0
+TPM: tlcl_read(0x1007, 10)
+TPM: command 0xcf returned 0x0
+TPM: command 0x14 returned 0x0
+TPM: command 0x14 returned 0x0
+TPM: Set global lock
+TPM: tlcl_write(0x0, 0)
+TPM: command 0xcd returned 0x0
+Slot A is selected
+CBFS: 'VBOOT' located CBFS at [402000:42f240)
+CBFS: Locating 'fallback/romstage'
+CBFS: Found @ offset 0 size 469b
+
+
+coreboot-60d1b1c Mon Jan  9 00:04:49 UTC 2017 romstage starting...
+SF: Detected W25Q64 with sector size 0x1000, total 0x800000
+CBFS: 'VBOOT' located CBFS at [402000:42f240)
+CBFS: Locating 'cdt.mbn'
+CBFS: Found @ offset bac0 size 1ac
+CBFS: 'VBOOT' located CBFS at [402000:42f240)
+CBFS: Locating 'ddr.mbn'
+CBFS: Found @ offset bcc0 size 7d38
+DDR version private build initialized
+SDI Entry: 0x860038d
+Mapping address range [0x80000000:0xa0000000) as writeback
+Mapping address range [0x87300000:0x87500000) as uncached
+CBMEM:
+oot @ 8727ec00 62 entries.
+creating vboot_handoff structure
+Reading tristate GPIOs: 0 Z 0 Copying FW preamble
+CBFS: 'VBOOT' located CBFS at [402000:42f240)
+CBFS: Locating 'fallback/ramstage'
+CBFS: Found @ offset 4700 size 6f3b
+
+
+coreboot-60d1b1c Mon Jan  9 00:04:49 UTC 2017 ramstage starting...
+SF: Detected W25Q64 with sector size 0x1000, total 0x800000
+FMAP: Found "FMAP" version 1.0 at 300000.
+FMAP: base = 0 size = 800000 #areas = 24
+FMAP: area RO_VPD found @ 3e0000 (131072 bytes)
+FMAP: area RW_VPD found @ 6e0000 (32768 bytes)
+FMAP: area RO_VPD found @ 3e0000 (131072 bytes)
+FMAP: area RW_VPD found @ 6e0000 (32768 bytes)
+Exception handlers installed.
+BS: BS_PRE_DEVICE times (us): entry 9 run 14 exit 9
+BS: BS_DEV_INIT_CHIPS times (us): entry 9 run 30 exit 9
+Enumerating buses...
+Show all devs... Before device enumeration.
+Root Device: enabled 1
+CPU_CLUSTER: 0: enabled 1
+Compare with tree...
+Root Device: enabled 1
+ CPU_CLUSTER: 0: enabled 1
+Root Device scanning...
+root_dev_scan_bus for Root Device
+CPU_CLUSTER: 0 enabled
+root_dev_scan_bus for Root Device done
+scan_bus: scanning of bus Root Device took 12401 usecs
+done
+BS: BS_DEV_ENUMERATE times (us): entry 9 run 37289 exit 10
+Allocating resources...
+Reading resources...
+Root Device read_resources bus 0 link: 0
+Root Device read_resources bus 0 link: 0 done
+Done reading resources.
+Show resources in subtree (Root Device)...After reading.
+ Root Device child on link 0 CPU_CLUSTER: 0
+  CPU_CLUSTER: 0
+  CPU_CLUSTER: 0 resource base 80000000 size 7500000 align 0 gran 0 limit 0 flags e0004200 index 0
+  CPU_CLUSTER: 0 resource base 87500000 size b00000 align 0 gran 0 limit 0 flags f0004200 index 1
+  CPU_CLUSTER: 0 resource base 88000000 size 18000000 align 0 gran 0 limit 0 flags e0004200 index 2
+Setting resources...
+Root Device assign_resources, bus 0 link: 0
+CPU_CLUSTER: 0 missing set_resources
+Root Device assign_resources, bus 0 link: 0
+Done setting resources.
+Show resources in subtree (Root Device)...After assigning values.
+ Root Device child on link 0 CPU_CLUSTER: 0
+  CPU_CLUSTER: 0
+  CPU_CLUSTER: 0 resource base 80000000 size 7500000 align 0 gran 0 limit 0 flags e0004200 index 0
+  CPU_CLUSTER: 0 resource base 87500000 size b00000 align 0 gran 0 limit 0 flags f0004200 index 1
+  CPU_CLUSTER: 0 resource base 88000000 size 18000000 align 0 gran 0 limit 0 flags e0004200 index 2
+Done allocating resources.
+BS: BS_DEV_RESOURCES times (us): entry 9 run 120224 exit 9
+Enabling resources...
+done.
+BS: BS_DEV_ENABLE times (us): entry 9 run 2982 exit 9
+Initializing devices...
+Root Device init ...
+CBFS: 'VBOOT' located CBFS at [402000:42f240)
+CBFS: Locating 'tzbsp_no_xpu.mbn'
+CBFS: Found @ offset 13a40 size 9428
+Starting TZBSP
+Translation table is @ 0a0f0000
+Mapping address r000000:0x0000000Creating new subtable @0a0f4000 for [0x0a000000:0x0a100000)
+MappiCreating new subfor [0x00000000:0x00100000)
+Setting address range [0x00000000:0x00000400USB Host mode reg = 101004
+cbmem_add_vpd_calibration_data: added wifi_base64_calibration0 to CBMEM
+cbmem_add_vpd_calibration_data: added wifi_base64_calibration1 to CBMEM
+Root Device init finished in 532374 usecs
+CPU_CLUSTER: 0 init ...
+CPU: QCA 40xx
+CPU_CLUSTER: 0 init finished in 3777 usecs
+Devices initialized
+Show all devs... After init.
+Root Device: enabled 1
+CPU_CLUSTER: 0: enabled 1
+BS: BS_DEV_INIT times (us): entry 9 run 556464 exit 3
+Finalize devices...
+Devices finalized
+BS: BS_POST_DEVICE times (us): entry 2 run 3776 exit 2
+BS: BS_OS_RESUME_CHECK times (us): entry 2 run 4 exit 2
+Writing coreboot table at 0x8724c000
+rom_table_end = 0x8724c000
+... aligned to 0x87250000
+ 0. 0000000080000000-000000008724bfff: RAM
+ 1. 000000008724c000-000000008727ffff: CONFIGURATION TABLES
+ 2. 0000000087280000-00000000874fffff: RAM
+ 3. 0000000087500000-0000000087ffffff: RESERVED
+ 4. 0000000088000000-000000009fffffff: RAM
+Reading tristate GPIOs: 0 Z 0 = 10 (binary_first base3 number system)
+Board ID 10
+Passing 5 GPIOs to payload:
+            NAME |       PORT | POLARITY |     VALUE
+       developer | 0x00000029 |      low |       low
+        recovery | 0x00000039 |      low |       low
+   write protect | 0x00000035 |      low |       low
+           power |  undefined |      low |       low
+             lid |  undefined |      low |      high
+CBFS: 'VBOOT' located CBFS at [402000:42f240)
+Wrote coreboot table at: 8724c000, 0x320 bytes, checksum 3504
+coreboot table: 824 bytes.
+IMD ROOT    0. 8727f000 00001000
+IMD SMALL   1. 8727e000 00001000
+CONSOLE     2. 8725e000 00020000
+TIME STAMP  3. 8725d000 00000400
+VBOOT       4. 8725c000 00000c0c
+VPD         5. 87254000 00007fec
+WIFI CLBR   6. 8724e000 00005e94
+COREBOOT    7. 8724c000 00002000
+IMD small region:
+  IMD ROOT    0. 8727ec00 00000400
+  VBOOT SEL   1. 8727ebe0 00000008
+BS: BS_WRITE_TABLES times (us): entry 2 run 120427 exit 2
+CBFS: 'VBOOT' located CBFS at [402000:42f240)
+CBFS: Locating 'fallback/payload'
+CBFS: Found @ offset 1cec0 size 10341
+Loading segment from rom address 0x87289428
+  code (compression=1)
+  New segment dstaddr 0x88104040 memsize 0x1249b70 srcaddr 0x87289460 filesize 0x10309
+Loading segment from rom address 0x87289444
+  Entry Point 0x88104041
+Bounce Buffer at 9ffcf000, 197488 bytes
+Loading Segment: addr: 0x0000000088104040 memsz: 0x0000000001249b70 filesz: 0x0000000000010309
+lb: [0x00000000872e0000, 0x00000000872f81b8)
+Post relocation: addr: 0x0000000088104040 memsz: 0x0000000001249b70 filesz: 0x0000000000010309
+using LZMA
+[ 0x88104040, 88121470, 0x8934dbb0) <- 87289460
+Clearing Segment: addr: 0x0000000088121470 memsz: 0x000000000122c740
+dest 88104040, end 8934dbb0, bouncebuffer 9ffcf000
+Loaded segments
+BS: BS_PAYLOAD_LOAD times (us): entry 2 run 175488 exit 2
+Jumping to boot code at 88104041(8724c000)
+CPU0: stack: 0a8fc000 - 0a900000, lowest used address 0a8ff5a0, stack used: 2656 bytes
+
+
+Starting depthcharge on gale...
+WARNING: can't convert coreboot GPIOs, 'lid' won't be resampled at runtime!
+WARNING: can't convert coreboot GPIOs, 'power' won't be resampled at runtime!
+clock_config_mmc : 1
+WW_RING: initialized controller found at 0x32
+WW_RING: initialized 1 out of 1
+The GBB signature is at 0x88004020 and is:  24 47 42 42
+Wipe memory regions:
+	[0x00000080000000, 0x00000080208000)
+	[0x00000080208200, 0x0000008724c000)
+	[0x00000087280000, 0x00000087500000)
+	[0x0000008934dbb0, 0x0000009ff00000)
+Initializing XHCI USB controller at 0x8a00000.
+Calling VbSelectAndLoadKernel().
+TPM: TlclRead(0x1008, 13)
+1.2 TPM (chip type slb9645tt device-id 0x1A)
+TPM: command 0xcf returned 0x0
+TPM: command 0x65 returned 0x0
+TPM: RollbackKernelRead 10001
+Entering VbBootDeveloper()
+VbAudioOpen() - ticks_per_msec is 1000
+sound_stop: No sound ops set.
+VbAudioOpen() - VbExBeep() is limited
+VbGetDevMusicNotes: use_short is 0, hdr is 0x0, maxsize is 0
+VbGetDevMusicNotes: using 5 default notes
+VbAudioOpen() - note count 5
+VbBootDeveloper() - user pressed Ctrl+U; try USB
+VbTryLoadKernel() start, get_info_flags=0x1
+VbTryLoadKernel() found 0 disks
+VbSetRecoveryRequest(90)
+VbBootDeveloper() - no kernel found on USB
+sound_start: No sound ops set.
+VbSetRecoveryRequest(0)
+sound_start: No sound ops set.
+sound_start: No sound ops set.
+VbBootDeveloper() - trying fixed disk
+sound_stop: No sound ops set.
+VbTryLoadKernel() start, get_info_flags=0x2
+MMC version  = 10000042
+clock_config_mmc : 1
+clock_config_mmc : 2
+Man 000015 Snr 2940973631 Product 4FPD3R Revision 0.2
+VbTryLoadKernel() found 1 disks
+VbTryLoadKernel() trying disk 0
+GptNextKernelEntry looking at new prio partition 2
+GptNextKernelEntry s1 t0 p1
+GptNextKernelEntry looking at new prio partition 4
+GptNextKernelEntry s0 t15 p0
+GptNextKernelEntry looking at new prio partition 6
+GptNextKernelEntry s0 t15 p0
+GptNextKernelEntry likes partition 2
+Found kernel entry at 20480 size 32768
+Checking key block signature...
+   - sig_size=512, expecting 512 for algorithm 8
+   - sig_size=256, expecting 256 for algorithm 4
+Kernel preamble is good.
+   - sig_size=256, expecting 256 for algorithm 4
+Partition is good.
+Same kernel version
+Good_partition >= 0
+VbTryLoadKernel() LoadKernel() = 0
+TPM: Lock physical presence
+TPM: command 0x4000000a returned 0x0
+VbSelectAndLoadKernel() returning 0
+Boot policy: Match for type 0 with cmdline 1
+Modified kernel command line: cros_secure console= loglevel=7 init=/sbin/init cros_secure oops=panic panic=-1 root=/dev/dm-0 rootwait ro dm_verity.error_behavior=3 dm_verity.max_bios=-1 dm_verity.dev_wait=1 dm="1 vroot none ro 1,0 1536000 verity payload=PARTUUID=09b395ba-2f59-c84a-a193-90709d3d1475/PARTNROFF=1 hashtree=PARTUUID=09b395ba-2f59-c84a-a193-90709d3d1475/PARTNROFF=1 hashstart=1536000 alg=sha1 root_hexdigest=25009619ed1c7b8e4eae62d0d4cc7f794507d4d6 salt=8da0ac678592acf6395953f6dca6310b5682844dc5ae70c2e96c88474c273afa" noinitrd vt.global_cursor_default=0 kern_guid=09b395ba-2f59-c84a-a193-90709d3d1475 coherent_pool=2M  
+Loading FIT.
+Image fdt@12 has 4873 bytes.
+Image fdt@11 has 4975 bytes.
+Image fdt@10 has 4166 bytes.
+Image fdt@9 has 6023 bytes.
+Image fdt@8 has 20301 bytes.
+Image fdt@7 has 18611 bytes.
+Image fdt@6 has 14306 bytes.
+Image fdt@5 has 4369 bytes.
+Image fdt@4 has 4506 bytes.
+Image fdt@3 has 5523 bytes.
+Image fdt@2 has 7318 bytes.
+Image fdt@1 has 7302 bytes.
+Image kernel@1 has 4574040 bytes.
+Compat preference: google,gale-v2
+Config conf@12, kernel kernel@1, fdt fdt@12, compat sony,xperia-honami qcom,msm8974
+Config conf@11, kernel kernel@1, fdt fdt@11, compat qcom,msm8960-cdp qcom,msm8960
+Config conf@10, kernel kernel@1, fdt fdt@10, compat qcom,msm8660-surf qcom,msm8660
+Config conf@9, kernel kernel@1, fdt fdt@9, compat qcom,ipq8064-ap148 qcom,ipq8064
+Config conf@8, kernel kernel@1, fdt fdt@8, compat google,gale qcom,ipq4019
+Config conf@7, kernel kernel@1, fdt fdt@7, compat google,gale-v2 (match) qcom,ipq4019
+Config conf@6, kernel kernel@1, fdt fdt@6, compat qcom,ipq4019
+Config conf@5, kernel kernel@1, fdt fdt@5, compat qcom,apq8084-mtp qcom,apq8084
+Config conf@4, kernel kernel@1, fdt fdt@4, compat qcom,apq8084-ifc6540 qcom,apq8084
+Config conf@3, kernel kernel@1, fdt fdt@3, compat qcom,apq8074-dragonboard qcom,apq8074
+Config conf@2, kernel kernel@1, fdt fdt@2, compat qcom,apq8064-ifc6410 qcom,apq8064
+Config conf@1 (default), kernel kernel@1, fdt fdt@1, compat qcom,apq8064-cm-qs600 qcom,apq8064
+Choosing best match conf@7.
+Shutting down all USB controllers.
+Exiting depthcharge with code 4 at timestamp: 42612637

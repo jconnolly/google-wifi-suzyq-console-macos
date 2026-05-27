@@ -1,0 +1,12 @@
+Changing password for root
+New password: 
+Retype password: 
+passwd: password for root changed by root
+===DONE===
+system.@system[0].hostname='mesh4'
+network.lan=interface
+network.lan.device='br-lan'
+network.lan.proto='dhcp'
+network.lan.ip6assign='60'
+	Interface phy0-ap0
+		type AP

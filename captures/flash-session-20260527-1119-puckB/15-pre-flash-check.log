@@ -1,0 +1,5 @@
+=== en9 + ping ===
+	inet 192.168.1.10 netmask 0xffffff00 broadcast 192.168.1.255
+--- 192.168.1.1 ping statistics ---
+3 packets transmitted, 3 packets received, 0.0% packet loss
+round-trip min/avg/max/stddev = 0.725/0.793/0.841/0.050 ms

@@ -1,0 +1,25 @@
+
+>>> echo --- dev_boot_usb=$(sudo crossystem dev_boot_usb)
+echo --- dev_boot_usb=$(sudo crossystem dev_boot_usb)
+--- dev_boot_usb=1
+chronos@localhost $ 
+
+>>> echo --- dev_boot_signed_only=$(sudo crossystem dev_boot_signed_only)
+echo --- dev_boot_signed_only=$(sudo crossystem dev_boot_signed_only)
+--- dev_boot_signed_only=0
+chronos@localhost $ 
+
+>>> echo --- dev_default_boot=$(sudo crossystem dev_default_boot)
+echo --- dev_default_boot=$(sudo crossystem dev_default_boot)
+--- dev_default_boot=usb
+chronos@localhost $ 
+
+>>> echo --- wpsw_cur=$(sudo crossystem wpsw_cur)
+echo --- wpsw_cur=$(sudo crossystem wpsw_cur)
+--- wpsw_cur=0
+chronos@localhost $ 
+
+>>> echo --- mainfw_type=$(sudo crossystem mainfw_type)
+echo --- mainfw_type=$(sudo crossystem mainfw_type)
+--- mainfw_type=developer
+chronos@localhost $ 

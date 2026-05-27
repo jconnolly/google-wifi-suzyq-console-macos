@@ -1,0 +1,25 @@
+=== check mount source ===
+/dev/root on /rom type squashfs (ro,relatime,errors=continue)
+proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
+sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime)
+cgroup2 on /sys/fs/cgroup type cgroup2 (rw,nosuid,nodev,noexec,relatime,nsdelegate)
+tmpfs on /tmp type tmpfs (rw,nosuid,nodev,noatime)
+/dev/loop0 on /overlay type ext4 (rw,noatime)
+overlayfs:/overlay on / type overlay (rw,noatime,lowerdir=/,upperdir=/overlay/upper,workdir=/overlay/work,uuid=on)
+tmpfs on /dev type tmpfs (rw,nosuid,noexec,noatime,size=512k,mode=755)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,noatime,mode=600,ptmxmode=000)
+debugfs on /sys/kernel/debug type debugfs (rw,nosuid,nodev,noexec,noatime)
+
+ls: /dev/sda: No such file or directory
+major minor  #blocks  name
+
+   7        0     101184 loop0
+  31        0       8192 mtdblock0
+ 179        0    3817472 mmcblk0
+ 179        1      16384 mmcblk0p1
+ 179        2     106496 mmcblk0p2
+ 179        8       4096 mmcblk0boot0
+ 179       16       4096 mmcblk0boot1
+
+=== triggering force reboot ===
+(force reboot fired)
